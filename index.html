@@ -752,6 +752,10 @@
     </footer>
 
     <script>
+        // === STRIPE CONFIG ===
+        // Sostituisci questo URL con il tuo Payment Link di Stripe
+        const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/ILTUOHO";
+
         function toggleFaq(btn) {
             const item = btn.parentElement;
             item.classList.toggle('open');
@@ -770,9 +774,24 @@
         document.getElementById('registration-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
-            console.log('Registration:', data);
-            alert('🎉 Quasi fatto! Il sistema di pagamento sarà attivato a breve. Dati raccolti: ' + data.name + ' ' + data.surname + ' — ' + data.mode);
+            const name = formData.get('name') || '';
+            const surname = formData.get('surname') || '';
+            const email = formData.get('email') || '';
+            const phone = formData.get('phone') || '';
+            const mode = formData.get('mode') || 'online';
+
+            // Build Stripe Checkout URL with pre-filled data
+            const stripeUrl = new URL(STRIPE_PAYMENT_LINK);
+            stripeUrl.searchParams.set('prefilled_email', email);
+            stripeUrl.searchParams.set('client_reference_id', name + ' ' + surname);
+
+            // Redirect to thank you page after payment (Stripe will append session_id)
+            // We pass mode as a query param so thanks.html knows what to show
+            const successUrl = window.location.origin + window.location.pathname.replace('index.html', '') + 'thanks.html?mode=' + mode;
+            stripeUrl.searchParams.set('success_url', successUrl);
+
+            // Redirect to Stripe
+            window.location.href = stripeUrl.toString();
         });
 
         document.querySelectorAll('a[href^="#"]').forEach(link => {
