@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop AI — 15 Giugno 2026 | Chris Profree</title>
+    <meta name="description" content="Workshop live di 2 ore: come uso l'AI e come ho creato i miei agenti. Limbiate o Online. 47€. Registrazione disponibile 30 giorni.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/jpeg" href="logo.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FFFFFF;
+            --bg-secondary: #F7F6F3;
+            --bg-hover: #EFEFEC;
+            --text: #121212;
+            --text-secondary: #6B6B6B;
+            --text-muted: #9B9B9B;
+            --border: #E8E7E4;
+            --border-light: #F0F0ED;
+            --accent: #000000;
+            --accent-hover: #333333;
+            --accent-subtle: rgba(0, 0, 0, 0.04);
+            --radius-sm: 4px;
+            --radius: 6px;
+            --radius-lg: 8px;
+            --max-w: 900px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Nav ── */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo img {
+            height: 30px;
+        }
+
+        .nav-cta {
+            background: var(--accent);
+            color: #FFFFFF;
+            border: none;
+            padding: 8px 20px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.15s;
+        }
+
+        .nav-cta:hover { background: var(--accent-hover); }
+
+        /* ── Hero ── */
+        .hero {
+            padding: 80px 0 56px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            max-width: 700px;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 580px;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+            margin-bottom: 36px;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.925rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .hero-meta-item svg {
+            width: 18px;
+            height: 18px;
+            color: var(--text);
+            flex-shrink: 0;
+        }
+
+        .hero-meta-item strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .hero-price {
+            display: inline-block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .hero-price .amount {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--accent);
+            color: #FFFFFF;
+            border: none;
+            padding: 14px 32px;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.15s;
+        }
+
+        .btn-primary:hover { background: var(--accent-hover); }
+
+        /* ── Sections ── */
+        section {
+            padding: 64px 0;
+        }
+
+        .section-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            margin-bottom: 16px;
+        }
+
+        .section-sub {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 580px;
+            line-height: 1.65;
+        }
+
+        /* ── Learn cards ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 36px;
+        }
+
+        .card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        .card:hover {
+            border-color: #D5D5D2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ── About Chris ── */
+        .about-block {
+            display: flex;
+            gap: 36px;
+            align-items: flex-start;
+            margin-top: 32px;
+        }
+
+        .about-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--radius);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .about-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ── Event details ── */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .detail-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+        }
+
+        .detail-card h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+        }
+
+        .detail-card p {
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* ── Form section ── */
+        .form-section {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            margin-top: 32px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-grid .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .form-group input,
+        .form-group select {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 10px 14px;
+            font-size: 0.95rem;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.08);
+        }
+
+        .form-group input::placeholder { color: var(--text-muted); }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B6B6B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+        }
+
+        .form-submit {
+            margin-top: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: #FFFFFF;
+            border: none;
+            padding: 14px 36px;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.15s;
+        }
+
+        .btn-submit:hover { background: var(--accent-hover); }
+
+        .form-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ── FAQ ── */
+        .faq-list {
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-item:first-child {
+            border-top: 1px solid var(--border);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 16px 0;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .faq-question .faq-arrow {
+            transition: transform 0.2s;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .faq-item.open .faq-arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding-bottom: 16px;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 28px 0;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+
+        footer a {
+            color: var(--text);
+            text-decoration: underline;
+        }
+
+        /* ── Fade-in animation ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Dividers ── */
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+            .hero { padding: 48px 0 36px; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero-meta { gap: 16px; flex-direction: column; }
+            section { padding: 48px 0; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .about-block { flex-direction: column; align-items: center; text-align: center; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-section { padding: 24px 20px; }
+            .details-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.55rem; }
+            .btn-primary, .btn-submit { width: 100%; text-align: center; }
+            .details-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <div class="container">
+        <nav>
+            <a href="#" class="nav-logo">
+                <img src="logo.jpg" alt="Profree">
+            </a>
+            <a href="#register" class="nav-cta">Iscriviti →</a>
+        </nav>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">Workshop live — 15 Giugno 2026</div>
+            <h1>Come uso l'AI per automatizzare il mio business</h1>
+            <p class="hero-sub">
+                2 ore in cui ti mostro <strong>esattamente</strong> come ho creato i miei agenti AI
+                e come li uso ogni giorno per lavorare meno e produrre di più.
+            </p>
+            <div class="hero-meta">
+                <div class="hero-meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <strong>15 giugno</strong> · 18:00–20:00
+                </div>
+                <div class="hero-meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <strong>Limbiate</strong> + Online
+                </div>
+            </div>
+            <div class="hero-price">
+                <span class="amount">47€</span> biglietto unico
+            </div>
+            <br>
+            <a href="#register" class="btn-primary">Prenota il tuo posto</a>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- Cosa imparerai -->
+    <section>
+        <div class="container">
+            <div class="section-label">Cosa imparerai</div>
+            <h2 class="section-title">In 2 ore ti porto da zero a sapere cosa fare</h2>
+            <p class="section-sub">Niente teoria astratta. Solo quello che uso davvero ogni giorno.</p>
+            <div class="cards-grid">
+                <div class="card fade-in">
+                    <h3>Il mindset giusto</h3>
+                    <p>Come pensare l'AI nel tuo business: cosa delegare, cosa no, e perché la maggior parte delle persone la usa male.</p>
+                </div>
+                <div class="card fade-in">
+                    <h3>Come ho creato i miei agenti</h3>
+                    <p>Da zero a un team di agenti AI che lavorano per me. Architettura, strumenti, errori che ho fatto (così non li fai tu).</p>
+                </div>
+                <div class="card fade-in">
+                    <h3>Workflow da copiare</h3>
+                    <p>Automazioni concrete che uso per content, clienti e operazioni. Te le porti a casa e le applichi subito.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- Chi è Chris -->
+    <section>
+        <div class="container">
+            <div class="section-label">Chi sono</div>
+            <div class="about-block fade-in">
+                <div class="about-photo">
+                    <img src="chris.jpg" alt="Christian La Porta">
+                </div>
+                <div class="about-text">
+                    <h3>Christian La Porta</h3>
+                    <p>
+                        Aiuto imprenditori e professionisti a usare l'AI per moltiplicare il loro business.
+                        Ho costruito agenti AI che gestiscono content, operazioni e clienti per me e per le aziende con cui lavoro.
+                        <br><br>
+                        Non sono un teorico: tutto quello che insegno lo uso in produzione ogni giorno.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- Dettagli evento -->
+    <section>
+        <div class="container">
+            <div class="section-label">I dettagli</div>
+            <h2 class="section-title">Tutto quello che devi sapere</h2>
+            <div class="details-grid">
+                <div class="detail-card fade-in">
+                    <h3>Dove</h3>
+                    <p>Via Monte Bianco 44<br>Limbiate (MB) — WeDesk<br>+ diretta streaming</p>
+                </div>
+                <div class="detail-card fade-in">
+                    <h3>Quando</h3>
+                    <p>15 Giugno 2026<br>18:00 – 20:00</p>
+                </div>
+                <div class="detail-card fade-in">
+                    <h3>Partecipazione</h3>
+                    <p>In presenza o online — il link streaming arriva via email il giorno prima</p>
+                </div>
+                <div class="detail-card fade-in">
+                    <h3>Registrazione</h3>
+                    <p>Disponibile per <strong>30 giorni</strong> dopo l'evento</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- Form registrazione -->
+    <section id="register">
+        <div class="container">
+            <div class="section-label">Iscriviti</div>
+            <h2 class="section-title">Prenota il tuo posto — 47€</h2>
+            <p class="section-sub">Compila il form e vai direttamente al pagamento. Riceverai subito la conferma via email.</p>
+
+            <div class="form-section fade-in">
+                <form id="registration-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Nome *</label>
+                            <input type="text" id="name" name="name" placeholder="Il tuo nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Cognome *</label>
+                            <input type="text" id="surname" name="surname" placeholder="Il tuo cognome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" placeholder="nome@esempio.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefono</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+39 ...">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="mode">Partecipazione *</label>
+                            <select id="mode" name="mode" required>
+                                <option value="">Scegli...</option>
+                                <option value="live">In presenza (Limbiate)</option>
+                                <option value="online">Online (streaming)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" class="btn-submit">
+                            Vai al pagamento — 47€
+                        </button>
+                        <p class="form-note">Pagamento sicuro via Stripe. Riceverai subito la conferma.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- FAQ -->
+    <section>
+        <div class="container">
+            <div class="section-label">Domande frequenti</div>
+            <h2 class="section-title">FAQ</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Serve saper programmare?
+                        <span class="faq-arrow">▾</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No. Il workshop è pensato per imprenditori e professionisti. Se sai usare ChatGPT, sei già a buon punto.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Cosa mi porto a casa di concreto?
+                        <span class="faq-arrow">▾</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Workflow pronti da copiare, template di prompt che uso ogni giorno, la mappa di come ho costruito i miei agenti, e un piano d'azione per applicare l'AI al tuo business.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Se non posso esserci in diretta?
+                        <span class="faq-arrow">▾</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>La registrazione resta disponibile per 30 giorni dopo l'evento. Puoi guardare quando vuoi e fare domande via email.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Perché solo 47€?
+                        <span class="faq-arrow">▾</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>È il primo workshop in questo formato. Voglio validare il modello — i prossimi costeranno di più.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Labutech S.r.l.s. — P. IVA IT10522260966</p>
+            <p><a href="mailto:chris@profree.co">chris@profree.co</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            item.classList.toggle('open');
+        }
+
+        document.querySelector('.faq-item').classList.add('open');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            console.log('Registration:', data);
+            alert('🎉 Quasi fatto! Il sistema di pagamento sarà attivato a breve. Dati raccolti: ' + data.name + ' ' + data.surname + ' — ' + data.mode);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
