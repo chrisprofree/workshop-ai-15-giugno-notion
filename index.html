@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IO NON LAVORO — Workshop AI | Chris Profree</title>
-    <meta name="description" content="15 Giugno 2026 — Workshop live di 2 ore. Come uso l'AI per lavorare meno e guadagnare di più. Limbiate o Online. 47€. Registrazione 30 giorni.">
+    <title>IO NON LAVORO — Come ho costruito un team di agenti AI che lavora al posto mio | Chris Profree</title>
+    <meta name="description" content="15 Giugno 2026 — Workshop pratico di 90 minuti. Come ho costruito un team di agenti AI che lavora al posto mio. Limbiate o Online. 47€. 50 posti.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -97,16 +97,25 @@
             font-weight: 800;
             letter-spacing: -0.03em;
             line-height: 1.15;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             max-width: 700px;
         }
 
-        .hero-sub {
-            font-size: 1.1rem;
+        .hero h2 {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 500;
             color: var(--text-secondary);
-            max-width: 580px;
+            margin-bottom: 20px;
+            max-width: 650px;
+            line-height: 1.4;
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 600px;
             line-height: 1.7;
-            margin-bottom: 40px;
+            margin-bottom: 36px;
         }
 
         .hero-meta {
@@ -231,6 +240,16 @@
             line-height: 1.6;
         }
 
+        .card .card-time {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
         /* ── About Chris ── */
         .about-block {
             display: flex;
@@ -306,12 +325,9 @@
 
         .form-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 16px;
-        }
-
-        .form-grid .full-width {
-            grid-column: 1 / -1;
+            max-width: 420px;
         }
 
         .form-group {
@@ -485,11 +501,11 @@
         @media (max-width: 768px) {
             .hero { padding: 48px 0 36px; }
             .hero h1 { font-size: 1.8rem; }
+            .hero h2 { font-size: 1rem; }
             .hero-meta { gap: 16px; flex-direction: column; }
             section { padding: 48px 0; }
             .cards-grid { grid-template-columns: 1fr; }
             .about-block { flex-direction: column; align-items: center; text-align: center; }
-            .form-grid { grid-template-columns: 1fr; }
             .form-section { padding: 24px 20px; }
             .details-grid { grid-template-columns: 1fr 1fr; }
         }
@@ -516,25 +532,29 @@
     <!-- Hero -->
     <section class="hero">
         <div class="container">
-            <div class="hero-badge">IO NON LAVORO — 15 Giugno 2026</div>
+            <div class="hero-badge">Workshop pratico · 15 Giugno 2026</div>
             <h1>IO NON LAVORO</h1>
+            <h2>Come ho costruito un team di agenti AI che lavora al posto mio.</h2>
             <p class="hero-sub">
-                <strong>Il tempo non è denaro, il tempo è vita.</strong><br><br>
-                2 ore live dove ti mostro come uso l'AI per delegare tutto quello che non dovrei fare io.
-                Così lavoro meno, guadagno di più, e ho tempo per quello che conta davvero.
+                Ho una figlia di 2 mesi, un SaaS in sviluppo, un assistente AI in alpha, e vado in palestra alle 5 di mattina senza che niente si fermi.<br><br>
+                Non è magia: è un sistema di agenti che ho costruito pezzo per pezzo. In 90 minuti ti mostro tutto, dal vivo.
             </p>
             <div class="hero-meta">
                 <div class="hero-meta-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                    <strong>15 giugno</strong> · 18:00–20:00
+                    <strong>15 giugno</strong> · 18:00–19:30
                 </div>
                 <div class="hero-meta-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     <strong>Limbiate</strong> + Online
                 </div>
+                <div class="hero-meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <strong>90 minuti</strong> pratici
+                </div>
             </div>
             <div class="hero-price">
-                <span class="amount">47€</span> biglietto unico
+                <span class="amount">47€</span> · 50 posti
             </div>
             <br>
             <a href="#register" class="btn-primary">Voglio smettere di lavorare</a>
@@ -543,54 +563,27 @@
 
     <hr>
 
-    <!-- Cosa imparerai -->
+    <!-- Struttura workshop -->
     <section>
         <div class="container">
-            <div class="section-label">Cosa impari</div>
-            <h2 class="section-title">In 2 ore esci con un piano per smettere di fare il lavoro che non ti serve</h2>
-            <p class="section-sub">Niente teoria. Solo roba che uso davvero.</p>
+            <div class="section-label">Cosa succede in 90 minuti</div>
+            <h2 class="section-title">Niente slide. Solo schermo condiviso e lavoro vero.</h2>
+            <p class="section-sub">Tre blocchi. Ogni minuto serve a qualcosa.</p>
             <div class="cards-grid">
                 <div class="card fade-in">
-                    <h3>Il mindset giusto</h3>
-                    <p>Come pensare l'AI nel tuo business: cosa delegare, cosa no, e perché la maggior parte delle persone la usa male.</p>
+                    <div class="card-time">Primi 30 minuti</div>
+                    <h3>Il sistema in diretta</h3>
+                    <p>Screen sharing del mio sistema reale. Sheryl, Gary e i satelliti in azione. Come comunicano tra loro, cosa fanno mentre sono offline. Vedi tutto dal vivo: dashboard Telegram, Notion, Supabase. Non è una demo preparata, è il mio sistema di produzione.</p>
                 </div>
                 <div class="card fade-in">
-                    <h3>Come ho creato i miei agenti</h3>
-                    <p>Da zero a un team di agenti AI che lavorano per me. Architettura, strumenti, errori che ho fatto (così non li fai tu).</p>
+                    <div class="card-time">Secondi 30 minuti</div>
+                    <h3>Personality Engineering</h3>
+                    <p>Come estrarre il "modo di pensare" da qualsiasi materiale — un libro, una call registrata, un post — e trasformarlo in un agente che ragiona come te. Non prompt engineering astratto: un metodo preciso che applichi subito al tuo caso.</p>
                 </div>
                 <div class="card fade-in">
-                    <h3>Workflow da copiare</h3>
-                    <p>Automazioni concrete che uso per content, clienti e operazioni. Te le porti a casa e le applichi subito.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <hr>
-
-    <!-- Per chi è / Per chi non è -->
-    <section>
-        <div class="container">
-            <div class="section-label">Per chi è (e per chi no)</div>
-            <h2 class="section-title">Non è per tutti. Ed è giusto così.</h2>
-            <div class="cards-grid">
-                <div class="card fade-in" style="border-left: 3px solid #000;">
-                    <h3>✅ È per te se:</h3>
-                    <p>
-                        Sei un imprenditore o freelance che vuole usare l'AI per lavorare meno e guadagnare di più.<br><br>
-                        Vuoi vedere <strong>dal vivo</strong> come si costruiscono agenti AI veri, non sentire chiacchiere.<br><br>
-                        Sei disposto a rimboccarti le maniche e applicare quello che impari.<br><br>
-                        Hai capito che delegare è l'unica strada per scalare — e l'AI è il tuo primo dipendente.
-                    </p>
-                </div>
-                <div class="card fade-in" style="border-left: 3px solid #D5D5D2;">
-                    <h3>❌ Non è per te se:</h3>
-                    <p>
-                        Pensi che l'AI sia "brutta e cattiva" e che le persone non debbano perdere il lavoro per colpa sua.<br><br>
-                        Sei un lamentone cronico che cerca scuse invece di soluzioni.<br><br>
-                        Vuoi solo teoria, senza sporcarti le mani.<br><br>
-                        Ti piace pagare consulenti per sentirti dire cosa fare, ma poi non fai niente.
-                    </p>
+                    <div class="card-time">Ultimi 30 minuti</div>
+                    <h3>Live Q&A sul tuo business</h3>
+                    <p>Niente domande generiche. Lavoriamo sul tuo caso specifico. Porti una sfida reale del tuo business e costruiamo insieme l'agente che la risolve. Te ne vai con un piano d'azione concreto, non con appunti.</p>
                 </div>
             </div>
         </div>
@@ -609,10 +602,39 @@
                 <div class="about-text">
                     <h3>Christian La Porta</h3>
                     <p>
-                        Aiuto imprenditori e professionisti a usare l'AI per moltiplicare il loro business.
-                        Ho costruito agenti AI che gestiscono content, operazioni e clienti per me e per le aziende con cui lavoro.
+                        Ho una figlia di 2 mesi, un SaaS voice AI in sviluppo (SalonVoice), un assistente AI in alpha (Otto), e un sistema di agenti che mi permette di andare in palestra alle 5 di mattina senza che il business si fermi.
                         <br><br>
-                        Non sono un teorico: tutto quello che insegno lo uso in produzione ogni giorno.
+                        Non sono un guru dell'AI. Sono un imprenditore che ha costruito un team invisibile per comprarsi il tempo. Quello che vedrai nel workshop è esattamente quello che uso ogni giorno — nessun segreto, nessuna teoria astratta.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- Per chi è / Per chi non è -->
+    <section>
+        <div class="container">
+            <div class="section-label">Per chi è (e per chi no)</div>
+            <h2 class="section-title">Non è per tutti. Ed è giusto così.</h2>
+            <div class="cards-grid">
+                <div class="card fade-in" style="border-left: 3px solid #000;">
+                    <h3>✅ È per te se:</h3>
+                    <p>
+                        Sei un imprenditore o freelance che passa troppe ore su cose che non dovresti fare tu.<br><br>
+                        Vuoi vedere <strong>dal vivo</strong> un sistema di agenti AI in produzione, non sentire teoria.<br><br>
+                        Hai capito che delegare è l'unica strada per scalare — e vuoi che l'AI faccia la prima linea.<br><br>
+                        Sei disposto a rimboccarti le maniche e applicare quello che impari, da subito.
+                    </p>
+                </div>
+                <div class="card fade-in" style="border-left: 3px solid #D5D5D2;">
+                    <h3>❌ Non è per te se:</h3>
+                    <p>
+                        Pensi che l'AI sia "brutta e cattiva" e rubi il lavoro alle persone.<br><br>
+                        Cerchi la formula magica senza fare niente — qui si lavora, tanto.<br><br>
+                        Vuoi solo teoria e bei discorsi, senza sporcarti le mani.<br><br>
+                        Paghi consulenti per sentirti dire cosa fare, ma poi non fai niente.
                     </p>
                 </div>
             </div>
@@ -633,11 +655,11 @@
                 </div>
                 <div class="detail-card fade-in">
                     <h3>Quando</h3>
-                    <p>15 Giugno 2026<br>18:00 – 20:00</p>
+                    <p>15 Giugno 2026<br>18:00 – 19:30</p>
                 </div>
                 <div class="detail-card fade-in">
-                    <h3>Partecipazione</h3>
-                    <p>In presenza o online — il link streaming arriva via email il giorno prima</p>
+                    <h3>Posti</h3>
+                    <p><strong>50 posti totali</strong><br>in presenza + online</p>
                 </div>
                 <div class="detail-card fade-in">
                     <h3>Registrazione</h3>
@@ -653,29 +675,17 @@
     <section id="register">
         <div class="container">
             <div class="section-label">Iscriviti</div>
-            <h2 class="section-title">Posti limitati — 47€</h2>
-            <p class="section-sub">Compila il form. Vai al pagamento. Fine delle chiacchiere.</p>
+            <h2 class="section-title">50 posti — 47€</h2>
+            <p class="section-sub">Solo email e modalità. Poi Stripe. Fine delle chiacchiere.</p>
 
             <div class="form-section fade-in">
                 <form id="registration-form">
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="name">Nome *</label>
-                            <input type="text" id="name" name="name" placeholder="Il tuo nome" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="surname">Cognome *</label>
-                            <input type="text" id="surname" name="surname" placeholder="Il tuo cognome" required>
-                        </div>
-                        <div class="form-group">
                             <label for="email">Email *</label>
                             <input type="email" id="email" name="email" placeholder="nome@esempio.com" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Telefono</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+39 ...">
-                        </div>
-                        <div class="form-group full-width">
                             <label for="mode">Partecipazione *</label>
                             <select id="mode" name="mode" required>
                                 <option value="">Scegli...</option>
@@ -688,7 +698,7 @@
                         <button type="submit" class="btn-submit">
                             Mi iscrivo — 47€
                         </button>
-                        <p class="form-note">Pagamento sicuro via Stripe. Riceverai subito la conferma.</p>
+                        <p class="form-note">Pagamento sicuro via Stripe. Solo email, niente altro.</p>
                     </div>
                 </form>
             </div>
@@ -709,7 +719,7 @@
                         <span class="faq-arrow">▾</span>
                     </button>
                     <div class="faq-answer">
-                        <p>No. Il workshop è pensato per imprenditori e professionisti. Se sai usare ChatGPT, sei già a buon punto.</p>
+                        <p>No. Il workshop è pensato per imprenditori e professionisti. Se sai usare ChatGPT, sei già a buon punto. Ti mostro tool che puoi usare da subito.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -718,7 +728,7 @@
                         <span class="faq-arrow">▾</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Workflow pronti da copiare, template di prompt che uso ogni giorno, la mappa di come ho costruito i miei agenti, e un piano d'azione per applicare l'AI al tuo business.</p>
+                        <p>La mappa esatta del mio sistema di agenti, il metodo Personality Engineering per crearne di tuoi, e un piano d'azione personalizzato per il tuo business. Niente appunti generici: roba che applichi lunedì mattina.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -736,7 +746,7 @@
                         <span class="faq-arrow">▾</span>
                     </button>
                     <div class="faq-answer">
-                        <p>È il primo workshop in questo formato. Voglio validare il modello — i prossimi costeranno di più.</p>
+                        <p>È il primo workshop in questo formato. Voglio validare il modello — i prossimi costeranno di più. Se sei qui adesso, cogli l'occasione.</p>
                     </div>
                 </div>
             </div>
@@ -753,8 +763,7 @@
 
     <script>
         // === STRIPE CONFIG ===
-        // Sostituisci questo URL con il tuo Payment Link di Stripe
-        const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/ILTUOHO";
+        const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/9B69AT6dxfzd4ph7ao9R60j";
 
         function toggleFaq(btn) {
             const item = btn.parentElement;
@@ -774,19 +783,14 @@
         document.getElementById('registration-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
-            const name = formData.get('name') || '';
-            const surname = formData.get('surname') || '';
             const email = formData.get('email') || '';
-            const phone = formData.get('phone') || '';
             const mode = formData.get('mode') || 'online';
 
-            // Build Stripe Checkout URL with pre-filled data
+            // Build Stripe Checkout URL — only pass email, no name/surname
             const stripeUrl = new URL(STRIPE_PAYMENT_LINK);
             stripeUrl.searchParams.set('prefilled_email', email);
-            stripeUrl.searchParams.set('client_reference_id', name + ' ' + surname);
 
-            // Redirect to thank you page after payment (Stripe will append session_id)
-            // We pass mode as a query param so thanks.html knows what to show
+            // Success URL with mode for thanks page
             const successUrl = window.location.origin + window.location.pathname.replace('index.html', '') + 'thanks.html?mode=' + mode;
             stripeUrl.searchParams.set('success_url', successUrl);
 
