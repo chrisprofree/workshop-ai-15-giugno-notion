@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grazie! — IO NON LAVORO | Chris Profree</title>
+    <title>Ci sei. — IO NON LAVORO | Chris Profree</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -15,11 +15,8 @@
             --border: #E8E7E4;
             --accent: #000000;
             --accent-hover: #333333;
-            --max-w: 650px;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg);
@@ -32,66 +29,42 @@
             min-height: 100vh;
             padding: 24px;
         }
-
-        .container {
-            max-width: var(--max-w);
-            width: 100%;
-            text-align: left;
-        }
-
-        .check {
-            font-size: 2.5rem;
-            margin-bottom: 16px;
-        }
+        .container { max-width: 580px; width: 100%; text-align: left; }
 
         h1 {
-            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-size: clamp(1.6rem, 2.8vw, 2.2rem);
             font-weight: 800;
             letter-spacing: -0.03em;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
-
         .subtitle {
             font-size: 1.05rem;
             color: var(--text-secondary);
-            margin-bottom: 32px;
+            margin-bottom: 40px;
             line-height: 1.7;
         }
-
         .info-box {
             background: #F7F6F3;
             border: 1px solid var(--border);
             border-radius: 6px;
-            padding: 24px;
-            margin-bottom: 36px;
+            padding: 22px 24px;
+            margin-bottom: 20px;
         }
-
-        .info-box h2 {
-            font-size: 0.85rem;
+        .info-box p { font-size: 0.95rem; color: var(--text); line-height: 1.6; }
+        .info-box .label {
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.05em;
             color: var(--text-muted);
-            margin-bottom: 12px;
+            margin-bottom: 6px;
         }
-
-        .info-box p {
-            font-size: 0.95rem;
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        .info-box .address {
-            margin-top: 8px;
-            font-weight: 600;
-        }
-
         .btn {
             display: inline-block;
             background: var(--accent);
             color: #FFFFFF;
             border: none;
-            padding: 12px 28px;
+            padding: 14px 28px;
             border-radius: 4px;
             font-size: 0.95rem;
             font-weight: 600;
@@ -99,22 +72,39 @@
             text-decoration: none;
             font-family: 'Inter', sans-serif;
             transition: background 0.15s;
+            margin-bottom: 40px;
         }
-
         .btn:hover { background: var(--accent-hover); }
+        .btn svg { vertical-align: -2px; margin-right: 6px; }
 
+        .upsell {
+            border-top: 1px solid var(--border);
+            padding-top: 28px;
+            margin-top: 8px;
+        }
+        .upsell h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .upsell p {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 10px;
+        }
+        .upsell a {
+            color: var(--text);
+            font-weight: 600;
+        }
         .footer-note {
-            margin-top: 40px;
-            padding-top: 20px;
+            margin-top: 36px;
+            padding-top: 16px;
             border-top: 1px solid var(--border);
             font-size: 0.8rem;
             color: var(--text-muted);
         }
-
-        .footer-note a {
-            color: var(--text);
-            text-decoration: underline;
-        }
+        .footer-note a { color: var(--text); text-decoration: underline; }
 
         @media (max-width: 480px) {
             body { padding: 20px; align-items: flex-start; padding-top: 48px; }
@@ -123,36 +113,38 @@
 </head>
 <body>
     <div class="container">
-        <div class="check">✅</div>
-        <h1>Sei dentro.</h1>
-        <p class="subtitle">
-            Il pagamento è andato a buon fine. Ora si fa sul serio.
+        <h1 id="headline">Ci sei.</h1>
+        <p class="subtitle" id="confirmation">
+            Ti aspetto il <strong>15 giugno alle 18:00</strong> a Limbiate o in diretta streaming.
         </p>
 
         <div class="info-box" id="info-online">
-            <h2>Partecipazione Online</h2>
-            <p>
-                Il link per lo streaming arriverà via email il giorno prima del workshop, il <strong>14 Giugno</strong>.<br>
-                Controlla anche la cartella spam se non lo vedi.
-            </p>
+            <div class="label">Partecipazione Online</div>
+            <p>Il link per lo streaming arriva via email il giorno prima, il <strong>14 Giugno</strong>. Controlla anche la cartella spam se non lo vedi.</p>
         </div>
-
         <div class="info-box" id="info-live" style="display:none;">
-            <h2>Partecipazione in Presenza</h2>
+            <div class="label">Partecipazione in Presenza</div>
             <p>
-                Ti aspettiamo il <strong>15 Giugno alle 18:00</strong> presso:
-            </p>
-            <p class="address">
-                WeDesk<br>
-                Via Monte Bianco 44<br>
-                20812 Limbiate (MB)
-            </p>
-            <p style="margin-top:12px;">
-                Riceverai una mail con tutte le indicazioni e un promemoria il giorno prima.
+                Ti aspetto da <strong>WeDesk</strong><br>
+                Via Monte Bianco 44, 20812 Limbiate (MB)<br>
+                Arriva con 5 minuti di anticipo, iniziamo puntuali.
             </p>
         </div>
 
-        <a href="https://profree.co" class="btn">← Torna su profree.co</a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=IO+NON+LAVORO+%E2%80%94+Workshop+AI&dates=20260615T180000+0200/20260615T193000+0200&details=Workshop+pratico+con+Christian+La+Porta.+Come+costruire+un+team+di+agenti+AI+che+lavora+al+posto+tuo.+https://chrisprofree.github.io/workshop-ai-15-giugno-notion/&location=WeDesk+Via+Monte+Bianco+44+Limbiate+MB+%2B+Online" class="btn" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Aggiungi al calendario
+        </a>
+
+        <div class="upsell">
+            <h3>Dopo il workshop</h3>
+            <p>
+                Se vuoi andare più in profondità e applicare tutto questo al tuo business, sto aprendo <strong>10 posti</strong> per un mese di lavoro insieme. Niente prezzi qui, nessuna pressione.
+            </p>
+            <p>
+                Se ti interessa, scrivimi su Instagram: <a href="https://instagram.com/chris_profree" target="_blank">@chris_profree</a>
+            </p>
+        </div>
 
         <p class="footer-note">
             Domande? Scrivi a <a href="mailto:chris@profree.co">chris@profree.co</a><br>
@@ -161,15 +153,14 @@
     </div>
 
     <script>
-        // Read 'mode' parameter from URL to show the right info box
         const params = new URLSearchParams(window.location.search);
         const mode = params.get('mode');
-
         if (mode === 'live') {
             document.getElementById('info-online').style.display = 'none';
             document.getElementById('info-live').style.display = 'block';
+            document.getElementById('confirmation').innerHTML =
+                'Ti aspetto il <strong>15 giugno alle 18:00</strong> a Limbiate. Arriva con 5 minuti di anticipo, iniziamo puntuali.';
         }
-        // Default: show online info (mode=online or no param)
     </script>
 </body>
 </html>
