@@ -52,12 +52,14 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 0;
+            padding: 10px 0;
             border-bottom: 1px solid var(--border);
+            height: 50px;
         }
 
         .nav-logo img {
-            height: 30px;
+            width: 150px;
+            height: auto;
         }
 
         .nav-cta {
@@ -93,7 +95,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-size: clamp(2.4rem, 5.5vw, 3.8rem);
             font-weight: 800;
             letter-spacing: -0.03em;
             line-height: 1.15;
@@ -500,9 +502,10 @@
         /* ── Mobile ── */
         @media (max-width: 768px) {
             .hero { padding: 48px 0 36px; }
-            .hero h1 { font-size: 1.8rem; }
+            .hero h1 { font-size: 2.1rem; }
             .hero h2 { font-size: 1rem; }
             .hero-meta { gap: 16px; flex-direction: column; }
+            .nav-logo img { width: 120px; }
             section { padding: 48px 0; }
             .cards-grid { grid-template-columns: 1fr; }
             .about-block { flex-direction: column; align-items: center; text-align: center; }
@@ -511,7 +514,7 @@
         }
 
         @media (max-width: 480px) {
-            .hero h1 { font-size: 1.55rem; }
+            .hero h1 { font-size: 1.8rem; }
             .btn-primary, .btn-submit { width: 100%; text-align: center; }
             .details-grid { grid-template-columns: 1fr; }
         }
@@ -523,7 +526,7 @@
     <div class="container">
         <nav>
             <a href="#" class="nav-logo">
-                <img src="logo.svg" alt="Profree" style="width:150px;height:auto;">
+                <img src="logo.svg" alt="Profree">
             </a>
             <a href="#register" class="nav-cta">Mi iscrivo →</a>
         </nav>
