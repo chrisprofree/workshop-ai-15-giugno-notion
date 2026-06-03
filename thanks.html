@@ -154,7 +154,11 @@
 
     <script>
         const params = new URLSearchParams(window.location.search);
-        const mode = params.get('mode');
+        // Stripe Payment Link non passa il parametro: fallback su localStorage salvato dal form.
+        let mode = params.get('mode');
+        if (!mode) {
+            try { mode = localStorage.getItem('workshop_mode'); } catch (e) {}
+        }
         if (mode === 'live') {
             document.getElementById('info-online').style.display = 'none';
             document.getElementById('info-live').style.display = 'block';

@@ -824,13 +824,14 @@
                 console.log('Registration save skipped, proceeding to payment');
             }
 
+            // Salvo la modalità nel browser: i Payment Link Stripe ignorano success_url,
+            // quindi thanks.html legge "mode" da qui (fallback affidabile al parametro URL).
+            try { localStorage.setItem('workshop_mode', mode); } catch (e) {}
+
             // 2. Redirect a Stripe — pageId come client_reference_id per marcare "Completato" dopo il pagamento
             const stripeUrl = new URL(STRIPE_PAYMENT_LINK);
             stripeUrl.searchParams.set('prefilled_email', email);
             if (pageId) stripeUrl.searchParams.set('client_reference_id', pageId);
-
-            const successUrl = window.location.origin + window.location.pathname.replace('index.html', '') + 'thanks.html?mode=' + mode;
-            stripeUrl.searchParams.set('success_url', successUrl);
 
             window.location.href = stripeUrl.toString();
         });
