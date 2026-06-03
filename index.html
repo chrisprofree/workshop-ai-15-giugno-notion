@@ -476,7 +476,14 @@
         /* ── Footer ── */
         footer {
             border-top: 1px solid var(--border);
-            padding: 28px 0;
+            padding: 40px 0 48px;
+        }
+
+        .footer-logo {
+            width: 84px;
+            height: auto;
+            display: block;
+            margin-bottom: 18px;
         }
 
         footer p {
@@ -514,19 +521,28 @@
             .hero { padding: 48px 0 36px; }
             .hero h1 { font-size: 2.1rem; }
             .hero h2 { font-size: 1rem; }
-            .hero-meta { gap: 16px; flex-direction: column; }
+            .hero-meta { gap: 14px; flex-direction: column; }
             .nav-logo img { width: 110px; }
             section { padding: 48px 0; }
-            .cards-grid { grid-template-columns: 1fr; }
-            .about-block { flex-direction: column; align-items: center; text-align: center; }
+            .cards-grid { grid-template-columns: 1fr; gap: 14px; }
+            .card { padding: 24px; }
+            .about-block { flex-direction: column; align-items: center; text-align: center; gap: 24px; }
             .form-section { padding: 24px 20px; }
             .details-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 480px) {
+            .container { padding: 0 20px; }
+            .hero { padding: 40px 0 32px; }
             .hero h1 { font-size: 1.8rem; }
+            .hero-sub { margin-bottom: 28px; }
+            .hero-meta { margin-bottom: 28px; }
+            section { padding: 44px 0; }
+            .card { padding: 22px 20px; }
+            .detail-card { padding: 20px; }
             .btn-primary, .btn-submit { width: 100%; text-align: center; }
             .details-grid { grid-template-columns: 1fr; }
+            footer { padding: 36px 0 40px; }
         }
     </style>
 </head>
@@ -773,6 +789,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
+            <img src="profree-venture-logo.svg" alt="Profree Venture" class="footer-logo">
             <p>© 2026 Labutech S.r.l.s. — P. IVA IT10522260966</p>
             <p><a href="mailto:chris@profree.co">chris@profree.co</a></p>
         </div>
