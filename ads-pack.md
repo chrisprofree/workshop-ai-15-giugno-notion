@@ -1,233 +1,191 @@
 # 📦 Ads Pack — Workshop "IO NON LAVORO" (15 Giugno)
 
 **Obiettivo**: 20 paganti in 7 giorni (8-14 giugno)
-**Budget suggerito**: 350-500€ totali (50-70€/giorno)
+**Budget ads**: 150€ totali
 **Prezzo biglietto**: 47€
-**Break-even**: bastano 8-11 vendite per rientrare del budget ads
+**Break-even**: bastano 4 vendite per rientrare del budget ads
 
 ---
 
-## ⚡ AZIONI IMMEDIATE (prima di tutto)
+## ⚡ PRIORITÀ #1: Lista The Digital Method (canale più caldo)
 
-### 1. Crea il Meta Pixel (2 minuti)
-- Vai su [Events Manager Meta](https://business.facebook.com/events_manager2/)
-- Click su "Connect Data Sources" → "Web" → "Meta Pixel"
-- Dai un nome tipo "Workshop IO NON LAVORO"
-- Inserisci l'URL: `https://iononlavoro.profree.co`
-- Copia il **Pixel ID** (numeri, tipo `123456789012345`)
-- Sostituisci `META_PIXEL_ID` nel file `index.html` con il tuo ID (cerca "SOSTITUISCI")
-- Pusha e fai redeploy
+Questo è il tuo asset migliore. Gente che ti conosce, ha già investito in un tuo prodotto, è allineata al tuo modo di pensare. Conversioni attese: 2-5% (se lista da 200 = 4-10 biglietti).
 
-### 2. Verifica che il Pixel funzioni
-- Installa [Meta Pixel Helper](https://chrome.google.com/webstore/detail/meta-pixel-helper/fdgfkebogiimcoedlicjlajpkdmockpc) su Chrome
-- Apri `iononlavoro.profree.co` → deve mostrare PageView verde
-- Compila il form → deve mostrare Lead verde
-
----
-
-## 🎯 TARGETING (Meta Ads Manager)
-
-### Pubblico 1: Interest-based (principale)
-- **Location**: Italia
-- **Età**: 25-55
-- **Interessi**: Imprenditoria, Automazione, Intelligenza artificiale, Freelance, Produttività, Startup, Business coaching, Digital marketing, ChatGPT
-- **Esclusioni**: Chi ha già comprato (carica custom audience)
-- **Budget**: 40€/giorno
-- **Posizionamenti**: Feed IG + Feed FB + Reels + Stories
-
-### Pubblico 2: Lookalike (se hai una lista)
-- Carica una lista email su Meta (clienti, lead, iscritti newsletter)
-- Crea Lookalike 1-3% in Italia
-- **Budget**: 20€/giorno
-- **Nota**: funziona solo se la lista ha almeno 100 contatti
-
-### Pubblico 3: Retargeting (dal giorno 3)
-- Retargeting su chi ha visitato la landing ma non ha comprato (ultimi 7 giorni)
-- Retargeting su chi ha iniziato il checkout Stripe
-- **Budget**: 10€/giorno
-
----
-
-## 📝 COPY ADS (scegli 3-4 varianti, testa in parallelo)
-
-### Variante A — Provocazione (per imprenditori)
-```
-😤 "Io non lavoro."
-
-Me lo diceva mio padre. Mi sentivo in colpa.
-Poi ho costruito un team di agenti AI che manda avanti 3 aziende mentre sono altrove.
-
-Il 15 giugno ti mostro tutto. In diretta. Niente slide.
-
-47€ — posti limitati.
-👉 [Link]
-```
-
-### Variante B — Problema/Soluzione (per freelance)
-```
-Quante ore passi su cose che non dovresti fare tu?
-
-Email, preventivi, follow-up, prenotazioni...
-
-Io ho delegato tutto a degli agenti AI.
-E ora ho il tempo per la palestra, mia figlia di 2 mesi, e far crescere il business.
-
-Ti mostro come → Workshop 15 Giugno, 47€
-👉 [Link]
-```
-
-### Variante C — Curiosità (per tech-savvy)
-```
-Ho un team. Ma non sono persone.
-
-Ho 7 agenti AI che si parlano tra loro su Telegram.
-Fanno marketing, operazioni, contenuti.
-Mentre io dormo o sono in palestra.
-
-Guarda il sistema in funzione → Workshop "IO NON LAVORO"
-15 Giugno · 47€ · Posti in sala: 30
-👉 [Link]
-```
-
-### Variante D — Urgenza (da usare da mercoledì 10 giugno)
-```
-⚠️ Mancano 5 giorni.
-
-Il workshop "IO NON LAVORO" è quasi pieno.
-47€ per vedere come gestisco 3 aziende con un team di agenti AI.
-
-Poi il prezzo sale.
-👉 [Link]
-```
-
-### Variante E — Testimonianza (se trovi qualcuno)
-```
-"[Nome] ha partecipato al workshop e [risultato concreto in 1 frase]"
-
-Workshop pratico. 90 minuti. Niente teoria.
-15 Giugno · 47€
-👉 [Link]
-```
-
----
-
-## 🖼️ CREATIVE
-
-### Formati da testare:
-1. **Video 15-30 secondi**: Chris che parla alla camera, 3 secondi hook, spiega il workshop, CTA finale. (Il formato che converte di più su IG/FB)
-2. **Immagine statica**: foto di Chris + titolo workshop + prezzo
-3. **Carosello (3-5 slide)**: sistema in funzione, team agenti, risultato concreto
-
-### Linee guida creative:
-- Hook nei primi 3 secondi (video) / sopra la piega (immagine)
-- Mostra schermate reali del sistema, non mockup
-- CTA chiara: "Prenota ora" o "47€ - Posti limitati"
-- NO loghi enormi, NO grafica da "corso online 2018"
-
----
-
-## 📧 EMAIL BLAST (se hai una lista)
-
-### Email 1 — Annuncio (oggi, 8 giugno)
-**Oggetto**: Ti faccio vedere il mio segreto (15 Giugno)
+### Email per lista TDM — OGGI (8 giugno)
+**Oggetto**: Quello che sto costruendo (non l'ho ancora mostrato a nessuno)
 
 Ciao,
 
-non faccio webinar. Non vendo corsi "da 10K in 7 giorni".
+sono Chris.
 
-Il 15 giugno apro il mio sistema in diretta per 90 minuti.
-Ti mostro gli agenti AI che mandano avanti 3 aziende mentre io sono altrove.
+Forse mi hai conosciuto con The Digital Method, quando parlavo di sistemi e automation.
 
-È la prima volta che faccio un workshop così.
-47€ perché voglio riempire la sala di persone giuste.
-I prossimi costeranno di più.
+Nel frattempo non mi sono fermato. Ho costruito un team di 7 agenti AI che mandano avanti 3 aziende mentre io sono altrove. Fanno marketing, operazioni, contenuti. Da soli.
 
-👉 [Link landing]
+Il 15 giugno apro il sistema in diretta per la prima volta.
+90 minuti, niente slide, schermo condiviso.
+
+Ho aperto 30 posti a 47€ perché è il primo workshop in questo formato e voglio gente vera in sala. I prossimi costeranno di più.
+
+Se ti interessa vedere cosa ho costruito:
+👉 https://iononlavoro.profree.co
 
 Ci vediamo lì,
 Chris
 
 ---
 
-### Email 2 — Urgenza (11-12 giugno)
-**Oggetto**: Mancano 4 giorni (e i posti stanno finendo)
+### Email TDM — Follow-up (11 giugno)
+**Oggetto**: Mancano 4 giorni — il workshop è quasi pieno
 
-Solo un heads-up.
+Ciao,
 
-Il workshop di domenica è quasi pieno.
-Abbiamo ancora qualche posto in sala, poi solo online.
+solo un heads-up sul workshop di domenica.
 
-Se ti interessa vedere il sistema in diretta:
-👉 [Link landing]
+Abbiamo ancora qualche posto in sala, poi resto solo online.
+Se ti interessava vedere il sistema di agenti AI dal vivo:
 
-47€. Poi il prezzo sale.
+👉 https://iononlavoro.profree.co
 
-A domenica,
+47€. Domenica alle 18:00.
+Poi il prezzo sale.
+
 Chris
 
 ---
 
-### Email 3 — Last call (14 giugno)
-**Oggetto**: Domani. Ultimi posti.
+### Email TDM — Last call (14 giugno)
+**Oggetto**: Domani. Ultimi 3 posti.
 
 Domani ore 18:00.
-Ultimi biglietti disponibili.
+Ultimi biglietti.
 
-👉 [Link landing]
-
----
-
-## 💰 BUDGET E PROIEZIONI
-
-| Scenario | Budget ads | Vendite stimate | ROI |
-|----------|-----------|----------------|-----|
-| Conservativo | 350€ | 10-12 | 1.3x |
-| Realistico | 500€ | 15-20 | 1.4x |
-| Ottimistico | 500€ | 25-30 | 2.3x |
-
-Costo per acquisizione stimato: 20-35€ a biglietto (Meta Ads in Italia, nicchia business/tech).
+👉 https://iononlavoro.profree.co
 
 ---
 
-## 📊 COSA MISURARE
+## 💰 STRATEGIA ADS: 150€ — Chirurgia, non dispersione
 
-- **CPM** (costo per 1000 impression): sotto i 10€ è buono
-- **CTR** (click-through rate): sopra l'1% è buono, sopra il 2% è ottimo
-- **CPC** (costo per click): sotto 0.50€ è buono
-- **Conversione landing**: sopra il 3% (visitatori → form) è buono
-- **Conversione pagamento**: sopra il 60% (form → pagato) è buono
+Con 150€ non possiamo permetterci di sparare nel mucchio. Concentriamo tutto sui giorni con più urgenza e sul pubblico più caldo.
 
-Dopo 48 ore di ads, guarda i numeri e:
-- Se CTR < 1% → cambia creative
-- Se conversione landing < 3% → migliora la landing
-- Se CPC troppo alto → allarga il targeting
+**Distribuzione budget:**
 
----
+| Giorno | Budget | Strategia |
+|--------|--------|-----------|
+| Lun 8/6 | 0€ | Solo organico + email TDM |
+| Mar 9/6 | 0€ | Solo organico + IG stories |
+| Mer 10/6 | 25€ | Interest-based (pubblico freddo mirato) |
+| Gio 11/6 | 35€ | Interest-based + inizio retargeting |
+| Ven 12/6 | 35€ | Retargeting + lookalike (se creata) |
+| Sab 13/6 | 35€ | Urgenza + retargeting aggressivo |
+| Dom 14/6 | 20€ | Last call "domani" |
+| **TOT** | **150€** | |
 
-## 🔄 ALTRE AZIONI GRATUITE (in parallelo)
-
-1. **Storie IG ogni giorno**: countdown, dietro le quinte, sneak peek del sistema
-2. **Post su LinkedIn**: 1 post oggi, 1 post giovedì
-3. **Gruppi Telegram/Facebook**: post in gruppi di imprenditori/freelance italiani
-4. **WhatsApp broadcast**: se hai contatti diretti, messaggio personale (converte più delle ads)
-5. **Amici e colleghi**: chiedi a 5 persone di condividere sui loro canali
-6. **Cross-post su X (Twitter)**: thread sul workshop con link
+**Perché così**: i primi 2 giorni li copri con l'email alla lista TDM e i contenuti organici (gratis). Le ads partono mercoledì quando l'urgenza del countdown inizia a mordere. Il grosso del budget va su gio-ven-sab, i giorni caldi.
 
 ---
 
-## ✅ CHECKLIST FINALE
+## 🎯 TARGETING (solo 2 pubblici, niente dispersione)
 
-- [ ] Pixel Meta creato e ID sostituito
+### Pubblico 1: Interest-based (mer-gio, 60€)
+- **Location**: Italia
+- **Età**: 28-50
+- **Interessi**: Imprenditoria, Automazione, Intelligenza artificiale, Freelance, Produttività, Startup, ChatGPT, Notion, Make (Integromat), No-code
+- **Posizionamenti**: Feed IG + Stories (dove sta il tuo pubblico)
+- **Esclusioni**: chi ha già comprato
+
+### Pubblico 2: Retargeting (gio-dom, 90€)
+- Visitatori landing ultimi 7 giorni (via Pixel)
+- Visitatori pagina grazie / thankyou (chi ha iniziato checkout ma non completato? se implementato)
+- **Posizionamenti**: Feed IG + FB + Stories
+- **Nota**: parte da giovedì quando il Pixel ha già raccolto dati
+
+---
+
+## 📝 COPY ADS (testane 2, non 5 — budget limitato)
+
+Con 150€, testare 5 varianti è dispersivo. Scegline 2, se una performa male la fermi subito.
+
+### Variante 1 — Provocazione (principale)
+```
+"Io non lavoro."
+
+Me lo diceva mio padre. Mi sentivo in colpa.
+Poi ho costruito un team di agenti AI che manda avanti 3 aziende mentre sono in palestra.
+
+Il 15 giugno apro il sistema in diretta.
+Niente slide. Niente teoria.
+
+47€ — posti in sala limitati.
+👉 Prenota ora
+```
+
+### Variante 2 — Urgenza + prova sociale (da giovedì)
+```
+⚠️ Il workshop di domenica è quasi pieno.
+
+7 agenti AI che lavorano al posto mio.
+Te li mostro tutti, in diretta, schermo condiviso.
+
+15 Giugno · 47€ · Ultimi posti in sala
+👉 Prenota prima che salga
+```
+
+---
+
+## 📱 WHATSAPP / MESSAGGI PERSONALI (converte più delle ads)
+
+Prendi i 20 contatti più caldi che hai (clienti passati, colleghi, persone che ti hanno scritto "che figata l'AI") e mandagli un vocale o messaggio personale. Non broadcast, messaggio 1-a-1.
+
+**Template messaggio**:
+
+"Ciao [Nome]! Il 15 giugno faccio un workshop dove mostro dal vivo il sistema di agenti AI che uso per mandare avanti le mie aziende. 90 minuti pratici, 47€. Ho pensato a te perché [motivo personale]. Se ti interessa: https://iononlavoro.profree.co"
+
+Fanne 5 oggi, 5 domani, 5 giovedì. 20 messaggi personali possono portare 4-5 biglietti.
+
+---
+
+## 📊 COSA MISURARE (numeri chiave)
+
+- **Email TDM**: open rate > 20%, click rate > 3%
+- **CPC ads**: sotto 0.60€
+- **CTR**: sopra 1.5%
+- **Conversione landing**: sopra il 4% (visitatori → comprano)
+- **CPA (costo per acquisto)**: sotto 25€
+
+Dopo 48 ore di ads (venerdì), se CPA > 30€ → ferma tutto, concentrati su organico e messaggi personali.
+
+---
+
+## 🔄 PIANO GIORNALIERO
+
+| Giorno | Azioni |
+|--------|--------|
+| **Lun 8** | Email TDM, post IG, 5 messaggi WhatsApp |
+| **Mar 9** | Stories IG (dietro le quinte), 5 messaggi WhatsApp |
+| **Mer 10** | Ads 25€, post LinkedIn, stories countdown |
+| **Gio 11** | Ads 35€, email TDM follow-up, 5 messaggi |
+| **Ven 12** | Ads 35€, stories IG urgenza, 5 messaggi |
+| **Sab 13** | Ads 35€, post IG ultima chiamata |
+| **Dom 14** | Ads 20€, email TDM last call, stories in giornata |
+| **Dom 15** | WORKSHOP 🚀 |
+
+---
+
+## ✅ CHECKLIST
+
+- [ ] Pixel Meta creato e ID sostituito in index.html
 - [ ] Landing redeployata con Pixel + countdown
 - [ ] Pixel Helper verifica PageView e Lead
-- [ ] Campagne Meta create (2-3 ad set, 3-4 varianti creative)
-- [ ] Budget giornaliero impostato (50-70€)
-- [ ] Email blast inviata (se hai lista)
-- [ ] Post IG programmati ogni giorno
-- [ ] Monitoraggio conversioni attivo
+- [ ] Email TDM inviata OGGI
+- [ ] Campagna Meta creata (1 ad set, 2 varianti)
+- [ ] Budget 150€ distribuito come da tabella
+- [ ] 20 messaggi WhatsApp personali schedulati
+- [ ] Storie IG programmate ogni giorno
+- [ ] Monitoraggio conversioni dal Pixel
 
 ---
 
-**File aggiornati**: `index.html` (countdown, pixel, banner urgenza, tracking Lead)
+**File pronti**: `index.html` (countdown, pixel placeholder, banner urgenza, tracking)
 **Dominio**: https://iononlavoro.profree.co
 **Stripe**: https://buy.stripe.com/9B69AT6dxfzd4ph7ao9R60j
