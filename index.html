@@ -9,6 +9,23 @@
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'META_PIXEL_ID'); // ← SOSTITUISCI con il tuo Pixel ID
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=META_PIXEL_ID&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -170,6 +187,69 @@
             font-weight: 800;
             color: var(--text);
         }
+
+        /* Countdown */
+        .countdown {
+            display: inline-flex;
+            gap: 6px;
+            align-items: center;
+            background: #FFF5F5;
+            border: 1px solid #FECACA;
+            border-radius: var(--radius);
+            padding: 10px 18px;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+            color: #991B1B;
+            font-weight: 600;
+        }
+        .countdown .cd-number {
+            background: #DC2626;
+            color: white;
+            border-radius: 3px;
+            padding: 2px 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        .countdown .cd-label {
+            font-size: 0.8rem;
+            color: #B91C1C;
+            font-weight: 500;
+        }
+
+        /* Urgency banner sticky */
+        .urgency-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            z-index: 1000;
+            animation: slideUp 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .urgency-banner a {
+            color: #fff;
+            background: #DC2626;
+            padding: 8px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        body.has-banner { padding-bottom: 70px; }
 
         .btn-primary {
             display: inline-block;
@@ -585,6 +665,9 @@
             <div class="hero-price">
                 <span class="amount">47€</span> · posti in sala limitati
             </div>
+            <div class="countdown" id="countdown">
+                ⏳ <span>Mancano</span> <span class="cd-number" id="cd-days">7</span> <span class="cd-label">giorni</span> <span class="cd-number" id="cd-hours">00</span> <span class="cd-label">ore</span> <span class="cd-number" id="cd-mins">00</span> <span class="cd-label">min</span>
+            </div>
             <br>
             <a href="#register" class="btn-primary">Prenoto il mio posto →</a>
         </div>
@@ -841,6 +924,8 @@
             // 1. Salva l'iscrizione su Notion (stato "In attesa"), recupera il pageId
             let pageId = null;
             try {
+                // Track lead event on Meta Pixel
+                if (typeof fbq !== 'undefined') fbq('track', 'Lead');
                 const resp = await fetch(API_BASE + '/api/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -871,6 +956,40 @@
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
+
+        // === COUNTDOWN ===
+        (function() {
+            const target = new Date('2026-06-15T18:00:00+02:00');
+            const daysEl = document.getElementById('cd-days');
+            const hoursEl = document.getElementById('cd-hours');
+            const minsEl = document.getElementById('cd-mins');
+            if (!daysEl) return;
+            function tick() {
+                const now = new Date();
+                const diff = target - now;
+                if (diff <= 0) {
+                    document.getElementById('countdown').innerHTML = '🔥 <span>IN CORSO!</span>';
+                    return;
+                }
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                daysEl.textContent = d;
+                hoursEl.textContent = String(h).padStart(2, '0');
+                minsEl.textContent = String(m).padStart(2, '0');
+            }
+            tick();
+            setInterval(tick, 60000);
+        })();
+
+        // === URGENCY BANNER (mobile + desktop) ===
+        (function() {
+            const banner = document.createElement('div');
+            banner.className = 'urgency-banner';
+            banner.innerHTML = '⚠️ Posti in sala quasi esauriti — <a href="#register">Prenota ora →</a>';
+            document.body.appendChild(banner);
+            document.body.classList.add('has-banner');
+        })();
     </script>
 </body>
 </html>

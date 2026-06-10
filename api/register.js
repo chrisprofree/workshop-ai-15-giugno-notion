@@ -25,7 +25,19 @@ export default async function handler(req, res) {
     }
 
     const modalita = mode === "live" ? "In presenza" : "Online";
-    const fonte = ref || "Organico";
+
+    // Mappa i ref corti delle landing ambassador ai nomi esatti del campo Fonte su Notion
+    const REF_MAP = {
+      vigano: "Daniele Viganò",
+      alice: "Alice Farella Monti",
+      davide: "Davide Espertini",
+      nicolo: "Nicolò",
+      wedesk: "WeDesk",
+      organico: "Organico",
+      ads: "Ads",
+      altro: "Altro",
+    };
+    const fonte = REF_MAP[ref] || ref || "Organico";
 
     const page = await notion.pages.create({
       parent: { database_id: DATABASE_ID },
