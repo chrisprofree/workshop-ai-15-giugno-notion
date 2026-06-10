@@ -794,12 +794,23 @@
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+        // Capture referral ref from URL
+        function getRefFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('ref') || sessionStorage.getItem('workshop_ref') || 'Organico';
+        }
+        const ref = getRefFromUrl();
+        if (ref && ref !== 'Organico') {
+            sessionStorage.setItem('workshop_ref', ref);
+        }
+
         document.getElementById('registration-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const formData = new FormData(this);
             const name = formData.get('name') || '';
             const email = formData.get('email') || '';
             const mode = formData.get('mode') || 'online';
+            const currentRef = getRefFromUrl();
 
             const submitBtn = document.querySelector('.btn-submit');
             submitBtn.textContent = 'Salvo...';
@@ -813,7 +824,8 @@
                     body: JSON.stringify({
                         name: name,
                         email: email,
-                        mode: mode === 'live' ? 'In presenza' : 'Online'
+                        mode: mode === 'live' ? 'In presenza' : 'Online',
+                        ref: currentRef
                     })
                 });
             } catch (err) {
