@@ -18,13 +18,14 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name = "", email = "", mode = "online" } = req.body || {};
+    const { name = "", email = "", mode = "online", ref = "Organico" } = req.body || {};
 
     if (!email) {
       return res.status(400).json({ ok: false, error: "Email mancante" });
     }
 
     const modalita = mode === "live" ? "In presenza" : "Online";
+    const fonte = ref || "Organico";
 
     const page = await notion.pages.create({
       parent: { database_id: DATABASE_ID },
@@ -34,6 +35,7 @@ export default async function handler(req, res) {
         "Modalità": { select: { name: modalita } },
         "Stato Pagamento": { select: { name: "In attesa" } },
         "Data Registrazione": { date: { start: new Date().toISOString() } },
+        "Fonte": { select: { name: fonte } },
       },
     });
 
