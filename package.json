@@ -1,0 +1,11 @@
+{
+  "name": "workshop-ai-15-giugno-notion",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Landing workshop IO NON LAVORO — form -> Notion, pagamento -> Stripe webhook",
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "stripe": "^17.5.0"
+  }
+}
