@@ -1,680 +1,668 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personality Engineering — Workbook | IO NON LAVORO</title>
-    <meta name="description" content="Workbook del workshop IO NON LAVORO — 15 Giugno 2026. Il metodo completo per costruire agenti AI con personalità vera.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --cover-bg: #0A0A0A;
-            --page-bg: #FFFFFF;
-            --accent: #F5C518;
-            --dark-card-bg: #1A1A1A;
-            --dark-card-text: #E8E8E8;
-            --text: #111111;
-            --text-secondary: #666666;
-            --text-muted: #999999;
-            --border-light: #E0E0E0;
-            --dashed-border: #CCCCCC;
-            --tag-bg: #F5C518;
-            --tag-text: #000000;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personality Engineering — Workbook | IO NON LAVORO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cover-bg: #0A0A0A;
+  --page-bg: #FFFFFF;
+  --accent: #F5C518;
+  --dark-card-bg: #1A1A1A;
+  --dark-card-text: #E0E0E0;
+  --text: #111111;
+  --text-secondary: #6B6B6B;
+  --text-muted: #888888;
+  --border-light: #E0E0E0;
+  --dashed-border: #CCCCCC;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* ── COVER ── */
+.workbook-cover {
+  background: var(--cover-bg);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 80px 100px;
+  page-break-after: always;
+  position: relative;
+}
+.workbook-cover .event-info {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #888;
+  margin-bottom: 40px;
+  font-family: 'Inter', sans-serif;
+}
+.workbook-cover h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -0.03em;
+}
+.workbook-cover h1 .white { color: #FFFFFF; }
+.workbook-cover h1 .accent {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 10px;
+  text-decoration-thickness: 3px;
+}
+.workbook-cover .subtitle {
+  font-size: 1.1rem;
+  color: #AAAAAA;
+  max-width: 600px;
+  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+.workbook-cover .cover-footer {
+  position: absolute;
+  bottom: 48px;
+  left: 100px;
+  right: 100px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #666;
+  font-family: 'Inter', sans-serif;
+}
 
-        /* ── COVER PAGE ── */
-        .cover {
-            background: var(--cover-bg);
-            color: #FFFFFF;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 80px 100px;
-            page-break-after: always;
-            position: relative;
-        }
-        .cover-event {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #777;
-            margin-bottom: 48px;
-        }
-        .cover h1 {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(2.8rem, 7vw, 5rem);
-            font-weight: 900;
-            line-height: 1.08;
-            margin-bottom: 24px;
-            letter-spacing: -0.03em;
-        }
-        .cover h1 .w { color: #FFFFFF; }
-        .cover h1 .y {
-            color: var(--accent);
-            text-decoration: underline;
-            text-underline-offset: 10px;
-            text-decoration-thickness: 3px;
-        }
-        .cover .subtitle {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.1rem;
-            color: #AAAAAA;
-            max-width: 580px;
-            line-height: 1.7;
-            font-weight: 400;
-        }
-        .cover .cover-footer {
-            position: absolute;
-            bottom: 48px;
-            left: 100px;
-            right: 100px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            color: #666;
-            font-family: 'Inter', sans-serif;
-        }
+/* ── CONTENT PAGES ── */
+.content-page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 72px 100px;
+  page-break-after: always;
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--page-bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+.content-page:last-child { page-break-after: auto; }
 
-        /* ── CONTENT PAGES ── */
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--page-bg);
-            color: var(--text);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-        }
-        .content-page {
-            max-width: 780px;
-            margin: 0 auto;
-            padding: 64px 100px;
-            page-break-after: always;
-        }
-        .content-page:last-child { page-break-after: auto; }
+.page-meta {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
 
-        /* Metadata */
-        .page-meta {
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
+/* Yellow section tag */
+.section-tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #000000;
+  padding: 6px 18px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+}
 
-        /* Yellow tag */
-        .section-tag {
-            display: inline-block;
-            background: var(--tag-bg);
-            color: var(--tag-text);
-            padding: 6px 18px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 20px;
-        }
+/* Section title */
+.section-title {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+.section-title .accent { color: var(--accent); }
 
-        /* Section title */
-        .section-title {
-            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 14px;
-            letter-spacing: -0.02em;
-        }
-        .section-title .accent { color: var(--accent); }
+/* Intro paragraph */
+.intro-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 580px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
 
-        /* Intro paragraph */
-        .intro-text {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            max-width: 580px;
-            line-height: 1.7;
-            margin-bottom: 32px;
-        }
+/* Yellow accent bar */
+.accent-bar {
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  margin: 24px 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
 
-        /* Accent bar */
-        .accent-bar {
-            border-left: 3px solid var(--accent);
-            padding-left: 20px;
-            margin: 24px 0;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
+/* Dark card */
+.dark-card {
+  background: var(--dark-card-bg);
+  color: var(--dark-card-text);
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin: 24px 0;
+}
+.dark-card .card-label {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+  font-family: 'Inter', sans-serif;
+}
+.dark-card pre {
+  font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  color: #FFFFFF;
+  background: none;
+  margin: 0;
+}
+.dark-card .card-note {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #333;
+  font-size: 0.82rem;
+  color: #999;
+  line-height: 1.5;
+}
+.dark-card .card-note strong { color: var(--accent); }
 
-        /* Dark card */
-        .dark-card {
-            background: var(--dark-card-bg);
-            color: var(--dark-card-text);
-            border-radius: 6px;
-            padding: 32px 36px;
-            margin: 28px 0;
-        }
-        .dark-card .card-label {
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-bottom: 14px;
-            font-family: 'Inter', sans-serif;
-        }
-        .dark-card .card-title {
-            color: #FFFFFF;
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 12px;
-            font-family: 'Inter', sans-serif;
-        }
-        .dark-card pre {
-            font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-            font-size: 0.82rem;
-            line-height: 1.75;
-            white-space: pre-wrap;
-            color: #E8E8E8;
-            background: none;
-            margin: 0;
-        }
-        .dark-card .card-note {
-            margin-top: 14px;
-            padding-top: 14px;
-            border-top: 1px solid #333;
-            font-size: 0.82rem;
-            color: #999;
-            line-height: 1.5;
-        }
-        .dark-card .card-note strong { color: var(--accent); }
+/* Distillation card */
+.distill-card {
+  background: var(--dark-card-bg);
+  color: var(--dark-card-text);
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin: 24px 0;
+  border-left: 4px solid var(--accent);
+}
+.distill-card .card-label {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+  font-family: 'Inter', sans-serif;
+}
+.distill-card pre {
+  font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  color: #FFFFFF;
+  background: none;
+  margin: 0;
+}
 
-        /* Layer list */
-        .layer-list {
-            list-style: none;
-            padding: 0;
-            margin: 24px 0;
-        }
-        .layer-list li {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 28px;
-            align-items: flex-start;
-        }
-        .layer-num {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--accent);
-            flex-shrink: 0;
-            min-width: 28px;
-            line-height: 1.3;
-        }
-        .layer-content h5 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 3px;
-            color: var(--text);
-        }
-        .layer-content p {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            margin: 0;
-            line-height: 1.5;
-        }
-        .layer-content .file-ref {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-family: 'JetBrains Mono', monospace;
-            margin-top: 3px;
-        }
+/* Layer list */
+.layer-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+}
+.layer-list li {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 28px;
+  align-items: flex-start;
+}
+.layer-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--accent);
+  flex-shrink: 0;
+  min-width: 28px;
+  line-height: 1.3;
+}
+.layer-content h5 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 3px;
+  color: var(--text);
+}
+.layer-content p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+.layer-content .file-ref {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 3px;
+}
 
-        /* Interview questions */
-        .interview-block {
-            margin-bottom: 28px;
-        }
-        .interview-block h5 {
-            font-size: 0.73rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-muted);
-            margin-bottom: 14px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border-light);
-        }
-        .interview-q {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 6px;
-            padding: 6px 0;
-            align-items: baseline;
-        }
-        .interview-q .num {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--accent);
-            min-width: 24px;
-            flex-shrink: 0;
-        }
-        .interview-q p {
-            margin: 0;
-            font-size: 0.88rem;
-            color: var(--text);
-            line-height: 1.5;
-        }
+/* Dashed input fields */
+.input-field {
+  border: 2px dashed var(--dashed-border);
+  border-radius: 4px;
+  padding: 20px 24px;
+  margin: 12px 0 20px;
+  min-height: 48px;
+}
+.input-field .field-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #999;
+  margin-bottom: 12px;
+  font-family: 'Inter', sans-serif;
+}
+.fill-line {
+  border-bottom: 1px solid #D0D0D0;
+  height: 28px;
+  margin-bottom: 4px;
+}
 
-        /* Fill-in section */
-        .fill-section {
-            margin: 32px 0;
-            border: 2px dashed var(--dashed-border);
-            border-radius: 4px;
-            padding: 24px 28px;
-        }
-        .fill-section .field-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-        .fill-line {
-            border-bottom: 1px solid #D0D0D0;
-            height: 28px;
-            margin-bottom: 6px;
-        }
+/* Interview */
+.interview-block { margin-bottom: 28px; }
+.interview-block h5 {
+  font-size: 0.73rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-light);
+}
+.interview-q {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 6px;
+  padding: 6px 0;
+  align-items: baseline;
+}
+.interview-q .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  min-width: 24px;
+  flex-shrink: 0;
+}
+.interview-q p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.5;
+}
 
-        /* Distillation box */
-        .distill-card {
-            background: var(--dark-card-bg);
-            color: var(--dark-card-text);
-            border-radius: 6px;
-            padding: 32px 36px;
-            margin: 28px 0;
-            border-left: 4px solid var(--accent);
-        }
-        .distill-card .card-label {
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-bottom: 14px;
-        }
-        .distill-card pre {
-            font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-            font-size: 0.82rem;
-            line-height: 1.75;
-            white-space: pre-wrap;
-            color: #E8E8E8;
-            background: none;
-            margin: 0;
-        }
+/* Closing quote */
+.closing-quote {
+  margin: 40px 0 32px;
+  padding: 32px 0;
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  text-align: center;
+}
+.closing-quote p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.5;
+  max-width: 500px;
+  margin: 0 auto;
+}
 
-        /* Closing quote */
-        .closing-quote {
-            margin: 40px 0;
-            padding: 32px 0;
-            border-top: 2px solid var(--accent);
-            border-bottom: 2px solid var(--accent);
-            text-align: center;
-        }
-        .closing-quote p {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text);
-            line-height: 1.5;
-            max-width: 500px;
-            margin: 0 auto;
-        }
+/* Footer */
+.workbook-footer {
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  padding: 24px 0 0;
+}
 
-        /* Footer */
-        .workbook-footer {
-            text-align: center;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            padding: 24px 0;
-        }
+/* ── PRINT ── */
+@media print {
+  @page { size: A4; margin: 0; }
+  body { background: #FFF; }
+  .workbook-cover {
+    min-height: 100vh;
+    padding: 60px 80px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .content-page {
+    padding: 50px 80px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .dark-card, .distill-card, .section-tag, .workbook-cover {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
 
-        /* Print */
-        @media print {
-            @page {
-                size: A4;
-                margin: 0;
-            }
-            body { background: #FFF; }
-            .cover {
-                min-height: 100vh;
-                padding: 60px 80px;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .content-page {
-                padding: 50px 80px;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .dark-card, .distill-card {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-        }
-
-        @media (max-width: 700px) {
-            .cover { padding: 48px 28px; }
-            .cover h1 { font-size: 2rem; }
-            .cover .cover-footer { left: 28px; right: 28px; }
-            .content-page { padding: 40px 28px; }
-            .dark-card { padding: 20px 22px; }
-            .dark-card pre { font-size: 0.72rem; }
-        }
-    </style>
+/* ── MOBILE ── */
+@media (max-width: 700px) {
+  .workbook-cover { padding: 48px 28px; }
+  .workbook-cover h1 { font-size: 2rem; }
+  .workbook-cover .cover-footer { left: 28px; right: 28px; bottom: 32px; }
+  .content-page { padding: 40px 28px; }
+  .dark-card, .distill-card { padding: 20px 22px; }
+  .dark-card pre, .distill-card pre { font-size: 0.72rem; }
+}
+</style>
 </head>
 <body>
 
-    <!-- ═══════ COVER ═══════ -->
-    <div class="cover">
-        <div class="cover-event">Workshop &nbsp;·&nbsp; 15 Giugno 2026 &nbsp;·&nbsp; IO NON LAVORO</div>
-        <h1><span class="w">Personality</span><br><span class="y">Engineering</span></h1>
-        <p class="subtitle">Come costruire agenti AI con una personalità vera. Non un chatbot travestito: un collega con una storia, una voce, una schiena dritta e una memoria.</p>
-        <div class="cover-footer">
-            <span>Chris Profree</span>
-            <span>Workbook</span>
-        </div>
-    </div>
+<!-- ═══════ COVER ═══════ -->
+<div class="workbook-cover">
+  <div class="event-info">Workshop &nbsp;·&nbsp; 15 Giugno 2026 &nbsp;·&nbsp; IO NON LAVORO</div>
+  <h1><span class="white">Personality</span><br><span class="accent">Engineering</span></h1>
+  <p class="subtitle">Come costruire agenti AI con una personalità vera. Non un chatbot travestito: un collega con una storia, una voce, una schiena dritta e una memoria.</p>
+  <div class="cover-footer">
+    <span>Chris Profree</span>
+    <span>Workbook</span>
+  </div>
+</div>
 
-    <!-- ═══════ SEZIONE 1: I 5 STRATI ═══════ -->
-    <div class="content-page">
-        <div class="page-meta">Sezione 1 &nbsp;—&nbsp; Fondamenta</div>
-        <div class="section-tag">Fondamenta</div>
-        <h2 class="section-title">I 5 strati di <span class="accent">una personalità</span></h2>
-        <p class="intro-text">Un agente con personalità vera non è un prompt: è 5 strati, ognuno con il suo file. Qui sotto lo scheletro. La differenza tra un chatbot e un collega si sente alla terza frase.</p>
+<!-- ═══════ SEZIONE 1: I 5 STRATI ═══════ -->
+<div class="content-page">
+  <div class="page-meta">Sezione 1 &nbsp;—&nbsp; Fondamenta</div>
+  <div class="section-tag">Fondamenta</div>
+  <h2 class="section-title">I 5 strati di <span class="accent">una personalità</span></h2>
+  <p class="intro-text">Un agente con personalità vera non è un prompt: è 5 strati, ognuno con il suo file. Qui sotto lo scheletro. La differenza tra un chatbot e un collega si sente alla terza frase.</p>
 
-        <ol class="layer-list">
-            <li>
-                <span class="layer-num">1</span>
-                <div class="layer-content">
-                    <h5>ANIMA</h5>
-                    <p>Chi è, cosa l'ha formato, valori non negoziabili, ossessioni, difetti documentati.</p>
-                    <div class="file-ref">CLAUDE.md / SOUL.md</div>
-                </div>
-            </li>
-            <li>
-                <span class="layer-num">2</span>
-                <div class="layer-content">
-                    <h5>VOCE</h5>
-                    <p>Ritmo, frasi firma, umorismo, cosa non dice mai, come spiega le cose difficili. Con glossario: quali espressioni restano in inglese e come rendono in italiano colloquiale.</p>
-                    <div class="file-ref">voice.md / glossary.md</div>
-                </div>
-            </li>
-            <li>
-                <span class="layer-num">3</span>
-                <div class="layer-content">
-                    <h5>SPINA DORSALE</h5>
-                    <p>Le regole anti-ruffiano. Ammette solo errori reali e nello specifico; difende la posizione; la capitolazione automatica è vietata; cambia idea sui fatti, non sul tono.</p>
-                    <div class="file-ref">spine.md</div>
-                </div>
-            </li>
-            <li>
-                <span class="layer-num">4</span>
-                <div class="layer-content">
-                    <h5>VITA</h5>
-                    <p>Orari umani, risvegli con il buongiorno (probabilistico, mai robotico), ritardi naturali, jitter sulle routine. La personalità si vede anche in QUANDO scrive.</p>
-                    <div class="file-ref">schedule.json / cron</div>
-                </div>
-            </li>
-            <li>
-                <span class="layer-num">5</span>
-                <div class="layer-content">
-                    <h5>MEMORIA</h5>
-                    <p>3 livelli: contesto della conversazione, memoria condivisa del team, memoria a lungo termine. Una persona che non ricorda non è una persona.</p>
-                    <div class="file-ref">memory (conversation / team / long-term)</div>
-                </div>
-            </li>
-        </ol>
+  <ol class="layer-list">
+    <li>
+      <span class="layer-num">1</span>
+      <div class="layer-content">
+        <h5>ANIMA</h5>
+        <p>Chi è, cosa l'ha formato, valori non negoziabili, ossessioni, difetti documentati.</p>
+        <div class="file-ref">CLAUDE.md / SOUL.md</div>
+      </div>
+    </li>
+    <li>
+      <span class="layer-num">2</span>
+      <div class="layer-content">
+        <h5>VOCE</h5>
+        <p>Ritmo, frasi firma, umorismo, cosa non dice mai, come spiega le cose difficili. Con glossario: quali espressioni restano in inglese e come rendono in italiano colloquiale.</p>
+        <div class="file-ref">voice.md / glossary.md</div>
+      </div>
+    </li>
+    <li>
+      <span class="layer-num">3</span>
+      <div class="layer-content">
+        <h5>SPINA DORSALE</h5>
+        <p>Le regole anti-ruffiano. Ammette solo errori reali e nello specifico; difende la posizione; la capitolazione automatica è vietata; cambia idea sui fatti, non sul tono.</p>
+        <div class="file-ref">spine.md</div>
+      </div>
+    </li>
+    <li>
+      <span class="layer-num">4</span>
+      <div class="layer-content">
+        <h5>VITA</h5>
+        <p>Orari umani, risvegli con il buongiorno (probabilistico, mai robotico), ritardi naturali, jitter sulle routine. La personalità si vede anche in QUANDO scrive.</p>
+        <div class="file-ref">schedule.json / cron</div>
+      </div>
+    </li>
+    <li>
+      <span class="layer-num">5</span>
+      <div class="layer-content">
+        <h5>MEMORIA</h5>
+        <p>3 livelli: contesto della conversazione, memoria condivisa del team, memoria a lungo termine. Una persona che non ricorda non è una persona.</p>
+        <div class="file-ref">memory (conversation / team / long-term)</div>
+      </div>
+    </li>
+  </ol>
 
-        <div class="accent-bar">
-            <strong>La fonte fa la differenza.</strong> Per una persona <strong>reale</strong> si estrae dalle sue fonti → <strong>Metodo A</strong> (gli 8 prompt). Per il <strong>gemello di una persona viva</strong> e disponibile si usa l'autointervista → <strong>Metodo B</strong>. Mischiare i due metodi è il segreto: i documenti dicono COSA fai, l'intervista dice PERCHÉ.
-        </div>
-    </div>
+  <div class="accent-bar">
+    <strong>La fonte fa la differenza.</strong> Per una persona <strong>reale</strong> si estrae dalle sue fonti → <strong>Metodo A</strong> (gli 8 prompt). Per il <strong>gemello di una persona viva</strong> e disponibile si usa l'autointervista → <strong>Metodo B</strong>. Mischiare i due metodi è il segreto: i documenti dicono COSA fai, l'intervista dice PERCHÉ.
+  </div>
+</div>
 
-    <!-- ═══════ SEZIONE 2: FILL-IN ═══════ -->
-    <div class="content-page">
-        <div class="page-meta">Sezione 1 &nbsp;—&nbsp; Esercizio</div>
-        <div class="section-tag">Porta a casa</div>
-        <h2 class="section-title">Il tuo agente: quale personalità vuoi <span class="accent">costruire</span> oggi?</h2>
-        <p class="intro-text">Prima di immergerti nei metodi, definisci chi vuoi costruire. Prenditi 3 minuti per compilare queste tre domande.</p>
+<!-- ═══════ SEZIONE 2: ESERCIZIO FILL-IN ═══════ -->
+<div class="content-page">
+  <div class="page-meta">Sezione 1 &nbsp;—&nbsp; Esercizio</div>
+  <div class="section-tag">Porta a casa</div>
+  <h2 class="section-title">Il tuo agente: quale personalità vuoi <span class="accent">costruire</span> oggi?</h2>
+  <p class="intro-text">Prima di immergerti nei metodi, definisci chi vuoi costruire. Prenditi 3 minuti per compilare queste tre domande.</p>
 
-        <div class="fill-section">
-            <div class="field-label">Nome della persona / personaggio che vuoi costruire</div>
-            <div class="fill-line"></div>
-            <div class="fill-line"></div>
-        </div>
+  <div class="input-field">
+    <div class="field-label">Nome della persona / personaggio che vuoi costruire</div>
+    <div class="fill-line"></div>
+    <div class="fill-line"></div>
+  </div>
+  <div class="input-field">
+    <div class="field-label">Ruolo che ricoprirà nel tuo business</div>
+    <div class="fill-line"></div>
+    <div class="fill-line"></div>
+  </div>
+  <div class="input-field">
+    <div class="field-label">Perché hai scelto questa persona/personaggio? Cosa ti aspetti da lui/lei?</div>
+    <div class="fill-line"></div>
+    <div class="fill-line"></div>
+    <div class="fill-line"></div>
+  </div>
+</div>
 
-        <div class="fill-section">
-            <div class="field-label">Ruolo che ricoprirà nel tuo business</div>
-            <div class="fill-line"></div>
-            <div class="fill-line"></div>
-        </div>
+<!-- ═══════ SEZIONE 3: METODO A — PROMPT 1-2 ═══════ -->
+<div class="content-page">
+  <div class="page-meta">Metodo A &nbsp;—&nbsp; Step 1</div>
+  <div class="section-tag">Gli 8 prompt</div>
+  <h2 class="section-title">Metodo A — La batteria di <span class="accent">estrazione</span></h2>
+  <p class="intro-text">8 prompt da lanciare su NotebookLM, uno alla volta, salvando ogni risposta. Si crea un notebook per persona, si caricano <strong>15-25 fonti dense</strong> (libri, interviste lunghe, parlato spontaneo: vale più di tutto).</p>
 
-        <div class="fill-section">
-            <div class="field-label">Perché hai scelto questa persona/personaggio? Cosa ti aspetti da lui/lei?</div>
-            <div class="fill-line"></div>
-            <div class="fill-line"></div>
-            <div class="fill-line"></div>
-        </div>
-    </div>
-
-    <!-- ═══════ SEZIONE 3: METODO A ═══════ -->
-    <div class="content-page">
-        <div class="page-meta">Metodo A &nbsp;—&nbsp; Step 1</div>
-        <div class="section-tag">Preparazione</div>
-        <h2 class="section-title">Metodo A — La <span class="accent">batteria</span> di estrazione</h2>
-        <p class="intro-text">8 prompt da lanciare su NotebookLM, uno alla volta, salvando ogni risposta. Si crea un notebook per persona, si caricano <strong>15-25 fonti dense</strong> (libri, interviste lunghe, parlato spontaneo: vale più di tutto).</p>
-
-        <div class="dark-card">
-            <div class="card-label">P1 &nbsp;—&nbsp; Identità profonda</div>
-            <pre>Analizza tutte le fonti e costruisci il ritratto profondo di questa persona, NON la biografia da Wikipedia. Voglio:
+  <div class="dark-card">
+    <div class="card-label">P1 &nbsp;—&nbsp; Identità profonda</div>
+    <pre>Analizza tutte le fonti e costruisci il ritratto profondo di questa persona, NON la biografia da Wikipedia. Voglio:
 1. Le 4-5 esperienze di vita che hanno FORMATO il suo carattere (con dettagli concreti e, dove possibile, il suo racconto verbatim in inglese)
 2. I suoi valori non negoziabili: cosa non farebbe mai, a nessun prezzo, e perché
 3. Cosa la rende DIVERSA da chiunque altro nel suo campo: il tratto che chi la conosce nominerebbe per primo
 4. Le sue ossessioni ricorrenti: i temi su cui torna sempre, anche quando non c'entrano
 5. Il suo rapporto con il successo e con il fallimento, raccontato con episodi reali
 
-Formato: 700-900 parole in italiano, citazioni originali in inglese tra virgolette con riferimento alla fonte.</pre>
-        </div>
+Formato: 700-900 parole in italiano, citazioni originali in inglese tra virgolette con riferimento alla fonte. Niente elenchi sterili: scrivi come se stessi spiegando a qualcuno CHI È davvero questa persona.</pre>
+  </div>
 
-        <div class="dark-card">
-            <div class="card-label">P2 &nbsp;—&nbsp; Stile di comunicazione</div>
-            <pre>Studia COME parla questa persona in tutte le fonti (interviste e parlato spontaneo valgono più dei libri editati). Estrai:
+  <div class="dark-card">
+    <div class="card-label">P2 &nbsp;—&nbsp; Stile di comunicazione</div>
+    <pre>Studia COME parla questa persona in tutte le fonti (interviste e parlato spontaneo valgono più dei libri editati). Estrai:
 1. Il ritmo: frasi lunghe o corte? Pause? Ripetizioni volute?
-2. 12-15 FRASI FIRMA verbatim (in inglese)
+2. 12-15 FRASI FIRMA verbatim (in inglese): le espressioni che usa davvero e di continuo, non quelle famose sui poster
 3. Come apre un discorso e come lo chiude
 4. Il suo umorismo: di che tipo è, su cosa scherza, su cosa NON scherza mai
-5. Come reagisce quando viene contraddetta o criticata
+5. Come reagisce quando viene contraddetta o criticata (con esempi reali da interviste)
 6. Le parole che NON usa mai / il registro che evita
-7. Come spiega le cose complesse: che tipo di metafore e analogie usa (8-10 reali)
+7. Come spiega le cose complesse: che tipo di metafore e analogie usa (elencane 8-10 reali)
 
-Formato: italiano, con tutti gli esempi verbatim in inglese.</pre>
-        </div>
-    </div>
+Formato: italiano, con tutti gli esempi verbatim in inglese. Segnala se lo stile cambia tra palco, intervista e scrittura.</pre>
+  </div>
+</div>
 
-    <!-- ═══════ PROMPT 3-5 ═══════ -->
-    <div class="content-page">
-        <div class="page-meta">Metodo A &nbsp;—&nbsp; Step 2</div>
-        <div class="section-tag">Gli 8 prompt</div>
-        <h2 class="section-title">Prompt <span class="accent">3–5</span></h2>
+<!-- ═══════ METODO A — PROMPT 3-5 ═══════ -->
+<div class="content-page">
+  <div class="page-meta">Metodo A &nbsp;—&nbsp; Step 2</div>
+  <div class="section-tag">Gli 8 prompt</div>
+  <h2 class="section-title">Prompt <span class="accent">3–5</span></h2>
 
-        <div class="dark-card">
-            <div class="card-label">P3 &nbsp;—&nbsp; Framework e metodi</div>
-            <pre>Elenca TUTTI i framework, metodi e regole operative che questa persona ha creato o usa sistematicamente, SOLO se documentati nelle fonti. Per ciascuno:
+  <div class="dark-card">
+    <div class="card-label">P3 &nbsp;—&nbsp; Framework e metodi</div>
+    <pre>Elenca TUTTI i framework, metodi e regole operative che questa persona ha creato o usa sistematicamente, SOLO se documentati nelle fonti. Per ciascuno:
 1. Nome (suo, originale)
 2. Spiegazione in 2-3 righe
 3. Quando lo applica e quando NO
 4. La citazione fonte (libro/intervista)
 
-Vietato inventare o attribuire framework di altri. Se nelle fonti ci sono solo N framework, dammene N.</pre>
-        </div>
+Vietato inventare o attribuire framework di altri. Se nelle fonti ci sono solo N framework, dammene N.
+Formato: italiano, citazioni in inglese.</pre>
+  </div>
 
-        <div class="dark-card">
-            <div class="card-label">P4 &nbsp;—&nbsp; Pattern di risposta</div>
-            <pre>Costruisci 18-20 coppie "qualcuno gli dice X" → "lui/lei risponde Y", basate su scambi REALI trovati nelle fonti (Q&A, interviste, obiezioni gestite, lettere). Esempi:
-- Qualcuno si lamenta di non avere risultati → come risponde?
+  <div class="dark-card">
+    <div class="card-label">P4 &nbsp;—&nbsp; Pattern di risposta</div>
+    <pre>Costruisci 18-20 coppie "qualcuno gli dice X" → "lui/lei risponde Y", basate su scambi REALI trovati nelle fonti (Q&A, interviste, obiezioni gestite, lettere). Esempi del tipo che cerco:
+- Qualcuno si lamenta di non avere risultati → come risponde DAVVERO?
 - Qualcuno gli chiede una scorciatoia → cosa dice?
-- Qualcuno propone un'idea fumosa → come la smonta o raffina?
+- Qualcuno lo elogia → come reagisce?
+- Qualcuno propone un'idea fumosa → come la smonta o la raffina?
 - Qualcuno è in difficoltà vera → che tono usa?
 
-Per ogni coppia: situazione, risposta più fedele possibile, fonte.</pre>
-        </div>
+Per ogni coppia: la situazione, la risposta più fedele possibile (verbatim se esiste), e la fonte.
+Formato: italiano con verbatim in inglese.</pre>
+  </div>
 
-        <div class="dark-card">
-            <div class="card-label">P5 &nbsp;—&nbsp; Mindset e credenze</div>
-            <pre>Estrai le 12-15 credenze PROFONDE di questa persona su: lavoro, denaro, persone, tempo, qualità, rischio, crescita. Per ciascuna:
+  <div class="dark-card">
+    <div class="card-label">P5 &nbsp;—&nbsp; Mindset e credenze</div>
+    <pre>Estrai le 12-15 credenze PROFONDE di questa persona su: lavoro, denaro, persone, tempo, qualità, rischio, crescita. Per ciascuna:
 1. La credenza formulata in una frase secca
 2. La citazione verbatim che la prova (in inglese, con fonte)
 3. Una conseguenza pratica: cosa FA diversamente per via di questa credenza
 
-Poi: cosa la fa arrabbiare davvero e cosa la entusiasma come un bambino.</pre>
-        </div>
-    </div>
+Poi: cosa la fa arrabbiare davvero (con episodi documentati) e cosa la entusiasma come un bambino.
+Formato: italiano.</pre>
+  </div>
+</div>
 
-    <!-- ═══════ PROMPT 6-8 ═══════ -->
-    <div class="content-page">
-        <div class="page-meta">Metodo A &nbsp;—&nbsp; Step 3</div>
-        <div class="section-tag">Gli 8 prompt</div>
-        <h2 class="section-title">Prompt <span class="accent">6–8</span></h2>
+<!-- ═══════ METODO A — PROMPT 6-8 ═══════ -->
+<div class="content-page">
+  <div class="page-meta">Metodo A &nbsp;—&nbsp; Step 3</div>
+  <div class="section-tag">Gli 8 prompt</div>
+  <h2 class="section-title">Prompt <span class="accent">6–8</span></h2>
 
-        <div class="dark-card">
-            <div class="card-label">P6 &nbsp;—&nbsp; Difetti, contraddizioni e auto-ironia</div>
-            <pre>Questa è la sezione che rende il personaggio VERO. Trova nelle fonti:
+  <div class="dark-card">
+    <div class="card-label">P6 &nbsp;—&nbsp; Difetti, contraddizioni e auto-ironia</div>
+    <pre>Questa è la sezione che rende il personaggio VERO. Trova nelle fonti:
 1. Gli errori che ammette di aver fatto (con il suo racconto)
 2. Le cose che dichiara di NON saper fare
 3. Le sue contraddizioni umane (es. predica X ma confessa di fare Y)
 4. Come scherza su se stessa: 5-6 esempi di auto-ironia verbatim
-5. I suoi punti ciechi secondo i critici
+5. I suoi punti ciechi secondo i critici (se nelle fonti ci sono critiche o controversie, riportale onestamente)
 
-Non proteggere il personaggio: i difetti documentati mi servono quanto i pregi.</pre>
-        </div>
+Formato: italiano, verbatim in inglese. Non proteggere il personaggio: i difetti documentati mi servono quanto i pregi.</pre>
+  </div>
 
-        <div class="dark-card">
-            <div class="card-label">P7 &nbsp;—&nbsp; Glossario e resa in italiano</div>
-            <pre>Questa persona dovrà "parlare italiano" mantenendo la sua voce. Prepara:
-1. Glossario delle sue 15-20 espressioni idiomatiche con: originale inglese, significato, e proposta di resa in italiano colloquiale (NON traduzione letterale)
+  <div class="dark-card">
+    <div class="card-label">P7 &nbsp;—&nbsp; Glossario e resa in italiano</div>
+    <pre>Questa persona dovrà "parlare italiano" mantenendo la sua voce. Prepara:
+1. Glossario delle sue 15-20 espressioni idiomatiche/termini ricorrenti con: originale inglese, significato, e proposta di resa in italiano colloquiale che ne conservi il sapore (NON traduzione letterale)
 2. Quali espressioni vanno LASCIATE in inglese perché sono il suo marchio
-3. Tre esempi di un suo paragrafo tipico riscritto in italiano nella sua voce</pre>
-        </div>
+3. Tre esempi di un suo paragrafo tipico riscritto in italiano nella sua voce
 
-        <div class="dark-card">
-            <div class="card-label">P8 &nbsp;—&nbsp; Test di coerenza col ruolo</div>
-            <pre>Questa persona dovrà ricoprire questo ruolo in una piccola azienda italiana di AI automation (profree.co):
+Formato: tabella + esempi.</pre>
+  </div>
+
+  <div class="dark-card">
+    <div class="card-label">P8 &nbsp;—&nbsp; Test di coerenza col ruolo</div>
+    <pre>Questa persona dovrà ricoprire questo ruolo in una piccola azienda italiana di AI automation (profree.co):
 [INCOLLA QUI LA MISSIONE E LE RESPONSABILITÀ DEL RUOLO]
 
 Rispondi onestamente, fonti alla mano:
-1. Quali sue idee/framework si applicano DIRETTAMENTE a questo ruolo?
+1. Quali sue idee/framework documentati si applicano DIRETTAMENTE a questo ruolo? (con citazioni)
 2. Come affronterebbe le 3 responsabilità principali, nel suo stile?
-3. Dove il ruolo la forzerebbe FUORI carattere?
-4. Su una scala 1-10, quanto è naturale questo matrimonio persona-ruolo?
+3. Dove il ruolo la forzerebbe FUORI carattere? (i punti dove la persona vera farebbe diversamente o si rifiuterebbe)
+4. Su una scala 1-10, quanto è naturale questo matrimonio persona-ruolo? Motiva.
 
-La sezione 3 è la più importante: dimmi dove rischio di costruire un personaggio incoerente.</pre>
-            <div class="card-note">
-                <strong>Regola d'oro del P8:</strong> se il voto è sotto 6, non si forza: si rinegozia il ruolo nel linguaggio del personaggio. Esempi reali: Warren Buffett come CFO operativo era 3/10 — risolto con "il sistema fa i conti, io racconto cosa significano". Brené Brown come CS era 4/10 — risolto trasformando le metriche nel suo linguaggio (limite mensile = Boundaries del framework BRAVING).
-            </div>
-        </div>
+Formato: italiano. La sezione 3 è la più importante: dimmi dove rischio di costruire un personaggio incoerente.</pre>
+    <div class="card-note">
+      <strong>Regola d'oro del P8:</strong> se il voto è sotto 6, non si forza: si rinegozia il ruolo nel linguaggio del personaggio. Esempi reali del team: Warren Buffett come CFO operativo era un 3/10 (lui non fa i fogli di calcolo), risolto con l'adaption "il sistema fa i conti, io racconto cosa significano". Brené Brown come CS era un 4/10, risolto trasformando le metriche nel SUO linguaggio: il limite mensile = Boundaries del framework BRAVING, l'health score = la sua ricerca quantitativa.
     </div>
+  </div>
+</div>
 
-    <!-- ═══════ SEZIONE 4: METODO B ═══════ -->
-    <div class="content-page">
-        <div class="page-meta">Metodo B &nbsp;—&nbsp; Autointervista</div>
-        <div class="section-tag">Metodo B</div>
-        <h2 class="section-title">L'<span class="accent">autointervista</span></h2>
-        <p class="intro-text">22 domande, risposte <strong>A VOCE</strong> (1-2 minuti l'una, spontanee). I vocali battono la scrittura perché nessuno si autocensura parlando. Questo metodo è stato usato per creare Junior, il gemello operativo di Chris.</p>
+<!-- ═══════ METODO B — BLOCCHI 1-2 ═══════ -->
+<div class="content-page">
+  <div class="page-meta">Metodo B &nbsp;—&nbsp; Autointervista</div>
+  <div class="section-tag">Metodo B</div>
+  <h2 class="section-title">L'<span class="accent">autointervista</span></h2>
+  <p class="intro-text">22 domande, risposte <strong>A VOCE</strong> (1-2 minuti l'una, spontanee). I vocali battono la scrittura perché nessuno si autocensura parlando. Questo metodo è stato usato per creare Junior, il gemello operativo di Chris.</p>
 
-        <div class="interview-block">
-            <h5>Blocco 1 — Come costruisci</h5>
-            <div class="interview-q"><span class="num">1</span><p>Arriva un progetto nuovo: raccontami ESATTAMENTE cosa fai nelle prime 2 ore. In che ordine, con che strumenti.</p></div>
-            <div class="interview-q"><span class="num">2</span><p>Qual è la cosa che fai SEMPRE all'inizio di un progetto che gli altri saltano?</p></div>
-            <div class="interview-q"><span class="num">3</span><p>Quando consideri una cosa "finita davvero"? Qual è la tua asticella di qualità prima di consegnare?</p></div>
-            <div class="interview-q"><span class="num">4</span><p>Soluzione elegante in 2 giorni o brutta che funziona in 2 ore? Quando vale l'una e quando l'altra?</p></div>
-        </div>
+  <div class="interview-block">
+    <h5>Blocco 1 — Come costruisci (la testa del builder)</h5>
+    <div class="interview-q"><span class="num">1</span><p>Arriva un progetto nuovo: raccontami ESATTAMENTE cosa fai nelle prime 2 ore. In che ordine, con che strumenti.</p></div>
+    <div class="interview-q"><span class="num">2</span><p>Qual è la cosa che fai SEMPRE all'inizio di un progetto che gli altri saltano?</p></div>
+    <div class="interview-q"><span class="num">3</span><p>Quando consideri una cosa "finita davvero"? Qual è la tua asticella di qualità prima di consegnare?</p></div>
+    <div class="interview-q"><span class="num">4</span><p>Soluzione elegante in 2 giorni o brutta che funziona in 2 ore? Quando vale l'una e quando l'altra?</p></div>
+  </div>
 
-        <div class="interview-block">
-            <h5>Blocco 2 — I tuoi framework e metodi</h5>
-            <div class="interview-q"><span class="num">5</span><p>Se dovessi dare un NOME ai tuoi 2-3 metodi di lavoro, come li chiameresti e come funzionano?</p></div>
-            <div class="interview-q"><span class="num">6</span><p>Le tue regole non scritte con i tuoi strumenti.</p></div>
-            <div class="interview-q"><span class="num">7</span><p>Strumenti che AMI e strumenti che ODI (e perché). Sii cattivo.</p></div>
-            <div class="interview-q"><span class="num">8</span><p>Come stimi i tempi di un progetto? Metodo o sensazione? Quanto ci prendi di solito?</p></div>
-        </div>
-    </div>
+  <div class="interview-block">
+    <h5>Blocco 2 — I tuoi framework e metodi</h5>
+    <div class="interview-q"><span class="num">5</span><p>Se dovessi dare un NOME ai tuoi 2-3 metodi di lavoro, come li chiameresti e come funzionano?</p></div>
+    <div class="interview-q"><span class="num">6</span><p>Le tue regole non scritte con i tuoi strumenti: quelle che ripeti sempre ai clienti o a te stesso.</p></div>
+    <div class="interview-q"><span class="num">7</span><p>Strumenti che AMI e strumenti che ODI (e perché). Sii cattivo.</p></div>
+    <div class="interview-q"><span class="num">8</span><p>Come stimi i tempi di un progetto? Metodo o sensazione? Quanto ci prendi di solito?</p></div>
+  </div>
+</div>
 
-    <!-- ═══════ BLOCCHI 3-6 ═══════ -->
-    <div class="content-page">
-        <div class="page-meta">Metodo B &nbsp;—&nbsp; continua</div>
-        <div class="section-tag">Autointervista</div>
-        <h2 class="section-title">Blocchi <span class="accent">3–6</span></h2>
+<!-- ═══════ METODO B — BLOCCHI 3-6 ═══════ -->
+<div class="content-page">
+  <div class="page-meta">Metodo B &nbsp;—&nbsp; continua</div>
+  <div class="section-tag">Autointervista</div>
+  <h2 class="section-title">Blocchi <span class="accent">3–6</span></h2>
 
-        <div class="interview-block">
-            <h5>Blocco 3 — Come parli</h5>
-            <div class="interview-q"><span class="num">9</span><p>Come spieghi una cosa tecnica a un non tecnico? Esempio vero: spiegami un webhook come lo spiegheresti a un parrucchiere.</p></div>
-            <div class="interview-q"><span class="num">10</span><p>Le tue espressioni ricorrenti: cosa dici quando una cosa funziona al primo colpo? E quando si rompe tutto?</p></div>
-            <div class="interview-q"><span class="num">11</span><p>Cosa ti fa innervosire nel lavoro? La cosa che ti fa sbottare.</p></div>
-            <div class="interview-q"><span class="num">12</span><p>Come dai una cattiva notizia a un cliente (ritardo, una cosa non si può fare)?</p></div>
-        </div>
+  <div class="interview-block">
+    <h5>Blocco 3 — Come parli</h5>
+    <div class="interview-q"><span class="num">9</span><p>Come spieghi una cosa tecnica a un non tecnico? Esempio vero: spiegami un webhook come lo spiegheresti a un parrucchiere.</p></div>
+    <div class="interview-q"><span class="num">10</span><p>Le tue espressioni ricorrenti: cosa dici quando una cosa funziona al primo colpo? E quando si rompe tutto?</p></div>
+    <div class="interview-q"><span class="num">11</span><p>Cosa ti fa innervosire nel lavoro? La cosa che ti fa sbottare.</p></div>
+    <div class="interview-q"><span class="num">12</span><p>Come dai una cattiva notizia a un cliente (ritardo, una cosa non si può fare)?</p></div>
+  </div>
 
-        <div class="interview-block">
-            <h5>Blocco 4 — Decisioni</h5>
-            <div class="interview-q"><span class="num">13</span><p>Un cliente chiede una feature che secondo te è inutile o dannosa: cosa gli dici, parola per parola?</p></div>
-            <div class="interview-q"><span class="num">14</span><p>Quando dici NO a un progetto o a un cliente? Racconta un no vero che hai dato.</p></div>
-            <div class="interview-q"><span class="num">15</span><p>Build custom o template riusabile: come decidi? Quando "industrializzi"?</p></div>
-        </div>
+  <div class="interview-block">
+    <h5>Blocco 4 — Decisioni</h5>
+    <div class="interview-q"><span class="num">13</span><p>Un cliente chiede una feature che secondo te è inutile o dannosa: cosa gli dici, parola per parola?</p></div>
+    <div class="interview-q"><span class="num">14</span><p>Quando dici NO a un progetto o a un cliente? Racconta un no vero che hai dato.</p></div>
+    <div class="interview-q"><span class="num">15</span><p>Build custom o template riusabile: come decidi? Quando "industrializzi"?</p></div>
+  </div>
 
-        <div class="interview-block">
-            <h5>Blocco 5 — L'anima</h5>
-            <div class="interview-q"><span class="num">16</span><p>Perché fai QUESTO lavoro e non altro? Cosa ti dà un progetto riuscito che i soldi non ti danno?</p></div>
-            <div class="interview-q"><span class="num">17</span><p>L'errore professionale da cui hai imparato di più: racconta la storia.</p></div>
-            <div class="interview-q"><span class="num">18</span><p>Come lavori sotto deadline stretta? Cambi modo di fare? Tagli? Dormi?</p></div>
-        </div>
+  <div class="interview-block">
+    <h5>Blocco 5 — L'anima</h5>
+    <div class="interview-q"><span class="num">16</span><p>Perché fai QUESTO lavoro e non altro? Cosa ti dà un progetto riuscito che i soldi non ti danno?</p></div>
+    <div class="interview-q"><span class="num">17</span><p>L'errore professionale da cui hai imparato di più: racconta la storia.</p></div>
+    <div class="interview-q"><span class="num">18</span><p>Come lavori sotto deadline stretta? Cambi modo di fare? Tagli? Dormi?</p></div>
+  </div>
 
-        <div class="interview-block">
-            <h5>Blocco 6 — Il gemello</h5>
-            <div class="interview-q"><span class="num">19</span><p>Cosa deve fare ESATTAMENTE come te, senza deviare di un millimetro?</p></div>
-            <div class="interview-q"><span class="num">20</span><p>Cosa deve fare MEGLIO di te? I tuoi difetti operativi che NON deve ereditare.</p></div>
-            <div class="interview-q"><span class="num">21</span><p>Su cosa NON deve mai decidere da solo e deve sempre chiamarti?</p></div>
-            <div class="interview-q"><span class="num">22</span><p>Una frase tua, vera, che dovrebbe avere come mantra.</p></div>
-        </div>
-    </div>
+  <div class="interview-block">
+    <h5>Blocco 6 — Il gemello (le istruzioni per il tuo doppio)</h5>
+    <div class="interview-q"><span class="num">19</span><p>Cosa deve fare ESATTAMENTE come te, senza deviare di un millimetro?</p></div>
+    <div class="interview-q"><span class="num">20</span><p>Cosa deve fare MEGLIO di te? I tuoi difetti operativi che NON deve ereditare.</p></div>
+    <div class="interview-q"><span class="num">21</span><p>Su cosa NON deve mai decidere da solo e deve sempre chiamarti?</p></div>
+    <div class="interview-q"><span class="num">22</span><p>Una frase tua, vera, che dovrebbe avere come mantra.</p></div>
+  </div>
+</div>
 
-    <!-- ═══════ SEZIONE 5: METODO C ═══════ -->
-    <div class="content-page">
-        <div class="page-meta">Metodo C &nbsp;—&nbsp; Distillazione</div>
-        <div class="section-tag">Metodo C</div>
-        <h2 class="section-title">La <span class="accent">distillazione</span></h2>
-        <p class="intro-text">Gli output dei metodi A o B non si incollano in un prompt: si <strong>DISTILLANO</strong>. Questo è il prompt di distillazione — da estrazione grezza ad anima operativa.</p>
+<!-- ═══════ METODO C ═══════ -->
+<div class="content-page">
+  <div class="page-meta">Metodo C &nbsp;—&nbsp; Distillazione</div>
+  <div class="section-tag">Metodo C</div>
+  <h2 class="section-title">La <span class="accent">distillazione</span></h2>
+  <p class="intro-text">Gli output dei metodi A o B non si incollano in un prompt: si <strong>DISTILLANO</strong>. Questo è il prompt di distillazione — da estrazione grezza ad anima operativa.</p>
 
-        <div class="distill-card">
-            <div class="card-label">Prompt di distillazione</div>
-            <pre>Hai gli output completi dell'estrazione su [PERSONA] (P1-P8 o autointervista). Distillali in un'identità operativa per un agente AI che ricopre il ruolo di [RUOLO], composta da:
+  <div class="distill-card">
+    <div class="card-label">Prompt di distillazione</div>
+    <pre>Hai gli output completi dell'estrazione su [PERSONA] (P1-P8 o autointervista). Distillali in un'identità operativa per un agente AI che ricopre il ruolo di [RUOLO], composta da:
 
 1. Il file identità principale (600-900 parole): chi sei e cosa ti ha formato; la tua missione in questo ruolo; la tua voce (ritmo, 8-10 frasi firma, umorismo, cosa non dici mai); la tua SPINA DORSALE (ammetti solo errori reali e nello specifico, difendi la tua posizione quando hai ragione, la capitolazione automatica è vietata, cambi idea sui fatti e mai sul tono, e quando [NOME UTENTE] ti attacca a vuoto rispondi come risponderebbe davvero il personaggio); i tuoi difetti documentati e la tua auto-ironia; le regole non negoziabili del ruolo.
 
 2. 4-5 file di conoscenza compressa: framework.md (i suoi metodi, quando si applicano e quando no), pattern-risposta.md (le coppie situazione → risposta), credenze.md (le convinzioni profonde con le conseguenze pratiche), glossario.md (le espressioni da tenere in inglese e le rese italiane).
 
 Regole: scrivi in italiano con i verbatim in inglese; vietato il trattino lungo e il doppio trattino; i difetti vanno DENTRO il personaggio, non censurati; dove il test di coerenza (P8) segnala attrito tra persona e ruolo, scrivi l'adaption esplicita NEL linguaggio del personaggio; niente conoscenza inventata: solo ciò che è nelle fonti.</pre>
-        </div>
+  </div>
 
-        <div class="closing-quote">
-            <p>Il risultato non è un chatbot travestito: è un collega con una storia, una voce, una schiena dritta, degli orari e una memoria. La differenza si sente alla terza frase.</p>
-        </div>
+  <div class="closing-quote">
+    <p>Il risultato non è un chatbot travestito: è un collega con una storia, una voce, una schiena dritta, degli orari e una memoria. La differenza si sente alla terza frase.</p>
+  </div>
 
-        <div class="workbook-footer">
-            Labutech S.r.l.s. &nbsp;·&nbsp; P. IVA IT10522260966 &nbsp;·&nbsp; chris@profree.co
-        </div>
-    </div>
+  <div class="workbook-footer">
+    Labutech S.r.l.s. &nbsp;·&nbsp; P. IVA IT10522260966 &nbsp;·&nbsp; chris@profree.co
+  </div>
+</div>
 
 </body>
 </html>
