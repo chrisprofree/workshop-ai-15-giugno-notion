@@ -41,9 +41,19 @@
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   background-image:
+    /* Subtle dot grid — premium tech texture */
+    radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px),
+    /* Warm glow bottom-left */
     radial-gradient(circle at 18% 82%, rgba(245,197,24,0.07) 0%, transparent 55%),
+    /* Warm glow top-right */
     radial-gradient(circle at 82% 18%, rgba(245,197,24,0.05) 0%, transparent 50%),
-    repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 8px);
+    /* Diagonal micro-stripes */
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.008) 0px, rgba(255,255,255,0.008) 1px, transparent 1px, transparent 8px);
+  background-size:
+    24px 24px,     /* dot grid spacing */
+    100% 100%,
+    100% 100%,
+    8px 8px;
   pointer-events: none;
 }
 .workbook-cover .event-badge {
