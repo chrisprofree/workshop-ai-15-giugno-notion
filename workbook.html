@@ -205,6 +205,24 @@
   padding: 34px 38px;
   margin: 24px 0;
   page-break-inside: avoid;
+  position: relative;
+  overflow: hidden;
+}
+.dark-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+.dark-card .card-label,
+.dark-card pre,
+.dark-card .card-note {
+  position: relative;
+  z-index: 1;
 }
 .dark-card .card-label {
   color: var(--accent);
@@ -243,6 +261,23 @@
   margin: 24px 0;
   border-left: 4px solid var(--accent);
   page-break-inside: avoid;
+  position: relative;
+  overflow: hidden;
+}
+.distill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+.distill-card .card-label,
+.distill-card pre {
+  position: relative;
+  z-index: 1;
 }
 .distill-card .card-label {
   color: var(--accent);
