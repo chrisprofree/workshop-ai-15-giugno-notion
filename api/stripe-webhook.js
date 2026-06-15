@@ -111,6 +111,7 @@ export default async function handler(req, res) {
       if (session.payment_status === "paid") {
         const pageId = session.client_reference_id || null;
         const email = session.customer_details?.email || session.customer_email || null;
+        const nameFromSession = session.customer_details?.name || "";
         const page = await findPage({ pageId, email });
         const already = page?.properties?.["Stato Pagamento"]?.select?.name === "Completato";
 
@@ -125,8 +126,31 @@ export default async function handler(req, res) {
           const modalita = page.properties?.["Modalità"]?.select?.name || "";
           const to = page.properties?.Email?.email || email;
           await sendThankYou({ email: to, nome, modalita });
+        } else if (!page && email && nameFromSession) {
+          // pagamento valido ma nessuna riga trovata su Notion
+          // → CREO la riga qui come fallback (il register potrebbe aver fallito silenziosamente)
+          const modalitaDefault = "Online"; // non sappiamo la modalità dal webhook
+          try {
+            const newPage = await notion.pages.create({
+              parent: { database_id: DATABASE_ID },
+              properties: {
+                Nome: { title: [{ text: { content: nameFromSession } }] },
+                Email: { email },
+                "Modalità": { select: { name: modalitaDefault } },
+                "Stato Pagamento": { select: { name: "Completato" } },
+                "Data Registrazione": { date: { start: new Date().toISOString() } },
+                "Fonte": { select: { name: "Stripe (webhook)" } },
+              },
+            });
+            await sendThankYou({ email, nome: firstName(nameFromSession), modalita: modalitaDefault });
+            console.log("Creato registrazione via webhook per", email, "pageId:", newPage.id);
+          } catch (createErr) {
+            console.error("webhook create fallback failed:", createErr?.body || createErr?.message || createErr);
+            // ultimo tentativo: mando comunque il link
+            await sendThankYou({ email, nome: "", modalita: "" });
+          }
         } else if (!page && email) {
-          // pagamento valido ma nessuna riga trovata: mando comunque il link
+          // nessun nome disponibile: mando comunque il link
           await sendThankYou({ email, nome: "", modalita: "" });
         }
       }
