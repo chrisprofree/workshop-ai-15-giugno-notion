@@ -5,8 +5,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
-// GET /api/reconcile — checkout sessions ultimi 12 giorni, filtra quelle non pagate e non su Notion.
-// Parametro opzionale: ?all=1 mostra anche le pagate (per debug).
+// GET /api/reconcile — checkout sessions ultimi 12 gg.
+// ?all=1 mostra tutte, default solo non pagate con email O con client_reference_id
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   if (req.method === "OPTIONS") return res.status(204).end();
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       cursor = q.next_cursor;
     } while (cursor);
 
-    // 2. Stripe: checkout sessions ultimi 12 giorni
+    // 2. Stripe
     const now = Math.floor(Date.now() / 1000);
     const twelveDaysAgo = now - 12 * 24 * 60 * 60;
 
@@ -52,25 +52,39 @@ export default async function handler(req, res) {
           status: s.payment_status,
           created: new Date(s.created * 1000).toISOString(),
           amount_total: s.amount_total,
-          payment_link: s.payment_link,
-          url: s.url,
-          id: s.id,
+          client_reference_id: s.client_reference_id || null,
+          // se ha client_reference_id = register API ha funzionato
+          registerOk: !!s.client_reference_id,
         });
       }
       stripeCursor = result.data.length > 0 ? result.data[result.data.length - 1].id : null;
       if (!result.has_more) stripeCursor = null;
     } while (stripeCursor);
 
-    const notPaid = allSessions.filter((s) => s.status !== "paid" && s.email);
-    const missing = notPaid.filter((s) => !notionEmails.has(s.email));
+    // 3. Filtra
+    const notPaidWithEmail = allSessions.filter(
+      (s) => s.status !== "paid" && s.email
+    );
+    const notPaidWithRef = allSessions.filter(
+      (s) => s.status !== "paid" && s.client_reference_id
+    );
+    const missing = allSessions.filter(
+      (s) => s.email && !notionEmails.has(s.email)
+    );
 
     return res.status(200).json({
       ok: true,
-      totalCheckoutSessions: allSessions.length,
-      totalUnpaid: notPaid.length,
-      missingFromNotion: missing.length,
+      total: allSessions.length,
+      paid: allSessions.filter((s) => s.status === "paid").length,
+      unpaid: allSessions.filter((s) => s.status !== "paid").length,
+      unpaidWithEmail: notPaidWithEmail.length,           // chi ha lasciato email ma non ha pagato
+      unpaidWithRef: notPaidWithRef.length,               // chi ha client_reference_id (register OK) ma non ha pagato
       notionEmailCount: notionEmails.size,
-      sessions: showAll ? allSessions : missing,
+      missingFromNotion: missing.length,                  // pagati non su Notion
+      sessions: showAll ? allSessions : [
+        ...notPaidWithEmail,
+        ...notPaidWithRef.filter((s) => !s.email),       // non pagati con ref ma senza email (doppioni evitati)
+      ],
     });
   } catch (err) {
     console.error("reconcile error:", err?.message || err);
