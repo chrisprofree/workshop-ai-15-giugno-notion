@@ -884,6 +884,53 @@
         const API_BASE = "";
         const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/9B69AT6dxfzd4ph7ao9R60j";
 
+        // === IN-APP BROWSER GUARD ===
+        // Il browser interno di Instagram/Facebook blocca i pagamenti (3D Secure, cookie, Apple/Google Pay).
+        // Rileviamo quel contesto e invitiamo ad aprire in Safari/Chrome. I browser normali non sono toccati.
+        (function() {
+            const ua = (navigator.userAgent || navigator.vendor || '') + '';
+            window.__inApp = /Instagram|FBAN|FBAV|FB_IAB|FBIOS|Line\/|TikTok|musical_ly|Snapchat|Pinterest/i.test(ua);
+            if (!window.__inApp) return;
+            const isAndroid = /Android/i.test(ua);
+            const pageUrl = window.location.href;
+
+            function copyLink(btn) {
+                const done = () => { if (btn) { const t = btn.textContent; btn.textContent = 'Link copiato ✓'; setTimeout(() => { btn.textContent = t; }, 2000); } };
+                const fallback = () => { const ta = document.createElement('textarea'); ta.value = pageUrl; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.focus(); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(ta); };
+                if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(pageUrl).then(done).catch(fallback); } else { fallback(); }
+            }
+            window.__copyCheckoutLink = copyLink;
+
+            const css = document.createElement('style');
+            css.textContent = `
+                .urgency-banner{display:none!important}
+                .inapp-banner{position:fixed;top:0;left:0;right:0;z-index:99998;background:#0A0A0A;color:#fff;padding:12px 14px;font-size:13.5px;line-height:1.45;text-align:center;border-bottom:2px solid #FFD60A}
+                .inapp-banner b{color:#FFD60A}
+                .inapp-banner button{margin-top:8px;background:#FFD60A;color:#0A0A0A;border:0;border-radius:8px;padding:9px 18px;font-weight:700;font-size:14px}
+                .inapp-overlay{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.93);display:flex;align-items:center;justify-content:center;padding:24px}
+                .inapp-card{background:#111;color:#fff;border:1px solid #FFD60A;border-radius:16px;max-width:380px;width:100%;padding:26px;text-align:center}
+                .inapp-card h3{color:#FFD60A;margin:0 0 10px;font-size:20px}
+                .inapp-card p{font-size:15px;line-height:1.5;margin:0 0 18px;color:#eee}
+                .inapp-card .btn{display:block;width:100%;box-sizing:border-box;background:#FFD60A;color:#0A0A0A;border:0;border-radius:10px;padding:14px;font-weight:700;font-size:15px;margin:8px 0;text-decoration:none;cursor:pointer}
+                .inapp-card .btn.sec{background:transparent;color:#FFD60A;border:1px solid #FFD60A}
+                .inapp-card small{display:block;color:#999;margin-top:12px;font-size:12px}`;
+            document.head.appendChild(css);
+
+            const banner = document.createElement('div');
+            banner.className = 'inapp-banner';
+            banner.innerHTML = 'Per iscriverti apri in <b>Safari o Chrome</b>: tocca i <b>···</b> in alto a destra e scegli <b>Apri nel browser</b>.<br><button type="button" onclick="__copyCheckoutLink(this)">Copia il link</button>';
+            document.body.appendChild(banner);
+
+            window.__showOpenBrowser = function() {
+                if (document.querySelector('.inapp-overlay')) return;
+                const androidBtn = isAndroid ? '<a class="btn" href="intent://' + window.location.host + window.location.pathname + window.location.search + '#Intent;scheme=https;package=com.android.chrome;end">Apri in Chrome</a>' : '';
+                const ov = document.createElement('div');
+                ov.className = 'inapp-overlay';
+                ov.innerHTML = '<div class="inapp-card"><h3>Apri in Safari per pagare</h3><p>Il browser di Instagram blocca il pagamento. Apri la pagina nel browser del telefono e completa lì: ci vogliono 10 secondi.</p>' + androidBtn + '<button type="button" class="btn" onclick="__copyCheckoutLink(this)">Copia il link</button><button type="button" class="btn sec" onclick="this.closest(\'.inapp-overlay\').remove()">Chiudi</button><small>In alternativa: ··· in alto a destra → Apri nel browser</small></div>';
+                document.body.appendChild(ov);
+            };
+        })();
+
         function toggleFaq(btn) {
             const item = btn.parentElement;
             item.classList.toggle('open');
@@ -911,6 +958,9 @@
 
         document.getElementById('registration-form').addEventListener('submit', async function(e) {
             e.preventDefault();
+            // Browser interno di Instagram/Facebook: il pagamento (3D Secure) fallisce. Fermiamo qui
+            // e mandiamo ad aprire in Safari/Chrome, invece di un checkout che si rompe a metà.
+            if (window.__inApp) { if (window.__showOpenBrowser) window.__showOpenBrowser(); return; }
             const formData = new FormData(this);
             const name = formData.get('name') || '';
             const email = formData.get('email') || '';
