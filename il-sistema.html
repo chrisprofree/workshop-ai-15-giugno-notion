@@ -663,12 +663,10 @@
     <!-- Hero -->
     <section class="hero">
         <div class="container">
-            <div class="hero-badge">Lead Magnet · IO NON LAVORO</div>
+            <div class="hero-badge">Il sistema in azione · IO NON LAVORO</div>
             <h1>Il Sistema<br><span class="highlight">Follow-Up</span></h1>
             <h2>Come trasformi un lead freddo in un cliente pagante in meno di 2 ore — senza alzare un dito.</h2>
-            <div class="hero-cta">
-                <a href="#cta" class="btn-primary pulse-anim">Scarica la guida completa →</a>
-            </div>
+            
         </div>
     </section>
 
@@ -827,47 +825,68 @@
     <section>
         <div class="container">
             <div class="section-label">Caso reale</div>
-            <h2 class="section-title">Da lead a chiuso in 1h45min</h2>
-            <p class="section-sub">Marco, architetto. "Perdo 3 ore al giorno a rispondere a email generiche." Ecco cosa è successo.</p>
+            <h2 class="section-title">Il funnel del workshop in azione</h2>
+            <p class="section-sub">Niente esempi inventati. Questo è il sistema che ha venduto i biglietti di IO NON LAVORO. Reel → commento → DM automatico → vendita. Zero intervento manuale.</p>
 
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="time">10:03</div>
-                    <div class="event"><strong>Lead compila il form</strong>"Sono un architetto, perdo 3 ore al giorno a rispondere a email generiche."</div>
+                    <div class="time">Lunedì</div>
+                    <div class="event"><strong>Reel pubblicato su IG</strong>Chris pubblica un reel su @chris_profree: "Ho costruito un team di agenti AI che lavora al posto mio".</div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time">10:03</div>
-                    <div class="event"><strong>Agente cattura e salva</strong>Su Notion, estrae nome/email/problema, triggera lo Step 2.</div>
+                    <div class="time">+2 min</div>
+                    <div class="event"><strong>Primo commento: "INFO"</strong>Un follower commenta "INFO" sotto al reel. ManyChat lo intercetta all'istante.</div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time">10:04</div>
-                    <div class="event"><strong>Mail automatica inviata</strong>Personalizzata con riferimento alle "3 ore al giorno" + link Calendly.</div>
+                    <div class="time">+0 sec</div>
+                    <div class="event"><strong>DM automatico con link</strong>ManyChat manda un DM: "Ciao! Ecco il link per il workshop: iononlavoro.profree.co — 47€, 20 luglio, Limbiate o online."</div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time">10:12</div>
-                    <div class="event"><strong>Marco prenota una call</strong>Slot disponibile alle 11:45 — tra 1h30min.</div>
+                    <div class="time">+4 min</div>
+                    <div class="event"><strong>Utente apre la landing</strong>Clicca il link, arriva su iononlavoro.profree.co. Vede la pagina, legge, decide di iscriversi.</div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time">10:12</div>
-                    <div class="event"><strong>Agente genera preventivo</strong>3 opzioni: €1.500 / €2.800 / €4.500. Analizza profilo architetto, studio piccolo.</div>
+                    <div class="time">+5 min</div>
+                    <div class="event"><strong>Compila il form</strong>Nome, email, modalità (live o online). Clicca "Prenoto il mio posto — 47€".</div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time">10:15</div>
-                    <div class="event"><strong>Notifica a Chris</strong>"🔥 Lead caldo: Marco Rossi — Call alle 11:45. Preventivo pronto."</div>
+                    <div class="time">+1 sec</div>
+                    <div class="event"><strong>Redirect a Stripe</strong>Il form salva l'iscrizione su Notion (stato: "In attesa") e reindirizza a Stripe Checkout. Pagamento con carta, Apple Pay o Google Pay.</div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time">11:45</div>
-                    <div class="event"><strong>Call di 20 minuti</strong>Chris apre il preventivo, propone opzione Standard. Marco accetta.</div>
+                    <div class="time">+30 sec</div>
+                    <div class="event"><strong>Pagamento completato</strong>Stripe conferma il pagamento (47€). Un webhook notifica il backend: "Cliente X ha pagato".</div>
                 </div>
                 <div class="timeline-item">
-                    <div class="time">11:47</div>
-                    <div class="event"><strong>Chiuso.</strong>Contratto inviato. Revenue: €2.800 + €350/mese. Tempo di Chris: 2 minuti.</div>
+                    <div class="time">+1 sec</div>
+                    <div class="event"><strong>Notion DB aggiornato</strong>Il webhook aggiorna la riga nel database Notion: stato passa da "In attesa" a "Completato". Tutto tracciato automaticamente.</div>
                 </div>
+                <div class="timeline-item">
+                    <div class="time">+5 sec</div>
+                    <div class="event"><strong>Mail di conferma inviata</strong>SendGrid (o analogo) manda una mail automatica: "Grazie per l'iscrizione! Ecco i dettagli del workshop."</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">19 Luglio</div>
+                    <div class="event"><strong>Mail pre-evento</strong>Il giorno prima del workshop: link allo streaming per chi è online, reminder con indirizzo per chi è in presenza.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">20 Luglio</div>
+                    <div class="event"><strong>Workshop live</strong>18:00-19:30. Chris condivide lo schermo, mostra gli agenti in funzione, risponde alle domande.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">+2 ore</div>
+                    <div class="event"><strong>Mail post-evento</strong>Link alla registrazione (valida 30 giorni) + workbook PDF generato da Chris Junior, l'agente AI di Chris.</div>
+                </div>
+            </div>
+
+            <div class="quote-card fade-in" style="margin-top: 36px;">
+                <div class="quote-label">Nessun intervento manuale</div>
+                <p>Da quando il follower commenta "INFO" a quando riceve il workbook dopo il workshop, <strong>Chris non ha toccato niente</strong>. Il sistema ha gestito tutto: DM, vendita, pagamento, CRM, mail pre/post evento, generazione del workbook. Questo non è un caso ipotetico — è il funnel reale di IO NON LAVORO.</p>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
+<!-- CTA -->
     <section id="cta">
         <div class="container">
             <div class="cta-banner">
