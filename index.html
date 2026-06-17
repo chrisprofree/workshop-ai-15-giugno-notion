@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IO NON LAVORO — Come ho costruito un team di agenti AI che manda avanti tre aziende | Chris Profree</title>
-    <meta name="description" content="20 Luglio 2026 — Workshop pratico di 90 minuti. Come ho costruito un team di agenti AI che manda avanti tre aziende mentre sono altrove. Limbiate o Online. 47€. Posti in sala limitati.">
+    <meta name="description" content="20 Luglio 2026 — Workshop pratico di 90 minuti. Come ho costruito un team di agenti AI che manda avanti tre aziende mentre sono altrove. Online. 47€. Posti limitati.">
     <meta property="og:image" content="https://iononlavoro.profree.co/og-workshop-15-giugno.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -655,7 +655,7 @@
                 </div>
                 <div class="hero-meta-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    <strong>Limbiate</strong> + Online
+                    <strong>Online</strong>
                 </div>
                 <div class="hero-meta-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -663,7 +663,7 @@
                 </div>
             </div>
             <div class="hero-price">
-                <span class="amount">47€</span> · posti in sala limitati
+                <span class="amount">47€</span> · posti limitati
                 <span style="display: inline-block; background: #FEF3C7; color: #92400E; font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; margin-left: 12px; vertical-align: middle;">Da settembre 97€</span>
             </div>
             <div class="countdown" id="countdown">
@@ -764,7 +764,7 @@
             <div class="details-grid">
                 <div class="detail-card fade-in">
                     <h3>Dove</h3>
-                    <p>Via Monte Bianco 44<br>Limbiate (MB) — WeDesk<br>+ diretta streaming</p>
+                    <p>Online<br>Link streaming inviato<br>il giorno prima</p>
                 </div>
                 <div class="detail-card fade-in">
                     <h3>Quando</h3>
@@ -772,7 +772,7 @@
                 </div>
                 <div class="detail-card fade-in">
                     <h3>Posti</h3>
-                    <p><strong>In sala limitati</strong><br>quando finiscono resta solo l'online</p>
+                    <p><strong>Posti limitati</strong><br>Registrazione disponibile<br>30 giorni</p>
                 </div>
                 <div class="detail-card fade-in">
                     <h3>Registrazione</h3>
@@ -812,8 +812,8 @@
     <section id="register">
         <div class="container">
             <div class="section-label">Iscriviti</div>
-            <h2 class="section-title">47€ · I posti in sala sono limitati</h2>
-            <p class="section-sub">Solo nome, email e modalità. Poi Stripe. Fine delle chiacchiere.</p>
+            <h2 class="section-title">47€ · Posti limitati</h2>
+            <p class="section-sub">Solo nome ed email. Poi Stripe. Fine delle chiacchiere.</p>
 
             <div class="form-section fade-in">
                 <form id="registration-form">
@@ -826,14 +826,7 @@
                             <label for="email">Email *</label>
                             <input type="email" id="email" name="email" placeholder="nome@esempio.com" required>
                         </div>
-                        <div class="form-group">
-                            <label for="mode">Partecipazione *</label>
-                            <select id="mode" name="mode" required>
-                                <option value="">Scegli...</option>
-                                <option value="live">In presenza (Limbiate)</option>
-                                <option value="online">Online (streaming)</option>
-                            </select>
-                        </div>
+                        <input type="hidden" id="mode" name="mode" value="online">
                     </div>
                     <div class="form-submit">
                         <button type="submit" class="btn-submit">
@@ -1061,7 +1054,7 @@
         (function() {
             const banner = document.createElement('div');
             banner.className = 'urgency-banner';
-            banner.innerHTML = '⚠️ Posti in sala quasi esauriti — <a href="#register">Prenota ora →</a>';
+            banner.innerHTML = '⚠️ Posti limitati — <a href="#register">Prenota ora →</a>';
             document.body.appendChild(banner);
             document.body.classList.add('has-banner');
         })();
