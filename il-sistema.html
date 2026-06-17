@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Sistema Follow-Up — Come automatizzare follow-up e preventivi con l'AI | Chris Profree</title>
+    <meta name="description" content="Come costruire un sistema AI che gestisce follow-up e preventivi in automatico. Il sistema risponde in 12 minuti. Tu chiudi. Nessun cliente perso per ritardo.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FFFFFF;
+            --bg-secondary: #F7F6F3;
+            --bg-hover: #EFEFEC;
+            --text: #121212;
+            --text-secondary: #6B6B6B;
+            --text-muted: #9B9B9B;
+            --border: #E8E7E4;
+            --border-light: #F0F0ED;
+            --accent: #000000;
+            --accent-hover: #333333;
+            --accent-subtle: rgba(0, 0, 0, 0.04);
+            --radius-sm: 4px;
+            --radius: 6px;
+            --radius-lg: 8px;
+            --max-w: 900px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Nav ── */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            height: 64px;
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .nav-logo img {
+            width: 140px;
+            height: auto;
+        }
+
+        .nav-cta {
+            background: var(--accent);
+            color: #FFFFFF;
+            border: none;
+            padding: 7px 16px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.15s, transform 0.15s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        /* ── Hero ── */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            animation: fadeInDown 0.6s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.6rem, 6vw, 4.2rem);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1.08;
+            margin-bottom: 16px;
+            animation: fadeInUp 0.7s ease 0.1s both;
+        }
+
+        .hero h1 .highlight {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: #000;
+            z-index: -1;
+            animation: underlineGrow 0.8s ease 0.5s both;
+        }
+
+        .hero h2 {
+            font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+            font-weight: 500;
+            color: var(--text-secondary);
+            max-width: 580px;
+            margin: 0 auto 32px;
+            line-height: 1.5;
+            animation: fadeInUp 0.7s ease 0.2s both;
+        }
+
+        .hero-cta {
+            animation: fadeInUp 0.7s ease 0.3s both;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--accent);
+            color: #FFFFFF;
+            border: none;
+            padding: 14px 32px;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* ── Sections ── */
+        section {
+            padding: 72px 0;
+        }
+
+        .section-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .section-sub {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 580px;
+            line-height: 1.65;
+            margin-bottom: 36px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        /* ── Problem card ── */
+        .problem-list {
+            list-style: none;
+            padding: 0;
+            margin: 28px 0;
+        }
+
+        .problem-list li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            opacity: 0;
+            transform: translateX(-12px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .problem-list li.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .problem-list li .time-badge {
+            flex-shrink: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            min-width: 80px;
+            text-align: center;
+        }
+
+        /* ── Quote card ── */
+        .quote-card {
+            background: var(--accent);
+            color: #FFFFFF;
+            border-radius: var(--radius-lg);
+            padding: 36px 40px;
+            margin: 32px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-card::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .quote-card .quote-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 12px;
+        }
+
+        .quote-card p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* ── Step Cards ── */
+        .step-card {
+            display: flex;
+            gap: 24px;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border-light);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .step-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step-num {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #FFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .step-content h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .step-content p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .step-content .bullet-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-content .bullet-list li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            padding: 3px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .step-content .bullet-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* ── Timeline ── */
+        .timeline {
+            position: relative;
+            margin: 36px 0;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px 0 20px 28px;
+            opacity: 0;
+            transform: translateX(-12px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 26px;
+            left: -5px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid #FFF;
+            box-shadow: 0 0 0 1px var(--accent);
+        }
+
+        .timeline-item .time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .timeline-item .event {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .timeline-item .event strong {
+            color: var(--text);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* ── CTA Banner ── */
+        .cta-banner {
+            background: var(--accent);
+            color: #FFFFFF;
+            border-radius: var(--radius-lg);
+            padding: 48px 44px;
+            text-align: center;
+            margin: 48px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: -60px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+
+        .cta-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+
+        .cta-banner > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-banner h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .cta-banner p {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 500px;
+            margin: 0 auto 28px;
+            line-height: 1.6;
+        }
+
+        .btn-white {
+            display: inline-block;
+            background: #FFFFFF;
+            color: #000000;
+            border: none;
+            padding: 14px 36px;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .cta-price-tag {
+            margin-top: 18px;
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .cta-price-tag .old {
+            text-decoration: line-through;
+        }
+
+        .cta-price-tag .new {
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        /* ── Cards grid ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 36px;
+        }
+
+        .card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            border-color: #D5D5D2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .card h3 {
+            font-size: 1.02rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        .card .card-tag {
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 3px 10px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+
+        .card .card-tag.hot { background: #FEE2E2; color: #991B1B; }
+        .card .card-tag.warm { background: #FEF3C7; color: #92400E; }
+        .card .card-tag.cold { background: #F0F0F0; color: #666; }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0 48px;
+            text-align: center;
+        }
+
+        footer img {
+            width: 90px;
+            height: auto;
+            margin-bottom: 16px;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            line-height: 1.6;
+        }
+
+        footer a {
+            color: var(--text);
+            text-decoration: underline;
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes underlineGrow {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .pulse-anim {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Counter ── */
+        .stat-highlight {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            display: inline-block;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+            .hero { padding: 56px 0 44px; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero h2 { font-size: 1rem; }
+            .nav-logo img { width: 110px; }
+            section { padding: 52px 0; }
+            .step-card { flex-direction: column; gap: 14px; padding: 26px 0; }
+            .step-num { width: 38px; height: 38px; font-size: 0.95rem; }
+            .timeline { padding-left: 24px; }
+            .timeline-item { padding-left: 20px; }
+            .cta-banner { padding: 36px 24px; }
+            .quote-card { padding: 28px 28px; }
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 20px; }
+            .hero { padding: 44px 0 36px; }
+            .hero h1 { font-size: 1.9rem; }
+            .btn-primary, .btn-white { width: 100%; text-align: center; }
+            footer { padding: 32px 0 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <div class="container">
+        <nav>
+            <a href="#" class="nav-logo">
+                <img src="logo-black.png" alt="Profree">
+            </a>
+            <a href="#cta" class="nav-cta">Voglio il sistema →</a>
+        </nav>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">Lead Magnet · IO NON LAVORO</div>
+            <h1>Il Sistema<br><span class="highlight">Follow-Up</span></h1>
+            <h2>Come trasformi un lead freddo in un cliente pagante in meno di 2 ore — senza alzare un dito.</h2>
+            <div class="hero-cta">
+                <a href="#cta" class="btn-primary pulse-anim">Scarica la guida completa →</a>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- Il problema -->
+    <section>
+        <div class="container">
+            <div class="section-label">Il problema</div>
+            <h2 class="section-title">Non perdi clienti.<br>Perdi il momento giusto.</h2>
+            <p class="section-sub">Il 78% dei lead risponde a un competitor perché il competitor risponde prima. Non perché è migliore. Perché è più veloce.</p>
+
+            <ul class="problem-list">
+                <li>
+                    <span class="time-badge">T+0</span>
+                    <span>Il lead compila il form sul tuo sito</span>
+                </li>
+                <li>
+                    <span class="time-badge">T+20h</span>
+                    <span>Tu te ne accorgi (tra una call e l'altra)</span>
+                </li>
+                <li>
+                    <span class="time-badge">T+23h</span>
+                    <span>Scrivi una mail "personalizzata" — copia-incolla con il nome</span>
+                </li>
+                <li>
+                    <span class="time-badge">T+3g</span>
+                    <span>Il lead ha già scelto il competitor che gli ha risposto in 4 minuti</span>
+                </li>
+            </ul>
+
+            <div class="quote-card fade-in">
+                <div class="quote-label">La verità</div>
+                <p>Un lead che non riceve risposta entro 60 minuti ha il <strong>400% di probabilità in meno</strong> di convertire. Dopo 24 ore, è praticamente morto. L'AI non ti rende più bravo a vendere — ti toglie l'unica scusa che hai: il ritardo.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- Step 1: Cattura -->
+    <section>
+        <div class="container">
+            <div class="section-label">Step 1</div>
+            <h2 class="section-title">Cattura immediata</h2>
+            <p class="section-sub">Il lead compila il form. In meno di 3 secondi, un agente AI lo intercetta e lo salva nel CRM. Tu non fai niente.</p>
+
+            <div class="step-card">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h3>Form → Webhook → Agente</h3>
+                    <p>Ogni form sul tuo sito (landing, contact, popup) è collegato a un webhook. Quando arriva un submit, il webhook chiama un agente AI che in automatico:</p>
+                    <ul class="bullet-list">
+                        <li>Salva il lead nel CRM (Notion, Airtable, HubSpot)</li>
+                        <li>Estrae nome, email, telefono, messaggio dal payload</li>
+                        <li>Assegna un tag "Nuovo lead — da contattare"</li>
+                        <li>Triggera lo Step 2 (risposta immediata)</li>
+                        <li>Ti manda una notifica Telegram con il riepilogo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 2: Risposta 60s -->
+    <section>
+        <div class="container">
+            <div class="section-label">Step 2</div>
+            <h2 class="section-title">Risposta in 60 secondi</h2>
+            <p class="section-sub">Mentre tu sei in call o in palestra, l'agente manda una mail di risposta al lead. Personalizzata, calda, e con un link per prenotare subito una call.</p>
+
+            <div class="step-card">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h3>Mail automatica personalizzata</h3>
+                    <p>L'agente legge il messaggio del lead, estrae il problema principale, e genera una mail che non sembra automatica:</p>
+                    <ul class="bullet-list">
+                        <li>Cita il problema specifico del lead ("ho letto che perdi 3 ore al giorno a rispondere a email")</li>
+                        <li>Allega il PDF lead magnet ("Il Sistema Follow-Up")</li>
+                        <li>Include un link per prenotare una call gratuita di 20 minuti</li>
+                        <li>Manda la mail via SMTP (SendGrid, Mailgun, Gmail API)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 3: Qualifica -->
+    <section>
+        <div class="container">
+            <div class="section-label">Step 3</div>
+            <h2 class="section-title">Qualifica automatica</h2>
+            <p class="section-sub">Non tutti i lead sono uguali. L'agente li classifica in base a budget, urgenza e qualità. Tu intervieni solo sui lead caldi.</p>
+
+            <div class="cards-grid">
+                <div class="card fade-in">
+                    <span class="card-tag hot">Lead caldo</span>
+                    <h3>Score 70-100</h3>
+                    <p>Budget >€2.000, urgenza alta, messaggio specifico, azienda reale.<br><br><strong>Azione:</strong> notifica Telegram urgente. Tu richiami entro 1 ora.</p>
+                </div>
+                <div class="card fade-in">
+                    <span class="card-tag warm">Lead tiepido</span>
+                    <h3>Score 40-69</h3>
+                    <p>Interesse specifico ma senza deadline, budget non chiaro.<br><br><strong>Azione:</strong> l'agente manda una seconda mail dopo 24h con un case study. Tu non fai niente.</p>
+                </div>
+                <div class="card fade-in">
+                    <span class="card-tag cold">Lead freddo</span>
+                    <h3>Score 0-39</h3>
+                    <p>Budget zero, messaggio generico, nessuna urgenza.<br><br><strong>Azione:</strong> sequenza nurturing di 3 mail in 7 giorni. Tu non perdi tempo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- Step 4 & 5 -->
+    <section>
+        <div class="container">
+            <div class="section-label">Step 4 & 5</div>
+            <h2 class="section-title">Preventivo + Follow-up</h2>
+            <p class="section-sub">Il lead prenota la call. L'agente prepara il preventivo prima che tu arrivi. Se non risponde, parte una sequenza di nurturing.</p>
+
+            <div class="step-card">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <h3>Preventivo automatico prima della call</h3>
+                    <p>Appena il lead prenota su Calendly, l'agente analizza il profilo, calcola il prezzo, e prepara 3 opzioni (base, standard, premium). Due ore prima della call ricevi tutto su Telegram — tu apri, leggi in 2 minuti, e sei pronto.</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-num">5</div>
+                <div class="step-content">
+                    <h3>Follow-up a cascata (4 mail in 10 giorni)</h3>
+                    <p>Se il lead non risponde dopo la prima mail:</p>
+                    <ul class="bullet-list">
+                        <li><strong>Giorno 2</strong> — "Hai avuto modo di dare un'occhiata?"</li>
+                        <li><strong>Giorno 5</strong> — Case study nel suo settore</li>
+                        <li><strong>Giorno 10</strong> — Ultima mail, "non voglio intasare la tua inbox"</li>
+                        <li>Se il lead prenota o risponde, la sequenza si ferma automaticamente</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quote-card fade-in" style="margin-top: 36px;">
+                <div class="quote-label">Risultato</div>
+                <p>Il 23% dei lead risponde entro la Mail 3. Senza follow-up automatico, sarebbe <strong>0%</strong>. Tu chiudi, il sistema lavora.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- Timeline reale -->
+    <section>
+        <div class="container">
+            <div class="section-label">Caso reale</div>
+            <h2 class="section-title">Da lead a chiuso in 1h45min</h2>
+            <p class="section-sub">Marco, architetto. "Perdo 3 ore al giorno a rispondere a email generiche." Ecco cosa è successo.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="time">10:03</div>
+                    <div class="event"><strong>Lead compila il form</strong>"Sono un architetto, perdo 3 ore al giorno a rispondere a email generiche."</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">10:03</div>
+                    <div class="event"><strong>Agente cattura e salva</strong>Su Notion, estrae nome/email/problema, triggera lo Step 2.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">10:04</div>
+                    <div class="event"><strong>Mail automatica inviata</strong>Personalizzata con riferimento alle "3 ore al giorno" + link Calendly.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">10:12</div>
+                    <div class="event"><strong>Marco prenota una call</strong>Slot disponibile alle 11:45 — tra 1h30min.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">10:12</div>
+                    <div class="event"><strong>Agente genera preventivo</strong>3 opzioni: €1.500 / €2.800 / €4.500. Analizza profilo architetto, studio piccolo.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">10:15</div>
+                    <div class="event"><strong>Notifica a Chris</strong>"🔥 Lead caldo: Marco Rossi — Call alle 11:45. Preventivo pronto."</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">11:45</div>
+                    <div class="event"><strong>Call di 20 minuti</strong>Chris apre il preventivo, propone opzione Standard. Marco accetta.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">11:47</div>
+                    <div class="event"><strong>Chiuso.</strong>Contratto inviato. Revenue: €2.800 + €350/mese. Tempo di Chris: 2 minuti.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+        <div class="container">
+            <div class="cta-banner">
+                <h2>Vuoi vedere il sistema completo dal vivo?</h2>
+                <p>Workshop IO NON LAVORO — 20 Luglio 2026, 18:00-19:30. WeDesk Limbiate + Online. In 90 minuti ti mostro tutto, schermo condiviso. Niente slide, niente teoria.</p>
+                <a href="https://iononlavoro.profree.co" class="btn-white">Prenota il tuo posto →</a>
+                <div class="cta-price-tag">
+                    <span class="old">97€</span> · <span class="new">47€</span> · Posti in sala limitati
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <img src="logo-black.png" alt="Profree">
+            <p>© 2026 Labutech S.r.l.s. — P. IVA IT10522260966</p>
+            <p><a href="mailto:chris@profree.co">chris@profree.co</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // ── Intersection Observer for scroll animations ──
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Observe step cards
+        document.querySelectorAll('.step-card').forEach(el => observer.observe(el));
+
+        // Observe timeline items (staggered)
+        document.querySelectorAll('.timeline-item').forEach((el, i) => {
+            el.style.transitionDelay = (i * 0.08) + 's';
+            observer.observe(el);
+        });
+
+        // Observe problem list items (staggered)
+        document.querySelectorAll('.problem-list li').forEach((el, i) => {
+            el.style.transitionDelay = (i * 0.12) + 's';
+            observer.observe(el);
+        });
+
+        // Observe cards in grid
+        document.querySelectorAll('.cards-grid .card').forEach((el, i) => {
+            el.style.transitionDelay = (i * 0.1) + 's';
+            observer.observe(el);
+        });
+
+        // ── Smooth scroll for anchor links ──
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
