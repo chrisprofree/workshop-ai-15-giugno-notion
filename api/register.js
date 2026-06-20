@@ -32,6 +32,7 @@ export default async function handler(req, res) {
       alice: "Alice Farella Monti",
       davide: "Davide Espertini",
       nicolo: "Nicolò",
+      ait: "Lorenzo Ait",
       wedesk: "WeDesk",
       organico: "Organico",
       ads: "Ads",
