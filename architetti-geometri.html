@@ -208,7 +208,52 @@
     margin-top: 0.5rem;
   }
 
-  /* AI Act section */
+  /* About section */
+  .section-about { background: var(--bg-white); }
+  .about-block {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+  .about-photo img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+  }
+  .about-text h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+  }
+  .about-text p { font-size: 0.95rem; color: #555; }
+
+  /* Testimonials */
+  .section-testimonials { background: var(--bg-light); }
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .testimonial-card {
+    border: 1px solid var(--border-dark);
+    padding: 1.5rem;
+    background: var(--bg-white);
+  }
+  .testimonial-card p.quote {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-style: italic;
+    color: #444;
+  }
+  .testimonial-card p.author {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+  }
   .section-aiact {
     background: var(--bg-darker);
     color: var(--text-light);
@@ -309,6 +354,8 @@
     .agent-row { flex-direction: column; gap: 0.75rem; padding: 2rem 0; }
     .agent-num { font-size: 3rem; min-width: auto; }
     .aiact-box { flex-direction: column; gap: 1rem; }
+    .about-block { flex-direction: column; text-align: center; }
+    .about-photo img { width: 140px; height: 140px; }
     .form-card { padding: 1.5rem; }
     h2 { font-size: 1.6rem; }
     .nav-logo { width: 100px; }
@@ -392,6 +439,26 @@
   </div>
 </section>
 
+<!-- ═══ CHI SONO ═══ -->
+<section class="section-about">
+  <div class="container">
+    <h2>Chi sono</h2>
+    <div class="about-block">
+      <div class="about-photo">
+        <img src="chris.jpg" alt="Christian La Porta">
+      </div>
+      <div class="about-text">
+        <h3>Christian La Porta</h3>
+        <p>
+          Imprenditore, non guru. Ho Profree (automazione e AI per le aziende), sto lanciando SalonVoice e ho creato Otto, il primo agente AI che si configura in modo semplice e ti rende più produttivo da subito.
+          <br><br>
+          Mi sveglio alle 5, alle 8 sono in palestra, ho una figlia di 2 mesi e il business non si ferma. Non perché lavoro 14 ore: perché ho costruito un team invisibile per comprarmi il tempo. Quello che vedrai nel workshop è esattamente ciò che uso ogni giorno. Nessun segreto, nessuna teoria astratta.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ AI ACT ═══ -->
 <section class="section-aiact">
   <div class="container">
@@ -404,6 +471,28 @@
         <h4>Attestato di partecipazione</h4>
         <p>Alla fine del workshop ricevi un attestato nominativo che certifica la formazione ricevuta sull'uso di agenti AI in ambito professionale. Lo alleghi al tuo fascicolo studio. Sei in regola con l'AI Act e hai un vantaggio competitivo su chi non ha ancora fatto nulla.</p>
         <span class="cert-badge">Attestato incluso</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="section-testimonials">
+  <div class="container">
+    <h2>Cosa dicono</h2>
+    <p>Chi c'era, ha parlato.</p>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="quote">"Da architetto pensavo non mi servisse l'AI, ma grazie al workshop ho capito che posso anch'io creare agenti che semplificano il mio lavoro notevolmente."</p>
+        <p class="author">Valentina</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">"Grazie al workshop IO NON LAVORO, ho capito come automatizzare tutto il flusso di lavoro che ho in studio. Non pensavo, ma così risparmierò almeno 4 ore a settimana!!!"</p>
+        <p class="author">Giovanni</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">"Fantastico! Dopo il workshop ho messo in pratica quello che ho imparato. Ho iniziato ad usare Codex e un lavoro di due giorni sono stata in grado di farlo in 13 minuti!"</p>
+        <p class="author">Pamela</p>
       </div>
     </div>
   </div>
