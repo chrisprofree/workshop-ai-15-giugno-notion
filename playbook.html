@@ -2,15 +2,13 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Playbook per smettere di lavorare — Profree</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<title>Playbook per smettere di lavorare | Profree</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* ── Reset & Base ── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: 10pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   body { font-family: 'Inter', -apple-system, sans-serif; color: #121212; background: #FFFFFF; }
 
-  /* ── Page Container ── */
   .page {
     width: 210mm; min-height: 297mm;
     padding: 20mm 20mm 18mm 20mm;
@@ -20,7 +18,7 @@
   }
   .page:last-child { page-break-after: avoid; }
 
-  /* ── Cover ── */
+  /* Cover */
   .cover-page { display: flex; flex-direction: column; justify-content: center; }
   .cover-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
   .cover-logo { width: 130px; height: auto; margin-bottom: 20pt; }
@@ -42,11 +40,10 @@
     font-size: 7.5pt; color: #9B9B9B; border-top: 1px solid #E8E7E4; padding-top: 10pt;
   }
 
-  /* ── Body Typography ── */
+  /* Body */
   h2 {
     font-family: 'Inter', sans-serif; font-weight: 700; font-size: 18pt;
-    color: #000; letter-spacing: -0.015em; margin-bottom: 10pt;
-    page-break-after: avoid;
+    color: #000; letter-spacing: -0.015em; margin-bottom: 10pt; page-break-after: avoid;
   }
   h3 {
     font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12pt;
@@ -60,7 +57,6 @@
     text-transform: uppercase; letter-spacing: 0.1em; color: #9B9B9B; margin-bottom: 6pt;
   }
 
-  /* ── Components ── */
   /* Pain card */
   .pain-card {
     background: #FFF5F5; border: 1px solid #FECACA; border-radius: 6px;
@@ -85,30 +81,47 @@
   }
   .accent-bar p { margin-bottom: 0; font-size: 10pt; font-style: italic; color: #121212; }
 
-  /* Agent cards grid */
-  .agent-grid { display: flex; flex-wrap: wrap; gap: 8pt; margin: 8pt 0; page-break-inside: avoid; }
-  .agent-card {
-    flex: 0 0 calc(50% - 4pt); border: 1px solid #E8E7E4; border-radius: 6px;
-    padding: 10pt 12pt; page-break-inside: avoid;
+  /* Process cards (3 large cards for processes) */
+  .process-card {
+    border: 1px solid #E8E7E4; border-radius: 6px; padding: 12pt 14pt;
+    margin-bottom: 8pt; page-break-inside: avoid;
   }
-  .agent-card .agent-icon { font-size: 18pt; margin-bottom: 4pt; }
-  .agent-card h4 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 10pt; color: #000; margin-bottom: 3pt; }
-  .agent-card p { font-size: 8.5pt; margin-bottom: 0; color: #6B6B6B; line-height: 1.45; }
+  .process-card h4 {
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 11pt;
+    color: #000; margin-bottom: 3pt;
+  }
+  .process-card .process-time {
+    font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 8pt;
+    color: #22C55E; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4pt;
+  }
+  .process-card p { font-size: 9pt; margin-bottom: 0; }
 
-  /* Process flow */
-  .process-flow { margin: 10pt 0; page-break-inside: avoid; }
-  .process-step {
-    display: flex; gap: 10pt; align-items: flex-start;
-    padding: 8pt 0; border-bottom: 1px solid #EFEFEC; page-break-inside: avoid;
+  /* Prompt block */
+  .prompt-block {
+    background: #F7F6F3; border: 1px solid #E8E7E4; border-radius: 6px;
+    padding: 10pt 12pt; margin-bottom: 8pt; page-break-inside: avoid;
   }
-  .process-step:last-child { border-bottom: none; }
-  .step-num {
-    font-family: 'Poppins', sans-serif; font-weight: 700;
-    font-size: 14pt; color: #000; min-width: 24pt; line-height: 1.3;
+  .prompt-block .prompt-label {
+    font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 7pt;
+    text-transform: uppercase; letter-spacing: 0.08em; color: #9B9B9B; margin-bottom: 4pt;
   }
-  .step-body { flex: 1; }
-  .step-body strong { font-size: 10pt; color: #121212; display: block; margin-bottom: 2pt; }
-  .step-body p { font-size: 9pt; margin: 0; }
+  .prompt-block .prompt-text {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 7.5pt; line-height: 1.5; color: #3A3A3A; white-space: pre-wrap;
+  }
+
+  /* Stack flow */
+  .stack-flow {
+    display: flex; gap: 6pt; align-items: center; margin: 12pt 0;
+    page-break-inside: avoid; flex-wrap: wrap;
+  }
+  .stack-box {
+    border: 1px solid #000; border-radius: 4px; padding: 6pt 10pt;
+    font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 8pt;
+    text-transform: uppercase; letter-spacing: 0.05em; color: #000;
+    white-space: nowrap;
+  }
+  .stack-arrow { font-size: 10pt; color: #9B9B9B; }
 
   /* KPI row */
   .kpi-row { display: flex; gap: 10pt; margin: 12pt 0; page-break-inside: avoid; }
@@ -121,6 +134,15 @@
     color: #000; display: block; line-height: 1.1; margin-bottom: 3pt;
   }
   .kpi-label { font-size: 7.5pt; color: #6B6B6B; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* Stat row */
+  .stat-row {
+    display: flex; gap: 8pt; background: #F7F6F3; border-radius: 6px;
+    padding: 10pt 14pt; margin: 10pt 0; page-break-inside: avoid;
+  }
+  .stat-item { flex: 1; text-align: center; }
+  .stat-value { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 16pt; color: #000; display: block; }
+  .stat-label { font-size: 7pt; color: #6B6B6B; text-transform: uppercase; letter-spacing: 0.05em; }
 
   /* CTA page */
   .cta-page { display: flex; flex-direction: column; justify-content: center; text-align: center; }
@@ -141,27 +163,11 @@
   .cta-price { font-size: 9pt; color: #6B6B6B; }
   .payoff { margin-top: 16pt; font-style: italic; font-size: 9pt; color: #9B9B9B; }
 
-  /* Page number */
   .page-num { position: absolute; bottom: 12mm; right: 20mm; font-size: 7pt; color: #B5B5B5; }
-
-  /* Dividers */
-  .divider { border: none; border-top: 1px solid #E8E7E4; margin: 10pt 0; }
-
-  /* Stat row */
-  .stat-row {
-    display: flex; gap: 8pt; background: #F7F6F3; border-radius: 6px;
-    padding: 10pt 14pt; margin: 10pt 0; page-break-inside: avoid;
-  }
-  .stat-item { flex: 1; text-align: center; }
-  .stat-value { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 16pt; color: #000; display: block; }
-  .stat-label { font-size: 7pt; color: #6B6B6B; text-transform: uppercase; letter-spacing: 0.05em; }
-
-  /* ── Page Structure Helpers ── */
   .section { page-break-inside: avoid; }
-  h2 + p, h3 + p, h3 + .agent-grid, h3 + .process-flow { /* keep heading with content */ }
 
-  /* ── Last page fix ── */
-  .cta-page .page-num { bottom: 12mm; }
+  ul, ol { margin-left: 16pt; margin-bottom: 8pt; }
+  ul li, ol li { font-size: 9.5pt; margin-bottom: 2pt; }
 </style>
 </head>
 <body>
@@ -173,7 +179,7 @@
     <div class="badge">Lead Magnet</div>
     <div class="cover-line"></div>
     <h1 class="cover-title">Playbook per<br>smettere di<br>lavorare</h1>
-    <p class="cover-subtitle">Cosa può fare un professionista con un team di agenti AI — e come iniziare a costruirlo oggi. Senza saper programmare.</p>
+    <p class="cover-subtitle">Tre processi che puoi delegare a un agente AI oggi. Con i prompt esatti per costruirli, lo stack per deployarli e il metodo per non doverci più pensare.</p>
   </div>
   <div class="cover-footer">
     <span>Giugno 2026</span>
@@ -186,21 +192,16 @@
   <div class="page-label">Capitolo 1</div>
   <h2>Perché sei ancora tu a fare tutto</h2>
 
-  <p>Sei un professionista. Un commercialista, un avvocato, un consulente, un'agente immobiliare. Hai costruito la tua attività sulle tue competenze.</p>
+  <p>Sei un professionista. Hai costruito la tua attività sulle tue competenze, sulla fiducia dei clienti, sulla qualità di quello che fai.</p>
   <p>Ma c'è un problema: <strong>sei tu il collo di bottiglia.</strong></p>
 
   <div class="pain-card">
     <p><strong>█ La situazione tipica:</strong></p>
-    <p>Email dei clienti a cui rispondi la sera. Preventivi che scrivi nel weekend. Fatture che accumuli a fine mese. Follow-up che «poi faccio». Contenuti social che rimandi da mesi.</p>
+    <p>Email dei clienti a cui rispondi la sera. Preventivi che scrivi nel weekend. Fatture che accumuli a fine mese. Follow-up che «poi faccio». Contenuti social che rimandi da mesi. Ogni sera ti porti il lavoro a casa, anche quando non vorresti.</p>
   </div>
 
   <p>Non è mancanza di disciplina. È che <strong>hai costruito un lavoro, non un sistema.</strong></p>
-  <p>Ogni task che passa da te è un task che:</p>
-  <ul style="margin-left:16pt; margin-bottom:8pt;">
-    <li>Si accumula mentre sei dal cliente</li>
-    <li>Si ferma quando sei in ferie</li>
-    <li>Non scala — se raddoppi i clienti, raddoppi le ore</li>
-  </ul>
+  <p>Ogni task che passa da te è un task che si accumula mentre sei dal cliente, si ferma quando sei in ferie e non scala. Se raddoppi i clienti, raddoppi le ore. Non c'è via d'uscita.</p>
 
   <div class="stat-row" style="margin-top:14pt;">
     <div class="stat-item"><span class="stat-value">60%</span><span class="stat-label">del tempo in task ripetitivi</span></div>
@@ -217,176 +218,163 @@
 <!-- ═══════════ PAGE 3 — IL CAMBIO DI PARADIGMA ═══════════ -->
 <div class="page">
   <div class="page-label">Capitolo 2</div>
-  <h2>Da tuttofare a direttore d'orchestra</h2>
+  <h2>Lo stack che usi per smettere di lavorare</h2>
 
-  <p>Immagina di arrivare in ufficio la mattina e trovare:</p>
+  <p>Costruire un agente AI non è roba da ingegneri. Nel 2026 hai quattro strumenti che fanno tutto il lavoro pesante. Tu devi solo sapere cosa vuoi che l'agente faccia.</p>
 
-  <div class="gain-card">
-    <p><strong>✓</strong> I lead di ieri hanno già ricevuto un preventivo personalizzato</p>
-    <p><strong>✓</strong> I clienti che dovevi ricontattare hanno già un appuntamento in calendario</p>
-    <p><strong>✓</strong> Le fatture del mese sono emesse e registrate</p>
-    <p><strong>✓</strong> I contenuti social della settimana sono programmati</p>
+  <div class="stack-flow">
+    <div class="stack-box">Claude Code</div>
+    <span class="stack-arrow">→</span>
+    <div class="stack-box">GitHub</div>
+    <span class="stack-arrow">→</span>
+    <div class="stack-box">Railway</div>
+    <span class="stack-arrow">←</span>
+    <div class="stack-box">Notion</div>
   </div>
 
-  <p>Non hai assunto un team di 5 persone. <strong>Hai costruito un team di agenti AI.</strong></p>
-
-  <p>Un agente AI è un assistente digitale che esegue un processo specifico in automatico. Riceve un input, segue delle regole, produce un output. Non si lamenta, non va in ferie, non sbaglia per distrazione.</p>
-
-  <h3 style="margin-top:12pt;">Cosa tieni per te</h3>
-  <div style="display:flex; gap:10pt; page-break-inside: avoid;">
-    <div style="flex:1; border:1px solid #E8E7E4; border-radius:6px; padding:10pt 12pt;">
-      <p style="font-weight:700; font-size:9.5pt; margin-bottom:3pt;">🧠 Strategia</p>
-      <p style="font-size:8.5pt; margin-bottom:0;">Decisioni, direzione, priorità. La roba che richiede il tuo giudizio.</p>
-    </div>
-    <div style="flex:1; border:1px solid #E8E7E4; border-radius:6px; padding:10pt 12pt;">
-      <p style="font-weight:700; font-size:9.5pt; margin-bottom:3pt;">🤝 Relazioni</p>
-      <p style="font-size:8.5pt; margin-bottom:0;">La stretta di mano, la fiducia. L'agente prepara, tu chiudi.</p>
-    </div>
+  <div class="process-card" style="margin-top:8pt;">
+    <h4>Claude Code scrive il codice</h4>
+    <p>Tu scrivi in italiano cosa vuoi che l'agente faccia, Claude Code genera tutto il codice Node.js. Non devi saper programmare. Devi saper descrivere il processo. Gli dai un prompt chiaro, lui costruisce l'agente, lo testa, lo corregge. Tu fai da supervisore.</p>
   </div>
 
-  <h3 style="margin-top:12pt;">Cosa delegare agli agenti</h3>
-  <div style="display:flex; gap:10pt; page-break-inside: avoid;">
-    <div style="flex:1; border:1px solid #E8E7E4; border-radius:6px; padding:10pt 12pt;">
-      <p style="font-weight:700; font-size:9.5pt; margin-bottom:3pt;">🔄 Ripetitivo</p>
-      <p style="font-size:8.5pt; margin-bottom:0;">Preventivi, fatture, email standard, follow-up, report.</p>
-    </div>
-    <div style="flex:1; border:1px solid #E8E7E4; border-radius:6px; padding:10pt 12pt;">
-      <p style="font-weight:700; font-size:9.5pt; margin-bottom:3pt;">⚡ Urgente</p>
-      <p style="font-size:8.5pt; margin-bottom:0;">Rispondere subito a un lead, anche alle 22 di sabato.</p>
-    </div>
+  <div class="process-card">
+    <h4>GitHub conserva tutto</h4>
+    <p>Il codice dell'agente vive su un repository GitHub. Claude Code pusha direttamente lì. Ogni modifica è tracciata. Se rompi qualcosa, torni indietro con un click. Non perdi niente.</p>
   </div>
 
-  <div class="accent-bar" style="margin-top:14pt;">
-    <p>Non si tratta di «lavorare meno». Si tratta di smettere di fare ciò che una macchina può fare meglio e più velocemente di te.</p>
+  <div class="process-card">
+    <h4>Railway lo tiene acceso 24/7</h4>
+    <p>Railway prende il codice da GitHub e lo mette online. L'agente gira su un server sempre attivo, senza che tu debba configurare niente. Tu connetti il repository, Railway fa il resto. Dieci dollari al mese, zero pensieri.</p>
+  </div>
+
+  <div class="process-card">
+    <h4>Notion è il database</h4>
+    <p>I tuoi dati vivono su Notion: clienti, lead, preventivi, fatture, KPI. L'agente legge e scrive su Notion via API. Tu hai il controllo visivo su tutto dalla tua dashboard Notion, l'agente fa il lavoro sporco nei database. Niente Excel, niente CSV, niente casini.</p>
+  </div>
+
+  <div class="accent-bar" style="margin-top:4pt;">
+    <p>Non ti serve un CTO. Ti serve sapere cosa vuoi automatizzare. Al codice ci pensa Claude Code.</p>
   </div>
   <div class="page-num">3</div>
 </div>
 
-<!-- ═══════════ PAGE 4 — I 5 AGENTI ═══════════ -->
+<!-- ═══════════ PAGE 4 — I 3 PROCESSI ═══════════ -->
 <div class="page">
   <div class="page-label">Capitolo 3</div>
-  <h2>I 5 agenti che ogni professionista dovrebbe costruire</h2>
+  <h2>Tre processi, una valanga di ore liberate</h2>
 
-  <p>Non serve un esercito. Bastano 5 agenti mirati per coprire l'80% dei task che oggi mangi tu.</p>
+  <p>Non serve automatizzare tutto. Bastano tre processi chiave per recuperare 20 ore a settimana. Eccoli.</p>
 
-  <div class="agent-grid" style="margin-top:8pt;">
-    <div class="agent-card">
-      <div class="agent-icon">💰</div>
-      <h4>Agente Commerciale</h4>
-      <p>Lead → preventivo → follow-up. Il potenziale cliente riceve una risposta in <strong>12 minuti</strong>, non in 3 giorni. Tu trovi la proposta già pronta da rivedere e inviare.</p>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">📋</div>
-      <h4>Agente Operativo</h4>
-      <p>Fatture, scadenze, documenti, promemoria. Emette la fattura quando il lavoro è concluso, ricorda le scadenze fiscali, archivia tutto.</p>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">📱</div>
-      <h4>Agente Marketing</h4>
-      <p>Scrive e programma contenuti social, newsletter, articoli. Tu gli dai i temi, lui produce le bozze. Tu approvi (o correggi) in 5 minuti.</p>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">💬</div>
-      <h4>Agente Assistenza</h4>
-      <p>Domande frequenti, onboarding nuovi clienti, richieste standard. Risponde in automatico a tutto ciò che non richiede la tua competenza specifica.</p>
-    </div>
-    <div class="agent-card" style="flex:0 0 100%; margin-top:2pt;">
-      <div class="agent-icon">📊</div>
-      <h4>Agente Strategico</h4>
-      <p>Ogni lunedì mattina trovi un report: KPI della settimana, clienti da ricontattare, opportunità aperte, colli di bottiglia. I numeri che ti servono per decidere, senza doverli cercare.</p>
-    </div>
+  <div class="process-card">
+    <h4>1. Follow-up commerciale automatico</h4>
+    <p class="process-time">Risparmio: 10-15 ore / settimana</p>
+    <p>Un potenziale cliente ti scrive su Instagram, WhatsApp o dal form del sito. L'agente risponde in 12 minuti con un messaggio personalizzato, cerca le informazioni rilevanti nei tuoi materiali, salva il lead su Notion e, se non riceve risposta entro 48 ore, invia un follow-up. Tu apri il telefono e trovi la conversazione già avviata, il lead già qualificato, la proposta già abbozzata. Devi solo chiudere.</p>
   </div>
 
-  <div class="accent-bar" style="margin-top:8pt;">
-    <p>Nessuno di questi agenti «ti sostituisce». Fanno il lavoro preparatorio, esecutivo, ripetitivo. Tu tieni la strategia e la relazione.</p>
+  <div class="process-card">
+    <h4>2. Preventivi generati in automatico</h4>
+    <p class="process-time">Risparmio: 5-8 ore / settimana</p>
+    <p>Arriva una richiesta di preventivo via email. L'agente legge la richiesta, recupera prezzi e condizioni dal tuo listino su Notion, genera il PDF del preventivo con il tuo template e risponde al cliente con il documento allegato. Salva tutto su Notion con stato «Inviato». Tu controlli una volta al giorno, approvi le cose complesse, lasci passare quelle standard. Fine della domenica passata a scrivere preventivi.</p>
+  </div>
+
+  <div class="process-card">
+    <h4>3. Report settimanale con KPI</h4>
+    <p class="process-time">Risparmio: 2-3 ore / settimana + niente più decisioni alla cieca</p>
+    <p>Ogni lunedì alle 7:00, mentre dormi o fai colazione, l'agente legge tutti i dati dai tuoi database Notion: nuovi lead, preventivi inviati, tasso di conversione, fatturato previsto. Calcola i KPI, scrive un report in markdown con i numeri chiave e 3 insight azionabili. Te lo invia su Telegram. Arrivi in ufficio che sai già cosa è successo la settimana prima e cosa fare questa.</p>
+  </div>
+
+  <div class="accent-bar">
+    <p>Tre agenti. Tre prompt. Ore recuperate ogni settimana, per sempre. Il ROI del tempo è immediato.</p>
   </div>
   <div class="page-num">4</div>
 </div>
 
-<!-- ═══════════ PAGE 5 — COME COSTRUIRE ═══════════ -->
+<!-- ═══════════ PAGE 5 — COME SI COSTRUISCE ═══════════ -->
 <div class="page">
   <div class="page-label">Capitolo 4</div>
-  <h2>Come costruire il tuo primo agente (in 3 fasi)</h2>
+  <h2>Come si costruisce un agente in 3 fasi</h2>
+  <p>Il metodo è lo stesso per tutti e tre gli agenti. Cambia solo il prompt che dai a Claude Code.</p>
 
-  <p>Non serve saper programmare. Serve sapere <strong>cosa</strong> fai, passo per passo. Il resto lo fanno gli strumenti.</p>
+  <h3 style="margin-top:8pt;">Fase 1: Prepari il prompt</h3>
+  <p>Scrivi in italiano cosa deve fare l'agente, passo per passo. Quali dati deve leggere, quali azioni deve compiere, dove deve scrivere il risultato. Specifica il tono di voce se l'agente deve comunicare con i clienti. Più sei preciso, meglio funziona. Nella prossima pagina trovi i tre prompt già pronti.</p>
 
-  <div class="process-flow">
-    <div class="process-step">
-      <div class="step-num">01</div>
-      <div class="step-body">
-        <strong>Mappa il processo</strong>
-        <p>Scegli UN task che mangi ore ogni settimana. Esempio: «rispondere a un lead che mi scrive su Instagram». Scrivi OGNI singolo passaggio, dal messaggio ricevuto alla proposta inviata. Sii maniacale: ogni click, ogni domanda, ogni variante. Se non lo sai spiegare a un apprendista, non puoi spiegarlo a un agente.</p>
-      </div>
+  <h3 style="margin-top:8pt;">Fase 2: Claude Code costruisce</h3>
+  <p>Apri Claude Code nel terminale, incolli il prompt e lo fai lavorare. Lui crea il progetto Node.js, scrive il codice, configura le API di Notion e Telegram, testa che tutto funzioni. Tu rispondi alle sue domande quando ti chiede chiarimenti. Tempo medio: 15-30 minuti per agente.</p>
+
+  <h3 style="margin-top:8pt;">Fase 3: Deploy su Railway e dimentichi</h3>
+  <p>Claude Code pusha il progetto su GitHub. Tu colleghi il repository a Railway con due click. Railway fa il deploy e l'agente è online 24/7. Lo tieni in modalità supervisione per una settimana, controlli gli output, correggi il tono di voce se serve. Poi togli la supervisione e non ci pensi più.</p>
+
+  <h3 style="margin-top:10pt;">Cosa ti serve (e cosa no)</h3>
+  <div style="display:flex; gap:10pt; page-break-inside: avoid;">
+    <div style="flex:1; border:1px solid #E8E7E4; border-radius:6px; padding:10pt 12pt;">
+      <p style="font-weight:700; font-size:9pt; margin-bottom:3pt; color:#166534;">✓ Serve</p>
+      <p style="font-size:8pt; margin-bottom:0; color:#3A3A3A;">Un account Claude Code, un account GitHub, un account Railway, un workspace Notion con le tue tabelle</p>
     </div>
-    <div class="process-step">
-      <div class="step-num">02</div>
-      <div class="step-body">
-        <strong>Scegli lo strumento e costruisci</strong>
-        <p>Opzione A: <strong>Make</strong> (ex Integromat) — interfaccia visuale, curve di apprendimento basse, centinaia di connettori pronti (Gmail, WhatsApp, Notion, Fogli Google). Opzione B: <strong>n8n</strong> — open source, più potente, richiede un minimo di comfort tecnico. Collega i blocchi come un diagramma di flusso. L'AI generativa (ChatGPT, Claude) ti aiuta a scrivere i testi che l'agente userà.</p>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-num">03</div>
-      <div class="step-body">
-        <strong>Testa e libera</strong>
-        <p>Fai girare l'agente in modalità «supervisione» per 1 settimana. Controlli ogni output prima che parta. Correggi gli errori, aggiusti il tono di voce. Quando l'agente sbaglia meno di te — ed è solo questione di giorni — togli la supervisione. Fine. Non ci pensi più. Passi al prossimo.</p>
-      </div>
+    <div style="flex:1; border:1px solid #E8E7E4; border-radius:6px; padding:10pt 12pt;">
+      <p style="font-weight:700; font-size:9pt; margin-bottom:3pt; color:#991B1B;">✗ Non serve</p>
+      <p style="font-size:8pt; margin-bottom:0; color:#3A3A3A;">Saper programmare, assumere uno sviluppatore, comprare software complicati, fare corsi da 100 ore</p>
     </div>
   </div>
 
   <div class="accent-bar" style="margin-top:10pt;">
-    <p>Il primo agente richiede 4-6 ore per costruirlo. Poi ti restituisce <strong>5-10 ore a settimana</strong>. Ogni settimana. Per sempre. Fai il calcolo.</p>
+    <p>Il primo agente ti costa un pomeriggio. Poi ti restituisce 10 ore a settimana. Ogni settimana. Per sempre.</p>
   </div>
   <div class="page-num">5</div>
 </div>
 
-<!-- ═══════════ PAGE 6 — IL RISULTATO ═══════════ -->
+<!-- ═══════════ PAGE 6 — I 3 PROMPT ═══════════ -->
 <div class="page">
   <div class="page-label">Capitolo 5</div>
-  <h2>Cosa succede quando il team gira senza di te</h2>
+  <h2>I tre prompt: copia, incolla, esegui</h2>
+  <p>Apri Claude Code, incolla il prompt dell'agente che vuoi costruire e segui le istruzioni. Poi passa al deploy.</p>
 
-  <div class="kpi-row">
-    <div class="kpi-item">
-      <span class="kpi-value">80%</span>
-      <span class="kpi-label">task amministrativi azzerati</span>
-    </div>
-    <div class="kpi-item">
-      <span class="kpi-value">15-20</span>
-      <span class="kpi-label">ore recuperate / settimana</span>
-    </div>
-    <div class="kpi-item">
-      <span class="kpi-value">12 min</span>
-      <span class="kpi-label">tempo risposta ai lead</span>
-    </div>
+  <div class="prompt-block">
+    <div class="prompt-label">Prompt 1 · Agente Follow-Up</div>
+    <div class="prompt-text">Crea un agente Node.js che gestisce i follow-up commerciali.
+
+Quando arriva un nuovo lead dal form del mio sito:
+1. Legge nome, email e necessità dal form
+2. Cerca nella tabella Notion "Servizi" le soluzioni più rilevanti per quella necessità
+3. Scrive un'email personalizzata con la proposta, usando un tono diretto e concreto, zero giri di parole. Niente "siamo lieti di", niente "innovativo"
+4. Salva il lead nella tabella Notion "CRM" con stato "Da contattare" e data
+5. Dopo 48 ore, se non c'è stata risposta, invia un follow-up breve: "Ti è arrivata la mia proposta? Fammi sapere se hai dubbi"
+
+Stack: Node.js, Express, Notion API, Gmail API (o SendGrid).
+Deploy: Railway. Il database è Notion. ID tabelle te li chiedo quando ti servono.</div>
   </div>
 
-  <p style="margin-top:10pt;">Non è teoria. È quello che succede quando smetti di essere l'esecutore e diventi il regista.</p>
+  <div class="prompt-block">
+    <div class="prompt-label">Prompt 2 · Agente Preventivi</div>
+    <div class="prompt-text">Crea un agente Node.js che genera preventivi in automatico.
 
-  <h3 style="margin-top:12pt;">Un esempio concreto</h3>
-  <p>Ho costruito un sistema di follow-up per la mia attività. Quando un potenziale cliente mi scrive su Instagram chiedendo informazioni, il sistema:</p>
-  <ol style="margin-left:16pt; margin-bottom:8pt; font-size:9.5pt; color:#3A3A3A;">
-    <li>Legge il messaggio e capisce di cosa ha bisogno</li>
-    <li>Cerca informazioni rilevanti dai miei contenuti e materiali</li>
-    <li>Scrive una risposta personalizzata con il mio tono di voce</li>
-    <li>Crea una bozza di preventivo su Notion</li>
-    <li>Programma un follow-up se non risponde entro 48 ore</li>
-  </ol>
-  <p><strong>Tempo totale: 12 minuti dal messaggio alla proposta.</strong> Senza che io tocchi nulla.</p>
+Quando ricevo una richiesta di preventivo via email:
+1. L'agente analizza il testo dell'email e identifica i servizi richiesti
+2. Recupera prezzi, descrizioni e condizioni dalla tabella Notion "Listino"
+3. Genera un PDF del preventivo usando il template HTML che creerai (stile pulito, logo Profree, testo nero su bianco)
+4. Risponde all'email con il PDF allegato e un messaggio breve di accompagnamento
+5. Salva il preventivo nella tabella Notion "Preventivi" con: cliente, importo, servizi, data, stato "Inviato"
 
-  <h3 style="margin-top:12pt;">Cosa fai con 20 ore in più a settimana</h3>
-  <div style="display:flex; gap:10pt; page-break-inside: avoid;">
-    <div style="flex:1; border-left: 3px solid #000; padding: 8pt 10pt; background: #F7F6F3; border-radius: 0 4px 4px 0;">
-      <p style="font-weight:700; font-size:9.5pt; margin-bottom:2pt;">Più clienti</p>
-      <p style="font-size:8.5pt; margin-bottom:0;">Acquisisci senza aumentare il carico operativo.</p>
-    </div>
-    <div style="flex:1; border-left: 3px solid #000; padding: 8pt 10pt; background: #F7F6F3; border-radius: 0 4px 4px 0;">
-      <p style="font-weight:700; font-size:9.5pt; margin-bottom:2pt;">Più vita</p>
-      <p style="font-size:8.5pt; margin-bottom:0;">Il venerdì pomeriggio libero non è un lusso. È il default.</p>
-    </div>
-    <div style="flex:1; border-left: 3px solid #000; padding: 8pt 10pt; background: #F7F6F3; border-radius: 0 4px 4px 0;">
-      <p style="font-weight:700; font-size:9.5pt; margin-bottom:2pt;">Più focus</p>
-      <p style="font-size:8.5pt; margin-bottom:0;">Lavori solo sulla roba che conta davvero.</p>
-    </div>
+Stack: Node.js, Express, Notion API, Gmail API, pdfkit o puppeteer.
+Deploy: Railway. ID tabella Listino e Preventivi te li chiedo.</div>
+  </div>
+
+  <div class="prompt-block">
+    <div class="prompt-label">Prompt 3 · Agente Report Settimanale</div>
+    <div class="prompt-text">Crea un agente Node.js che ogni lunedì alle 7:00 genera un report settimanale.
+
+L'agente esegue questi passaggi:
+1. Legge dalla tabella Notion "CRM" i lead della settimana: nuovi, contattati, persi, vinti
+2. Legge dalla tabella Notion "Preventivi" i preventivi inviati e quelli chiusi (con importo)
+3. Calcola: tasso di conversione lead→cliente, fatturato previsto dai preventivi aperti, tempo medio di risposta ai lead
+4. Scrive un report in markdown con: 5 KPI chiave, 3 insight azionabili basati sui dati, 1 raccomandazione per la settimana
+5. Invia il report su Telegram al mio numero
+
+Stack: Node.js, node-cron, Notion API, Telegram Bot API.
+Deploy: Railway. Token bot Telegram e ID tabelle Notion te li chiedo.</div>
+  </div>
+
+  <div class="accent-bar" style="margin-top:6pt;">
+    <p>Non modificare i prompt la prima volta. Usali esattamente così. Poi, quando l'agente gira, li raffini.</p>
   </div>
   <div class="page-num">6</div>
 </div>
@@ -401,17 +389,17 @@
       <p class="workshop-date">Domenica 20 Luglio 2026</p>
       <p class="workshop-info">18:00 – 19:30 · Online · Posti limitati</p>
 
-      <p style="font-size:9.5pt; color:#3A3A3A; margin-bottom:12pt;">In 90 minuti costruisci il tuo primo agente AI. Quello che hai letto in questo playbook — lo metti in pratica. Tempo reale, passo per passo. Esci dal workshop con un agente che lavora per te.</p>
+      <p style="font-size:9.5pt; color:#3A3A3A; margin-bottom:12pt;">In 90 minuti costruisci il tuo primo agente AI con Claude Code. Prendi uno dei tre prompt di questo playbook, lo metti in pratica e esci dal workshop con un agente che lavora per te mentre dormi.</p>
 
       <a class="cta-url" href="https://iononlavoro.profree.co">Voglio smettere di lavorare</a>
-      <p class="cta-price">47€ — meno di una cena fuori. E dura per sempre.</p>
+      <p class="cta-price">47€, meno di una cena fuori. E il tempo che recuperi vale 100 volte tanto.</p>
     </div>
 
     <div style="max-width:360pt; margin:14pt auto 0; text-align:left;">
       <p style="font-weight:700; font-size:9pt; color:#000; margin-bottom:4pt;">Cosa porti a casa in 90 minuti:</p>
-      <p style="font-size:8.5pt; color:#3A3A3A; margin-bottom:2pt;">→ Un agente AI funzionante, costruito da te</p>
+      <p style="font-size:8.5pt; color:#3A3A3A; margin-bottom:2pt;">→ Un agente AI funzionante, costruito da te con Claude Code</p>
       <p style="font-size:8.5pt; color:#3A3A3A; margin-bottom:2pt;">→ Il metodo per costruirne altri in autonomia</p>
-      <p style="font-size:8.5pt; color:#3A3A3A; margin-bottom:2pt;">→ L'accesso alla community di professionisti che stanno facendo la stessa cosa</p>
+      <p style="font-size:8.5pt; color:#3A3A3A; margin-bottom:2pt;">→ L'accesso alla community di professionisti che stanno già delegando tutto agli agenti</p>
     </div>
 
     <p class="payoff" style="margin-top:14pt;">Il tempo non è denaro, il tempo è vita.</p>
