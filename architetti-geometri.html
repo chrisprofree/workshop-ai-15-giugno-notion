@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Io non lavoro | Workshop AI per Geometri e Architetti | Profree</title>
+<meta name="description" content="Workshop AI per geometri e architetti. Impara a delegare relazioni tecniche, preventivi e stato pratiche a un agente AI. 22 luglio 2026, online, 47€.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #1a1a1a;
+    --bg-darker: #111111;
+    --bg-white: #ffffff;
+    --bg-light: #f5f5f5;
+    --text-dark: #262626;
+    --text-light: #f0f0f0;
+    --text-muted: #999999;
+    --accent: #1c69d4;
+    --accent-hover: #0653b6;
+    --border-light: rgba(255,255,255,0.12);
+    --border-dark: #e0e0e0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text-dark);
+    background: var(--bg-white);
+    line-height: 1.6;
+  }
+
+  /* Typography */
+  .display {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+  h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+    color: var(--text-dark);
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+  }
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+  }
+  p { margin-bottom: 0.75rem; color: var(--text-dark); }
+
+  /* Sections */
+  section { padding: 5rem 1.5rem; }
+  .container { max-width: 860px; margin: 0 auto; }
+
+  /* Nav */
+  nav {
+    position: absolute; top: 0; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 1.5rem; z-index: 10;
+  }
+  .nav-logo { width: 120px; height: auto; }
+
+  /* Hero (dark) */
+  .hero {
+    background: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 1.5rem 3rem;
+    position: relative;
+  }
+  .hero .container { max-width: 860px; }
+  .hero-label {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 1.25rem;
+    color: #fff;
+  }
+  .hero h1 span { display: block; }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: #bbbbbb;
+    max-width: 520px;
+    margin-bottom: 2rem;
+    line-height: 1.55;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 14px 32px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-submit {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 16px 40px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+    width: 100%;
+  }
+  .btn-submit:hover { background: var(--accent-hover); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  /* Problem section */
+  .section-pain { background: var(--bg-white); }
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .pain-item {
+    border: 1px solid var(--border-dark);
+    padding: 1.5rem;
+  }
+  .pain-num {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .pain-item h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .pain-item p { font-size: 0.9rem; color: #666; margin-bottom: 0; }
+
+  /* Agents section */
+  .section-agents { background: var(--bg-light); }
+  .agent-row {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border-dark);
+  }
+  .agent-row:last-child { border-bottom: none; }
+  .agent-num {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 4rem;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 80px;
+  }
+  .agent-content h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .agent-content p { color: #555; font-size: 0.95rem; margin-bottom: 0.25rem; }
+  .agent-tag {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 10px;
+    margin-top: 0.5rem;
+  }
+
+  /* AI Act section */
+  .section-aiact {
+    background: var(--bg-darker);
+    color: var(--text-light);
+  }
+  .section-aiact h2 { color: #fff; }
+  .section-aiact p { color: #bbbbbb; }
+  .aiact-box {
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 2rem;
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+  .aiact-icon { font-size: 2.5rem; min-width: 50px; text-align: center; }
+  .aiact-text h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .aiact-text p { font-size: 0.9rem; }
+  .cert-badge {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: var(--accent);
+    color: #fff;
+    padding: 6px 14px;
+    margin-top: 0.75rem;
+  }
+
+  /* Registration form */
+  .section-register { background: var(--bg-white); }
+  .form-card {
+    border: 1px solid var(--border-dark);
+    padding: 2.5rem;
+    max-width: 520px;
+    margin: 2rem auto 0;
+  }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dark);
+    margin-bottom: 0.35rem;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    border: 1px solid var(--border-dark);
+    background: var(--bg-white);
+    color: var(--text-dark);
+    transition: border-color 0.15s;
+  }
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .form-note { font-size: 0.75rem; color: #999; text-align: center; margin-top: 0.75rem; margin-bottom: 0; }
+  .form-price {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .perks {
+    max-width: 500px;
+    margin: 1.5rem auto 0;
+  }
+  .perks p { font-size: 0.9rem; margin-bottom: 0.4rem; }
+
+  /* Footer */
+  footer {
+    background: var(--bg-darker);
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+  footer p { color: #777; font-size: 0.8rem; margin-bottom: 0.25rem; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 2.6rem; }
+    section { padding: 3rem 1rem; }
+    .pain-grid { grid-template-columns: 1fr; }
+    .agent-row { flex-direction: column; gap: 0.75rem; padding: 2rem 0; }
+    .agent-num { font-size: 3rem; min-width: auto; }
+    .aiact-box { flex-direction: column; gap: 1rem; }
+    .form-card { padding: 1.5rem; }
+    h2 { font-size: 1.6rem; }
+    .nav-logo { width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <img class="nav-logo" src="logo.svg" alt="Profree">
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="container">
+    <p class="hero-label">Workshop · 22 Luglio 2026</p>
+    <h1>Io non<br>lavoro</h1>
+    <p class="hero-sub">Il workshop AI per geometri e architetti. Impara a delegare relazioni tecniche, preventivi e stato pratiche a un agente AI. Così torni a fare il tecnico, non l'impiegato.</p>
+    <a href="#register" class="btn btn-primary">Voglio smettere di fare carte</a>
+  </div>
+</section>
+
+<!-- ═══ IL PROBLEMA ═══ -->
+<section class="section-pain">
+  <div class="container">
+    <h2>Sei un tecnico, non un impiegato</h2>
+    <p>Ma quante ore passi a scrivere relazioni tecniche, preparare preventivi e rispondere a clienti che chiedono «a che punto siamo?». Il tempo che rubi al cantiere, ai sopralluoghi, alla progettazione vera.</p>
+
+    <div class="pain-grid">
+      <div class="pain-item">
+        <span class="pain-num">01</span>
+        <h4>Relazioni tecniche</h4>
+        <p>Ogni pratica ha la sua relazione. Struttura simile, dati diversi. Eppure la scrivi da zero ogni volta. La domenica sera.</p>
+      </div>
+      <div class="pain-item">
+        <span class="pain-num">02</span>
+        <h4>Preventivi</h4>
+        <p>Il cliente chiama, vuole un preventivo per la ristrutturazione. Tu apri Excel, cerchi i prezzi, componi. Tempo: 45 minuti. Ogni volta.</p>
+      </div>
+      <div class="pain-item">
+        <span class="pain-num">03</span>
+        <h4>Stato pratiche</h4>
+        <p>Hai 12 pratiche aperte. Tre clienti ti scrivono a settimana per sapere a che punto sono. Rispondi a tutti. Manualmente. Invece di lavorare.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ I 3 AGENTI ═══ -->
+<section class="section-agents">
+  <div class="container">
+    <h2>Tre agenti AI che fanno il lavoro al posto tuo</h2>
+    <p>Non è fantascienza. Sono automazioni che scrivono, compilano e rispondono mentre sei in cantiere.</p>
+
+    <div class="agent-row">
+      <div class="agent-num">01</div>
+      <div class="agent-content">
+        <h3>Agente Relazioni Tecniche</h3>
+        <p>Prende i dati della pratica da Notion (committente, immobile, intervento, riferimenti catastali) e scrive la relazione tecnica completa. Stile professionale, struttura corretta, zero errori di copia-incolla. Tu la rivedi in 10 minuti invece di scriverla in 3 ore.</p>
+        <span class="agent-tag">Risparmio: 8-12 ore/settimana</span>
+      </div>
+    </div>
+
+    <div class="agent-row">
+      <div class="agent-num">02</div>
+      <div class="agent-content">
+        <h3>Agente Preventivi</h3>
+        <p>Il cliente descrive il lavoro. L'agente consulta il tuo listino su Notion, calcola gli importi, compila il preventivo con voci, quantità e prezzi. Genera il PDF pronto da inviare. Tu controlli i numeri grossi e autorizzi. Fine della domenica passata a fare conti.</p>
+        <span class="agent-tag">Risparmio: 5-7 ore/settimana</span>
+      </div>
+    </div>
+
+    <div class="agent-row">
+      <div class="agent-num">03</div>
+      <div class="agent-content">
+        <h3>Agente Stato Pratiche</h3>
+        <p>Ogni pratica ha una scheda su Notion con fasi, documenti e scadenze. L'agente, su richiesta del cliente via email o WhatsApp, risponde in automatico con lo stato aggiornato: fase corrente, prossimo passo, data prevista. Il cliente è informato. Tu non vieni interrotto.</p>
+        <span class="agent-tag">Risparmio: 3-4 ore/settimana + zero interruzioni</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AI ACT ═══ -->
+<section class="section-aiact">
+  <div class="container">
+    <h2>Formazione obbligatoria. E tu hai il certificato.</h2>
+    <p>L'AI Act europeo stabilisce che chi utilizza sistemi di intelligenza artificiale in ambito professionale deve dimostrare di aver ricevuto una formazione adeguata. Non è un'opzione. È un requisito.</p>
+
+    <div class="aiact-box">
+      <div class="aiact-icon">📜</div>
+      <div class="aiact-text">
+        <h4>Attestato di partecipazione</h4>
+        <p>Alla fine del workshop ricevi un attestato nominativo che certifica la formazione ricevuta sull'uso di agenti AI in ambito professionale. Lo alleghi al tuo fascicolo studio. Sei in regola con l'AI Act e hai un vantaggio competitivo su chi non ha ancora fatto nulla.</p>
+        <span class="cert-badge">Attestato incluso</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REGISTRATION ═══ -->
+<section class="section-register" id="register">
+  <div class="container">
+    <h2 style="text-align:center;">47€ · Posti limitati</h2>
+    <p style="text-align:center; max-width:500px; margin:0 auto 0.5rem;">In 90 minuti costruisci il tuo primo agente AI. Niente teoria. Esci dal workshop con un agente che scrive relazioni tecniche mentre dormi.</p>
+
+    <div class="form-card">
+      <p class="form-price">47€</p>
+      <form id="registration-form">
+        <div class="form-group">
+          <label for="name">Nome</label>
+          <input type="text" id="name" name="name" placeholder="Il tuo nome" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="nome@esempio.com" required>
+        </div>
+        <input type="hidden" name="mode" value="online">
+        <button type="submit" class="btn-submit">Prenoto il mio posto</button>
+        <p class="form-note">Pagamento sicuro via Stripe. Meno di un'ora di parcella.</p>
+      </form>
+    </div>
+
+    <div class="perks">
+      <p><strong>→</strong> Un agente AI funzionante, costruito da te durante il workshop</p>
+      <p><strong>→</strong> Il metodo per costruirne altri in autonomia con Claude Code</p>
+      <p><strong>→</strong> Attestato di partecipazione valido per compliance AI Act</p>
+      <p><strong>→</strong> Accesso alla community di professionisti che stanno già delegando tutto</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>Labutech S.r.l.s. · P.IVA IT10522260966</p>
+  <p>chris@profree.co · profree.co</p>
+</footer>
+
+<script>
+  const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/9B69AT6dxfzd4ph7ao9R60j";
+  const API_BASE = "";
+
+  document.getElementById('registration-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const name = formData.get('name') || '';
+    const email = formData.get('email') || '';
+    const mode = formData.get('mode') || 'online';
+
+    const submitBtn = document.querySelector('.btn-submit');
+    submitBtn.textContent = 'Salvo...';
+    submitBtn.disabled = true;
+
+    let pageId = null;
+    try {
+      const resp = await fetch(API_BASE + '/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, mode, ref: 'architetti' })
+      });
+      const data = await resp.json();
+      if (data && data.pageId) pageId = data.pageId;
+    } catch (err) {
+      console.log('Registration save skipped, proceeding to payment');
+    }
+
+    try { localStorage.setItem('workshop_mode', mode); } catch (e) {}
+
+    const stripeUrl = new URL(STRIPE_PAYMENT_LINK);
+    stripeUrl.searchParams.set('prefilled_email', email);
+    if (pageId) stripeUrl.searchParams.set('client_reference_id', pageId);
+
+    window.location.href = stripeUrl.toString();
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
