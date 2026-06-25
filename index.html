@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IO NON LAVORO — Come ho costruito un team di agenti AI che manda avanti tre aziende | Chris Profree</title>
-    <meta name="description" content="20 Luglio 2026 — Workshop pratico di 90 minuti. Come ho costruito un team di agenti AI che manda avanti tre aziende mentre sono altrove. Online. 47€. Posti limitati.">
+    <meta name="description" content="20 Luglio 2026 — Workshop pratico di 90 minuti. Come ho costruito un team di agenti AI che manda avanti tre aziende mentre sono altrove. Online. Posti limitati.">
     <meta property="og:image" content="https://iononlavoro.profree.co/og-workshop-15-giugno.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -906,7 +906,31 @@
         // === CONFIG ===
         // API serverless sullo stesso dominio (Vercel /api/*)
         const API_BASE = "";
-        const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/9B69AT6dxfzd4ph7ao9R60j";
+
+        // === PRICING CONFIG ===
+        // Prezzo: 47€ fino al 30 giugno 23:59, 67€ dal 1 luglio 2026
+        (function() {
+            const now = new Date();
+            const italyNow = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Rome' }));
+            const TRANSITION = new Date('2026-06-30T23:59:00+02:00');
+            const NEW_PRICE = new Date('2026-07-01T00:00:00+02:00');
+            const OLD_LINK = 'https://buy.stripe.com/9B69AT6dxfzd4ph7ao9R60j';
+            const NEW_LINK = 'STRIPE_67_NUOVO_LINK_DA_SOSTITUIRE';
+
+            let price, stripeLink, phase;
+            if (italyNow >= NEW_PRICE) {
+                price = 67; stripeLink = NEW_LINK; phase = 'new';
+            } else if (italyNow >= TRANSITION) {
+                price = 67; stripeLink = null; phase = 'transition';
+            } else {
+                price = 47; stripeLink = OLD_LINK; phase = 'old';
+            }
+            window.__PRICE = price;
+            window.__STRIPE_LINK = stripeLink;
+            window.__PRICE_PHASE = phase;
+        })();
+
+        const STRIPE_PAYMENT_LINK = window.__STRIPE_LINK;
 
         // === IN-APP BROWSER GUARD ===
         // Il browser interno di Instagram/Facebook blocca i pagamenti (3D Secure, cookie, Apple/Google Pay).
@@ -953,6 +977,55 @@
                 ov.innerHTML = '<div class="inapp-card"><h3>Apri in Safari per pagare</h3><p>Il browser di Instagram blocca il pagamento. Apri la pagina nel browser del telefono e completa lì: ci vogliono 10 secondi.</p>' + androidBtn + '<button type="button" class="btn" onclick="__copyCheckoutLink(this)">Copia il link</button><button type="button" class="btn sec" onclick="this.closest(\'.inapp-overlay\').remove()">Chiudi</button><small>In alternativa: ··· in alto a destra → Apri nel browser</small></div>';
                 document.body.appendChild(ov);
             };
+        })();
+
+        // === PRICE UI UPDATER ===
+        // Aggiorna tutti i prezzi nella pagina in base alla data corrente
+        (function updatePriceUI() {
+            const price = window.__PRICE;
+            const phase = window.__PRICE_PHASE;
+
+            // Hero price
+            const heroAmount = document.querySelector('.hero-price .amount');
+            if (heroAmount) heroAmount.textContent = price + '€';
+
+            // Registration section title
+            const regTitle = document.querySelector('#register .section-title');
+            if (regTitle) regTitle.textContent = price + '€ · Posti limitati';
+
+            // Submit button
+            const submitBtn = document.querySelector('.btn-submit');
+            if (submitBtn) {
+                if (phase === 'transition') {
+                    submitBtn.textContent = 'Dalla mezzanotte: ' + price + '€';
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.6';
+                    submitBtn.style.cursor = 'not-allowed';
+                    submitBtn.title = 'Il prezzo cambia a mezzanotte. Torna tra qualche minuto.';
+                } else {
+                    submitBtn.textContent = 'Prenoto il mio posto — ' + price + '€';
+                }
+            }
+
+            // FAQ "Perché solo 47€?" → aggiorna se prezzo è cambiato
+            if (price === 67) {
+                const faqButtons = document.querySelectorAll('.faq-question');
+                faqButtons.forEach(function(btn) {
+                    if (btn.textContent.includes('Perché solo 47€')) {
+                        btn.innerHTML = 'Perché 67€? <span class="faq-arrow">▾</span>';
+                    }
+                });
+            }
+
+            // Form price text (architetti page)
+            const formPrice = document.querySelector('.form-price');
+            if (formPrice) formPrice.textContent = price + '€';
+
+            // Badge "Da settembre 97€" — keep only for old price
+            const badge = document.querySelector('.hero-price span[style]');
+            if (badge && price === 67) {
+                badge.textContent = 'Prezzo pieno da settembre: 97€';
+            }
         })();
 
         function toggleFaq(btn) {
@@ -1016,6 +1089,14 @@
             try { localStorage.setItem('workshop_mode', mode); } catch (e) {}
 
             // 2. Redirect a Stripe — pageId come client_reference_id per marcare "Completato" dopo il pagamento
+            // Se siamo in fase di transizione (30 giugno 23:59), STRIPE_PAYMENT_LINK è null
+            if (!STRIPE_PAYMENT_LINK) {
+                submitBtn.textContent = 'Dalla mezzanotte: ' + window.__PRICE + '€';
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.6';
+                alert('Il prezzo sta per cambiare. Dalla mezzanotte il workshop costa ' + window.__PRICE + '€. Torna tra qualche minuto per iscriverti.');
+                return;
+            }
             const stripeUrl = new URL(STRIPE_PAYMENT_LINK);
             stripeUrl.searchParams.set('prefilled_email', email);
             if (pageId) stripeUrl.searchParams.set('client_reference_id', pageId);
