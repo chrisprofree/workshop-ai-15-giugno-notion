@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IO NON LAVORO — Slide Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1A1A24;
+  --accent: #F5C518;
+  --accent-dim: rgba(245,197,24,0.15);
+  --text: #FFFFFF;
+  --text-secondary: #AAAAAA;
+  --text-muted: #777777;
+  --slide-w: 1920;
+  --slide-h: 1080;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: #0D0D14;
+  font-family: 'Inter', -apple-system, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Deck viewport: scales 1920×1080 to fit window ── */
+.deck {
+  width: calc(var(--slide-w) * 1px);
+  height: calc(var(--slide-h) * 1px);
+  position: relative;
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  background: var(--bg);
+  display: none;
+  overflow: hidden;
+}
+.slide.active { display: block; }
+
+/* ── Texture ── */
+.slide::before {
+  content: '';
+  position: absolute;
+  top:0; left:0; right:0; bottom:0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px),
+    radial-gradient(circle at 20% 85%, rgba(245,197,24,0.06) 0%, transparent 50%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.006) 0px, rgba(255,255,255,0.006) 1px, transparent 1px, transparent 8px);
+  background-size: 24px 24px, 100% 100%, 8px 8px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.slide-inner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 80px 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Event badge ── */
+.event-badge {
+  display: inline-block;
+  border: 1.5px solid rgba(245,197,24,0.35);
+  color: var(--accent);
+  padding: 8px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  align-self: flex-start;
+}
+
+/* ── Section tag ── */
+.section-tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #000;
+  padding: 7px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  align-self: flex-start;
+}
+
+/* ── Typography ── */
+h1 {
+  font-size: 96px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+h1 .accent { color: var(--accent); }
+
+h2 {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin-bottom: 40px;
+}
+h2 .accent { color: var(--accent); }
+
+.subtitle {
+  font-size: 22px;
+  color: var(--text-muted);
+  max-width: 620px;
+  line-height: 1.7;
+  margin-top: 24px;
+  font-weight: 400;
+}
+
+/* ── Footer ── */
+.slide-footer {
+  position: absolute;
+  bottom: 36px;
+  left: 120px;
+  right: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+  font-size: 14px;
+  color: #555;
+}
+.slide-footer .author { color: #999; font-weight: 500; }
+
+/* ── Grid layouts ── */
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 36px;
+  flex: 1;
+  align-content: start;
+}
+
+/* ── Cards ── */
+.card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.card-icon { font-size: 36px; }
+.card h3 { font-size: 26px; font-weight: 700; color: var(--text); }
+.card p { font-size: 19px; color: var(--text-secondary); line-height: 1.6; flex: 1; }
+.card .card-accent {
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: auto;
+}
+
+/* ── About layout ── */
+.about-layout {
+  display: flex;
+  gap: 64px;
+  flex: 1;
+  align-items: center;
+}
+.about-photo {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  flex-shrink: 0;
+}
+.about-text { flex: 1; }
+.about-text .bio {
+  font-size: 22px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 700px;
+}
+.about-text .bio strong { color: var(--text); }
+.stat-row {
+  display: flex;
+  gap: 48px;
+  margin-top: 32px;
+}
+.stat { text-align: center; }
+.stat .number { font-size: 48px; font-weight: 900; color: var(--accent); }
+.stat .label { font-size: 14px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+/* ── Agenda list ── */
+.agenda-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+.agenda-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+}
+.agenda-num {
+  background: var(--accent);
+  color: #000;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.agenda-text h4 { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.agenda-text p { font-size: 18px; color: var(--text-secondary); line-height: 1.55; max-width: 700px; }
+
+/* ── Nav hint ── */
+.nav-hint {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #555;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ── Print ── */
+@media print {
+  body { background: #000; margin:0; }
+  .deck { width: 100vw; height: auto; transform: none; }
+  .slide {
+    position: relative !important;
+    display: block !important;
+    width: 100vw;
+    height: 56.25vw;
+    max-height: 100vh;
+    page-break-after: always;
+    break-inside: avoid;
+  }
+  .slide:last-child { page-break-after: auto; }
+  .nav-hint { display: none; }
+}
+
+/* ── Cover center alignment ── */
+.cover-center {
+  justify-content: center;
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ═══ SLIDE 1: COVER ═══ -->
+  <div class="slide active" data-slide="1">
+    <div class="slide-inner cover-center">
+      <div class="event-badge" style="margin-bottom:56px;">15 Giugno 2026 · WeDesk Limbiate · Ore 18:00</div>
+      <h1><span class="accent">IO NON</span><br>LAVORO</h1>
+      <p class="subtitle" style="font-size:26px; max-width:680px;">Come ho costruito un team di agenti AI che manda avanti tre aziende mentre sono altrove.</p>
+    </div>
+    <div class="slide-footer">
+      <span class="author">Christian La Porta — Chris Profree</span>
+      <span>1 / 5</span>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 2: CHI SONO ═══ -->
+  <div class="slide" data-slide="2">
+    <div class="slide-inner">
+      <div class="section-tag" style="margin-bottom:40px;">Chi sono</div>
+      <h2 style="font-size:48px;">Christian La Porta,<br><span class="accent">Chris Profree</span></h2>
+      <div class="about-layout">
+        <img class="about-photo" src="chris.jpg" alt="Chris Profree">
+        <div class="about-text">
+          <p class="bio">
+            Founder di <strong>Profree</strong>, studio di automazione AI. Costruisco sistemi che lavorano al posto mio — agenti, automazioni, Voice AI.
+          </p>
+          <p style="font-size:17px; color:var(--text-muted); margin-top:8px;">
+            35 anni · Milano/Brianza · Padre di Blake (2 mesi)
+          </p>
+          <div class="stat-row">
+            <div class="stat"><div class="number">3</div><div class="label">Aziende attive</div></div>
+            <div class="stat"><div class="number">5</div><div class="label">Agenti AI</div></div>
+            <div class="stat"><div class="number">10+</div><div class="label">Automazioni</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="author">IO NON LAVORO</span>
+      <span>2 / 5</span>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 3: DI COSA MI OCCUPO ═══ -->
+  <div class="slide" data-slide="3">
+    <div class="slide-inner">
+      <div class="section-tag" style="margin-bottom:32px;">Di cosa mi occupo</div>
+      <h2>Tre aziende,<br><span class="accent">un unico stack AI</span></h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">🎓</div>
+          <h3>Profree</h3>
+          <p>Formazione AI e automazioni per aziende e professionisti. Corsi, workshop, membership, sistemi su misura.</p>
+          <span class="card-accent">Formazione & Automazione</span>
+        </div>
+        <div class="card">
+          <div class="card-icon">💇</div>
+          <h3>SalonVoice</h3>
+          <p>Voice AI per saloni di bellezza. Risponde al telefono, prenota appuntamenti, non perde chiamate. SaaS B2B.</p>
+          <span class="card-accent">Voice AI</span>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏠</div>
+          <h3>Easyroi</h3>
+          <p>Gestione affitti brevi nel settore immobiliare. Ottimizzazione rendimenti, automazione operation, report clienti.</p>
+          <span class="card-accent">PropTech</span>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="author">IO NON LAVORO</span>
+      <span>3 / 5</span>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 4: COSA SPIEGHERÒ 1/2 ═══ -->
+  <div class="slide" data-slide="4">
+    <div class="slide-inner">
+      <div class="section-tag" style="margin-bottom:28px;">Cosa spiegherò oggi</div>
+      <h2>Il sistema<br><span class="accent">dall'interno</span></h2>
+      <div class="agenda-list">
+        <div class="agenda-item">
+          <div class="agenda-num">1</div>
+          <div class="agenda-text">
+            <h4>La filosofia: Buyback &amp; DRIP</h4>
+            <p>Comprati indietro il tempo. Delega, non automatizzare a caso. Il framework per capire cosa delegare prima e come.</p>
+          </div>
+        </div>
+        <div class="agenda-item">
+          <div class="agenda-num">2</div>
+          <div class="agenda-text">
+            <h4>L'architettura degli agenti</h4>
+            <p>Sheryl (COO), Gary (Content), Bozoma (CMO), Dharmes (Coach CTO) e Chris Junior su base Hermes. System prompt, knowledge base, memoria persistente.</p>
+          </div>
+        </div>
+        <div class="agenda-item">
+          <div class="agenda-num">3</div>
+          <div class="agenda-text">
+            <h4>Automazioni che lavorano 24/7</h4>
+            <p>Form → Notion → Stripe → Webhook → Email. Telegram come centro di comando. Make.com come sistema nervoso.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="author">IO NON LAVORO</span>
+      <span>4 / 5</span>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 5: COSA SPIEGHERÒ 2/2 ═══ -->
+  <div class="slide" data-slide="5">
+    <div class="slide-inner">
+      <div class="section-tag" style="margin-bottom:28px;">Cosa spiegherò oggi</div>
+      <h2><span class="accent">Cassetta degli attrezzi</span><br>&amp; demo dal vivo</h2>
+      <div class="agenda-list">
+        <div class="agenda-item">
+          <div class="agenda-num">4</div>
+          <div class="agenda-text">
+            <h4>Tool &amp; stack concreto</h4>
+            <p>Notion, Supabase, Vercel, Railway, Telegram Bot API, Make.com. Cosa uso e perché. Niente fuffa, solo roba che funziona.</p>
+          </div>
+        </div>
+        <div class="agenda-item">
+          <div class="agenda-num">5</div>
+          <div class="agenda-text">
+            <h4>Demo dal vivo</h4>
+            <p>Agenti AI in azione: creazione contenuti, gestione clienti, automazione vendite. Live, senza filtri.</p>
+          </div>
+        </div>
+        <div class="agenda-item">
+          <div class="agenda-num">6</div>
+          <div class="agenda-text">
+            <h4>Personality Engineering</h4>
+            <p>Come dare un'identità ai tuoi agenti. Il workbook ti guida passo passo. Esci con il tuo primo agente configurato.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="author">IO NON LAVORO</span>
+      <span>5 / 5</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="nav-hint">← → tasti freccia per navigare</div>
+
+<script>
+// Scale deck to fit viewport, preserving 16:9
+const SLIDE_W = 1920, SLIDE_H = 1080;
+const deck = document.getElementById('deck');
+const slides = deck.querySelectorAll('.slide');
+let current = 0;
+
+function scaleDeck() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const scaleX = vw / SLIDE_W;
+  const scaleY = vh / SLIDE_H;
+  const scale = Math.min(scaleX, scaleY);
+  deck.style.transform = `scale(${scale})`;
+  // Center
+  const offsetX = (vw - SLIDE_W * scale) / 2;
+  const offsetY = (vh - SLIDE_H * scale) / 2;
+  deck.style.position = 'absolute';
+  deck.style.left = offsetX + 'px';
+  deck.style.top = offsetY + 'px';
+}
+
+function showSlide(idx) {
+  slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+    current = Math.min(current + 1, slides.length - 1);
+    showSlide(current);
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    current = Math.max(current - 1, 0);
+    showSlide(current);
+  }
+});
+
+window.addEventListener('resize', scaleDeck);
+scaleDeck();
+showSlide(0);
+</script>
+
+</body>
+</html>

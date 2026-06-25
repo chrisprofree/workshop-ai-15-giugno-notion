@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carousel — IO NON LAVORO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root {
+  --bg: #0A0A0A;
+  --text: #FFFFFF;
+  --text-muted: #999999;
+  --accent: #F5C518;
+  --accent-dim: rgba(245,197,24,0.08);
+  --slide-w: 1080px;
+  --slide-h: 1080px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: #050505;
+  font-family: 'Inter', -apple-system, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  padding: 40px 20px;
+  color: var(--text);
+}
+
+/* ── Toolbar ── */
+.toolbar {
+  position: sticky; top: 20px; z-index: 100;
+  display: flex; gap: 12px;
+  background: #1A1A1A; padding: 12px 20px;
+  border-radius: 12px; border: 1px solid #333;
+}
+.toolbar button {
+  background: var(--accent); color: #000;
+  border: none; padding: 10px 22px; border-radius: 8px;
+  font-weight: 700; font-size: 14px; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.toolbar button:hover { opacity: 0.85; }
+.toolbar button.sec { background: #333; color: #FFF; }
+
+/* ── Slide wrapper ── */
+.slide-wrapper {
+  position: relative; width: var(--slide-w); height: var(--slide-h);
+  flex-shrink: 0;
+}
+.slide { width:100%; height:100%; background: var(--bg); position: relative; overflow: hidden; }
+
+/* ── Texture ── */
+.texture {
+  position: absolute; top:0; left:0; right:0; bottom:0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 24px 24px; pointer-events: none; z-index: 0;
+}
+
+/* ── Corner brackets ── */
+.corners {
+  position: absolute; top: 30px; left: 30px; right: 30px; bottom: 30px;
+  pointer-events: none; z-index: 1;
+}
+.corners::before, .corners::after {
+  content: ''; position: absolute; width: 28px; height: 28px;
+  border-color: var(--accent); border-style: solid;
+}
+.corners::before { top:0; left:0; border-width: 2px 0 0 2px; }
+.corners::after { bottom:0; right:0; border-width: 0 2px 2px 0; }
+
+/* ── Geo circle ── */
+.geo {
+  position: absolute; border-radius: 50%;
+  border: 1px solid var(--accent-dim); pointer-events: none; z-index: 0;
+}
+
+/* ── Section tag ── */
+.tag {
+  display: inline-block;
+  border: 1px solid rgba(245,197,24,0.3); color: var(--accent);
+  padding: 7px 20px; font-size: 14px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  align-self: flex-start;
+}
+
+/* ── Typography ── */
+h1 { font-size: 84px; font-weight: 900; line-height: 1.06; letter-spacing: -0.03em; }
+h1 .a { color: var(--accent); }
+h2 { font-size: 48px; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 28px; }
+h2 .a { color: var(--accent); }
+.sub { font-size: 26px; color: var(--text-muted); line-height: 1.6; max-width: 640px; margin-top: 22px; }
+
+.slide-inner {
+  position: relative; z-index: 2; width: 100%; height: 100%;
+  padding: 80px; display: flex; flex-direction: column;
+}
+
+/* ── Bullet list ── */
+.blist { display: flex; flex-direction: column; gap: 22px; padding-left: 6px; border-left: 2px solid rgba(255,255,255,0.08); }
+.bitem { display: flex; align-items: flex-start; gap: 26px; padding-left: 30px; }
+.bnum { color: var(--accent); font-weight: 800; font-size: 20px; flex-shrink: 0; margin-top: 4px; }
+.btitle { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.bdesc { font-size: 18px; color: var(--text-muted); line-height: 1.5; }
+
+/* ── Photo frame ── */
+.pframe { border: 2px solid var(--accent); border-radius: 4px; overflow: hidden; flex-shrink: 0; }
+.pframe img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ── Footer ── */
+.sfooter {
+  position: absolute; bottom: 40px; left: 80px; right: 80px;
+  display: flex; justify-content: space-between; z-index: 2;
+  font-size: 14px; color: #555;
+}
+
+/* ── Export btn ── */
+.exp {
+  position: absolute; bottom: 38px; right: 40px;
+  background: #222; color: #FFF; border: 1px solid #444;
+  padding: 8px 18px; border-radius: 6px; font-size: 13px;
+  cursor: pointer; z-index: 5; font-family: 'Inter', sans-serif; font-weight: 600;
+}
+.exp:hover { background: #333; }
+
+/* ── Toast ── */
+.toast {
+  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #000; padding: 12px 28px;
+  border-radius: 8px; font-weight: 700; font-size: 15px; z-index: 200; display: none;
+}
+
+/* ── Photo overlay cover ── */
+.photo-cover { position: absolute; top:0; left:0; width:100%; height:100%; z-index:0; }
+.photo-cover img { width:100%; height:100%; object-fit:cover; }
+.photo-cover::after {
+  content: ''; position: absolute; top:0; left:0; right:0; bottom:0;
+  background: linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.88) 100%);
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="exportAll()">📥 Scarica tutte (PNG)</button>
+  <button class="sec" onclick="exportCurrent()">📥 Solo questa</button>
+</div>
+<div id="toast" class="toast"></div>
+
+<!-- ═══ SLIDE 1: COVER — foto come sfondo ═══ -->
+<div class="slide-wrapper" id="slide-1">
+  <div class="slide">
+    <div class="photo-cover"><img src="chris-presentation.jpg" alt="Chris"></div>
+    <div class="corners"></div>
+    <div class="geo" style="width:400px;height:400px;top:-120px;right:-80px;border-color:rgba(245,197,24,0.06);"></div>
+    <div class="slide-inner" style="justify-content:flex-end; padding-bottom:120px;">
+      <div class="tag" style="margin-bottom:28px;">15 GIUGNO 2026 · WEDESK</div>
+      <h1 style="font-size:88px;"><span class="a">IO NON</span><br>LAVORO</h1>
+      <p class="sub" style="font-size:24px;">Come ho costruito un team di agenti AI che manda avanti tre aziende mentre sono altrove</p>
+    </div>
+    <div class="sfooter"><span>Chris Profree</span><span>1 / 4</span></div>
+    <button class="exp" onclick="exportSlide('slide-1')">📥 PNG</button>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 2: CHI SONO — foto + testo ═══ -->
+<div class="slide-wrapper" id="slide-2">
+  <div class="slide">
+    <div class="texture"></div>
+    <div class="corners"></div>
+    <div class="geo" style="width:320px;height:320px;bottom:-100px;right:-60px;border-color:rgba(245,197,24,0.05);"></div>
+    <div class="slide-inner" style="flex-direction:row;align-items:center;gap:60px;padding:100px 80px;">
+      <div class="pframe" style="width:400px;height:500px;">
+        <img src="chris-presentation.jpg" alt="Chris Profree">
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:20px;">
+        <div class="tag">CHI SONO</div>
+        <h2 style="font-size:44px;">Christian La Porta<br><span class="a">Chris Profree</span></h2>
+        <p style="font-size:20px;color:var(--text-muted);line-height:1.6;">
+          Founder di Profree. Automazione AI per imprenditori. Costruisco agenti che lavorano al posto mio.
+        </p>
+        <p style="font-size:16px;color:#777;">35 anni · Milano/Brianza · Padre di Blake</p>
+        <div style="display:flex;gap:44px;margin-top:12px;">
+          <div><span style="font-size:38px;font-weight:900;color:var(--accent);">3</span><br><span style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Aziende</span></div>
+          <div><span style="font-size:38px;font-weight:900;color:var(--accent);">5</span><br><span style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Agenti AI</span></div>
+          <div><span style="font-size:38px;font-weight:900;color:var(--accent);">10+</span><br><span style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Automazioni</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="sfooter"><span>IO NON LAVORO</span><span>2 / 4</span></div>
+    <button class="exp" onclick="exportSlide('slide-2')">📥 PNG</button>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 3: COSA IMPARERAI — bullet list ═══ -->
+<div class="slide-wrapper" id="slide-3">
+  <div class="slide">
+    <div class="texture"></div>
+    <div class="geo" style="width:260px;height:260px;top:-80px;right:-50px;border-color:rgba(245,197,24,0.05);"></div>
+    <div class="slide-inner">
+      <div class="tag" style="margin-bottom:32px;">COSA IMPARERAI</div>
+      <h2>Il sistema<br><span class="a">dall'interno</span></h2>
+      <div class="blist">
+        <div class="bitem">
+          <span class="bnum">01</span>
+          <div><div class="btitle">Buyback & DRIP — la filosofia</div><div class="bdesc">Comprati indietro il tempo. Il framework per capire cosa delegare prima e come.</div></div>
+        </div>
+        <div class="bitem">
+          <span class="bnum">02</span>
+          <div><div class="btitle">Architettura degli agenti AI</div><div class="bdesc">Sheryl (COO), Gary (Content), Bozoma (CMO), Dharmes (Coach), Chris Junior. System prompt, memoria, ruoli.</div></div>
+        </div>
+        <div class="bitem">
+          <span class="bnum">03</span>
+          <div><div class="btitle">Automazioni 24/7</div><div class="bdesc">Form → Notion → Stripe → Webhook → Email. Telegram centro di comando. Make.com sistema nervoso.</div></div>
+        </div>
+        <div class="bitem">
+          <span class="bnum">04</span>
+          <div><div class="btitle">Personality Engineering</div><div class="bdesc">Dai un'identità ai tuoi agenti. Il workbook ti guida passo passo.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sfooter"><span>IO NON LAVORO</span><span>3 / 4</span></div>
+    <button class="exp" onclick="exportSlide('slide-3')">📥 PNG</button>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 4: QUOTE — chiusura ═══ -->
+<div class="slide-wrapper" id="slide-4">
+  <div class="slide">
+    <div class="texture"></div>
+    <div class="corners" style="top:50px;left:50px;right:50px;bottom:50px;"></div>
+    <div style="position:absolute;top:30px;left:90px;font-size:280px;font-weight:900;color:rgba(245,197,24,0.03);line-height:1;pointer-events:none;z-index:0;">"</div>
+    <div class="geo" style="width:520px;height:520px;top:50%;left:50%;transform:translate(-50%,-50%);border-color:rgba(245,197,24,0.04);"></div>
+    <div class="slide-inner" style="justify-content:center;align-items:center;text-align:center;">
+      <p style="font-size:54px;font-weight:700;line-height:1.2;max-width:780px;position:relative;z-index:2;">
+        Non si tratta di lavorare di più.<br>Si tratta di <span style="color:var(--accent);">delegare meglio</span>.
+      </p>
+      <p style="font-size:22px;color:var(--text-muted);margin-top:32px;position:relative;z-index:2;">— Chris Profree</p>
+    </div>
+    <div class="sfooter"><span>IO NON LAVORO</span><span>4 / 4</span></div>
+    <button class="exp" onclick="exportSlide('slide-4')">📥 PNG</button>
+  </div>
+</div>
+
+<script>
+function toast(m) {
+  const t=document.getElementById('toast'); t.textContent=m; t.style.display='block';
+  setTimeout(()=>t.style.display='none',2500);
+}
+async function exportSlide(id) {
+  const el=document.getElementById(id).querySelector('.slide');
+  toast('Esportazione...');
+  const c=await html2canvas(el,{width:el.offsetWidth,height:el.offsetHeight,scale:1,backgroundColor:'#0A0A0A'});
+  c.toBlob(b=>{const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=id+'.png';a.click();URL.revokeObjectURL(u);toast('Scaricato: '+id+'.png');});
+}
+async function exportAll() {
+  const ws=document.querySelectorAll('.slide-wrapper');
+  toast('Export '+ws.length+' slide...');
+  for(let i=0;i<ws.length;i++){
+    const el=ws[i].querySelector('.slide');
+    const c=await html2canvas(el,{width:el.offsetWidth,height:el.offsetHeight,scale:1,backgroundColor:'#0A0A0A'});
+    c.toBlob(b=>{const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='slide-'+(i+1)+'.png';a.click();URL.revokeObjectURL(u);});
+    await new Promise(r=>setTimeout(r,200));
+  }
+  toast('✅ '+ws.length+' slide scaricate!');
+}
+function exportCurrent() {
+  const w=document.querySelector('.slide-wrapper:hover')||document.querySelector('.slide-wrapper');
+  if(w) exportSlide(w.id);
+}
+</script>
+</body>
+</html>
